@@ -33,7 +33,7 @@ flatpak run io.github.jhaygood86.mauborgne
 
 ### Special Thanks
 
-Mauborgne utilizes the following open source software that we would like to think:http
+Mauborgne utilizes the following open source software that we would like to thank!
 
  * **[libcotp](https://github.com/paolostivanin/libcotp)** We utilize libcotp for generating the OTP tokens
  * **[quirc](https://github.com/dlbeer/quirc/)** We utilize quirc for parsing QR Codes
