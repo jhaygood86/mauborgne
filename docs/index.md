@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Mauborgne
 
 You can use the [editor on GitHub](https://github.com/jhaygood86/mauborgne/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
 
