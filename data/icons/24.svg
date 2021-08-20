@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="24"
+   height="24"
+   viewBox="0 0 6.34992 6.34992"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   sodipodi:docname="24.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:document-units="px"
+     showgrid="false"
+     width="64px"
+     inkscape:zoom="34.321434"
+     inkscape:cx="11.873047"
+     inkscape:cy="12.819977"
+     inkscape:window-width="1920"
+     inkscape:window-height="1019"
+     inkscape:window-x="0"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     units="px" />
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient57301">
+      <stop
+         style="stop-color:#0e9a83;stop-opacity:1;"
+         offset="0"
+         id="stop57297" />
+      <stop
+         style="stop-color:#0e9a83;stop-opacity:0;"
+         offset="1"
+         id="stop57299" />
+    </linearGradient>
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect57205"
+       is_visible="true"
+       lpeversion="1"
+       satellites_param="F,0,0,1,0,0.5,0,1 @ F,0,0,1,0,0.5,0,1 @ F,0,0,1,0,0.5,0,1 @ F,0,0,1,0,0.5,0,1"
+       unit="px"
+       method="auto"
+       mode="F"
+       radius="0.5"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect3281"
+       is_visible="true"
+       lpeversion="1"
+       satellites_param="F,0,0,1,0,0.5,0,1 @ F,0,0,1,0,0.5,0,1 @ F,0,0,1,0,0.5,0,1 @ F,0,0,1,0,0.5,0,1"
+       unit="px"
+       method="auto"
+       mode="F"
+       radius="0.5"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect1133"
+       is_visible="true"
+       lpeversion="1"
+       satellites_param="F,0,0,1,0,0.5,0,1 @ F,0,0,1,0,0.5,0,1 @ F,0,0,1,0,0.5,0,1 @ F,0,0,1,0,0.5,0,1"
+       unit="px"
+       method="auto"
+       mode="F"
+       radius="0.5"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient57301"
+       id="linearGradient57303"
+       x1="0.27496627"
+       y1="17.197918"
+       x2="33.591648"
+       y2="17.197918"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.19961525,0,0,0.12876442,0.1846509,0.88024291)" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#28bca3;fill-opacity:1;fill-rule:evenodd;stroke:#007367;stroke-width:0.277114;stroke-opacity:1"
+       id="rect136"
+       width="6.0605545"
+       height="3.8066609"
+       x="0.12640658"
+       y="1.1921116"
+       inkscape:path-effect="#path-effect1133"
+       d="M 0.62640658,1.1921116 H 5.6869611 a 0.5,0.5 45 0 1 0.5,0.5 v 2.8066609 a 0.5,0.5 135 0 1 -0.5,0.5 l -5.06055452,0 a 0.5,0.5 45 0 1 -0.5,-0.5 V 1.6921116 a 0.5,0.5 135 0 1 0.5,-0.5 z"
+       sodipodi:type="rect" />
+    <path
+       style="fill:#d4d4d4;fill-opacity:0.988235;stroke:#1a1a1a;stroke-width:0.264583;stroke-opacity:1"
+       id="rect3279"
+       width="5.0257459"
+       height="1.6490084"
+       x="0.63756061"
+       y="2.2562764"
+       inkscape:path-effect="#path-effect3281"
+       d="m 1.1375606,2.2562764 h 4.0257459 a 0.5,0.5 45 0 1 0.5,0.5 v 0.6490084 a 0.5,0.5 135 0 1 -0.5,0.5 H 1.1375606 a 0.5,0.5 45 0 1 -0.49999999,-0.5 V 2.7562764 a 0.5,0.5 135 0 1 0.49999999,-0.5 z"
+       sodipodi:type="rect" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:1.36009px;line-height:1.25;font-family:'Courier New';-inkscape-font-specification:'Courier New, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.034002"
+       x="1.1594112"
+       y="3.0660141"
+       id="text31513"
+       transform="scale(0.8515265,1.1743616)"><tspan
+         sodipodi:role="line"
+         id="tspan31511"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:1.36009px;font-family:'Courier New';-inkscape-font-specification:'Courier New, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.034002"
+         x="1.1594112"
+         y="3.0660141">123987</tspan></text>
+    <path
+       style="fill:none;fill-opacity:1;stroke:url(#linearGradient57303);stroke-width:0.13229;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect56705"
+       width="6.5970693"
+       height="3.5741472"
+       x="0.26626271"
+       y="1.3076493"
+       inkscape:path-effect="#path-effect57205"
+       d="M 0.76626271,1.3076493 H 6.363332 a 0.5,0.5 45 0 1 0.5,0.5 v 2.5741472 a 0.5,0.5 135 0 1 -0.5,0.5 H 0.76626271 a 0.5,0.5 45 0 1 -0.5,-0.5 V 1.8076493 a 0.5,0.5 135 0 1 0.5,-0.5 z"
+       sodipodi:type="rect" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="elementary icon" />
+</svg>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="32"
+   height="32"
+   viewBox="0 0 8.46656 8.46656"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   sodipodi:docname="32.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:document-units="px"
+     showgrid="false"
+     width="64px"
+     inkscape:zoom="17.160717"
+     inkscape:cx="17.744014"
+     inkscape:cy="14.101975"
+     inkscape:window-width="1920"
+     inkscape:window-height="1019"
+     inkscape:window-x="0"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     units="px" />
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient57301">
+      <stop
+         style="stop-color:#0e9a83;stop-opacity:1;"
+         offset="0"
+         id="stop57297" />
+      <stop
+         style="stop-color:#0e9a83;stop-opacity:0;"
+         offset="1"
+         id="stop57299" />
+    </linearGradient>
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect57205"
+       is_visible="true"
+       lpeversion="1"
+       satellites_param="F,0,0,1,0,1,0,1 @ F,0,0,1,0,1,0,1 @ F,0,0,1,0,1,0,1 @ F,0,0,1,0,1,0,1"
+       unit="px"
+       method="auto"
+       mode="F"
+       radius="1"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect3281"
+       is_visible="true"
+       lpeversion="1"
+       satellites_param="F,0,0,1,0,1,0,1 @ F,0,0,1,0,1,0,1 @ F,0,0,1,0,1,0,1 @ F,0,0,1,0,1,0,1"
+       unit="px"
+       method="auto"
+       mode="F"
+       radius="1"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect1133"
+       is_visible="true"
+       lpeversion="1"
+       satellites_param="F,0,0,1,0,1,0,1 @ F,0,0,1,0,1,0,1 @ F,0,0,1,0,1,0,1 @ F,0,0,1,0,1,0,1"
+       unit="px"
+       method="auto"
+       mode="F"
+       radius="1"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient57301"
+       id="linearGradient57303"
+       x1="0.27496627"
+       y1="17.197918"
+       x2="33.591648"
+       y2="17.197918"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.26693284,0,0,0.20667291,0.13306924,0.82921999)" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#28bca3;fill-opacity:1;fill-rule:evenodd;stroke:#007367;stroke-width:0.277114;stroke-opacity:1"
+       id="rect136"
+       width="8.107131"
+       height="5.9039092"
+       x="0.18153308"
+       y="1.4427018"
+       inkscape:path-effect="#path-effect1133"
+       d="m 1.1815331,1.4427018 h 6.107131 a 1,1 45 0 1 1,1 V 6.346611 a 1,1 135 0 1 -1,1 l -6.107131,0 a 1,1 45 0 1 -1.00000002,-1 V 2.4427018 a 1,1 135 0 1 1.00000002,-1 z"
+       sodipodi:type="rect" />
+    <path
+       style="fill:#d4d4d4;fill-opacity:0.988235;stroke:#1a1a1a;stroke-width:0.264583;stroke-opacity:1"
+       id="rect3279"
+       width="6.7228799"
+       height="2.5575159"
+       x="0.86529773"
+       y="3.0931597"
+       inkscape:path-effect="#path-effect3281"
+       d="m 1.8652977,3.0931597 4.7228799,0 a 1,1 45 0 1 1,1 v 0.5575158 a 1,1 135 0 1 -1,1 H 1.8652977 a 1,1 45 0 1 -0.99999997,-1 l 0,-0.5575158 a 1,1 135 0 1 0.99999997,-1 z"
+       sodipodi:type="rect" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:2.39698px;line-height:1.25;font-family:'Courier New';-inkscape-font-specification:'Courier New, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0599245"
+       x="1.2923043"
+       y="4.0569439"
+       id="text31513"
+       transform="scale(0.75445875,1.3254535)"><tspan
+         sodipodi:role="line"
+         id="tspan31511"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:2.39698px;font-family:'Courier New';-inkscape-font-specification:'Courier New, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.0599245"
+         x="1.2923043"
+         y="4.0569439">123987</tspan></text>
+    <path
+       style="fill:none;fill-opacity:1;stroke:url(#linearGradient57303);stroke-width:0.267758;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect56705"
+       width="8.8218441"
+       height="5.7366729"
+       x="0.24220356"
+       y="1.5152272"
+       inkscape:path-effect="#path-effect57205"
+       d="m 1.2422036,1.5152272 h 6.8218441 a 1,1 45 0 1 1,1 v 3.7366729 a 1,1 135 0 1 -1,1 H 1.2422036 a 1,1 45 0 1 -1.00000004,-1 V 2.5152272 a 1,1 135 0 1 1.00000004,-1 z"
+       sodipodi:type="rect" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="elementary icon" />
+</svg>

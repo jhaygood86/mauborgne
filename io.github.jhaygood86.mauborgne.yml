@@ -1,0 +1,44 @@
+app-id: io.github.jhaygood86.mauborgne
+runtime: io.elementary.Platform
+runtime-version: '6'
+sdk: io.elementary.Sdk
+command: io.github.jhaygood86.mauborgne
+finish-args:
+  - '--device=dri'
+  - '--share=ipc'
+  - '--socket=fallback-x11'
+  - '--socket=wayland'
+    # Nedded for perfer-color-scheme
+  - '--system-talk-name=org.freedesktop.Accounts'
+  
+cleanup:
+- '/include'
+- '/lib/pkgconfig'
+- '/share/vala'
+- '*.a'
+- '*.la'
+  
+modules:
+  - name: libbaseencode
+    buildsystem: cmake
+    sources:
+    - type: git
+      url: https://github.com/paolostivanin/libbaseencode.git
+      branch: v1.0.11
+  - name: libctop
+    buildsystem: cmake
+    sources:
+    - type: git
+      url: https://github.com/paolostivanin/libcotp.git
+      branch: v1.2.3
+  - name: libportal
+    buildsystem: meson
+    sources:
+    - type: git
+      url: https://github.com/flatpak/libportal.git
+      branch: 0.4
+  - name: mauborgne
+    buildsystem: meson
+    sources:
+    - type: dir
+      path: .

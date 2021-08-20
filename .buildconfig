@@ -1,0 +1,11 @@
+[default]
+name=Default
+runtime=flatpak:io.elementary.Sdk/x86_64/6
+toolchain=default
+config-opts=
+run-opts=
+prefix=/app
+app-id=
+postbuild=
+prebuild=
+default=true

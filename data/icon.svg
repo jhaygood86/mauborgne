@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="128"
+   height="128"
+   viewBox="0 0 33.866667 33.866667"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   sodipodi:docname="icon.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:document-units="px"
+     showgrid="false"
+     width="128px"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="16.970563"
+     inkscape:cy="51.265242"
+     inkscape:window-width="1920"
+     inkscape:window-height="1019"
+     inkscape:window-x="0"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient57301">
+      <stop
+         style="stop-color:#0e9a83;stop-opacity:1;"
+         offset="0"
+         id="stop57297" />
+      <stop
+         style="stop-color:#0e9a83;stop-opacity:0;"
+         offset="1"
+         id="stop57299" />
+    </linearGradient>
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect57205"
+       is_visible="true"
+       lpeversion="1"
+       satellites_param="F,0,0,1,0,1,0,1 @ F,0,0,1,0,1,0,1 @ F,0,0,1,0,1,0,1 @ F,0,0,1,0,1,0,1"
+       unit="px"
+       method="auto"
+       mode="F"
+       radius="1"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect3281"
+       is_visible="true"
+       lpeversion="1"
+       satellites_param="F,0,0,1,0,1,0,1 @ F,0,0,1,0,1,0,1 @ F,0,0,1,0,1,0,1 @ F,0,0,1,0,1,0,1"
+       unit="px"
+       method="auto"
+       mode="F"
+       radius="1"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect1133"
+       is_visible="true"
+       lpeversion="1"
+       satellites_param="F,0,0,1,0,1,0,1 @ F,0,0,1,0,1,0,1 @ F,0,0,1,0,1,0,1 @ F,0,0,1,0,1,0,1"
+       unit="px"
+       method="auto"
+       mode="F"
+       radius="1"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient57301"
+       id="linearGradient57303"
+       x1="0.27496627"
+       y1="17.197917"
+       x2="33.591648"
+       y2="17.197917"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0085597,0,0,1.0102329,-0.14491923,-0.1754126)" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#28bca3;fill-opacity:1;fill-rule:evenodd;stroke:#007367;stroke-width:0.277114;stroke-opacity:1"
+       id="rect136"
+       width="33.59008"
+       height="28.199871"
+       x="0.138557"
+       y="3.0487099"
+       inkscape:path-effect="#path-effect1133"
+       d="m 1.138557,3.0487099 h 31.59008 a 1,1 45 0 1 1,1 V 30.248581 a 1,1 135 0 1 -1,1 H 1.138557 a 1,1 45 0 1 -1,-1 V 4.0487099 a 1,1 135 0 1 1,-1 z"
+       sodipodi:type="rect" />
+    <path
+       style="fill:#d4d4d4;fill-opacity:0.98823529;stroke:#1a1a1a;stroke-width:0.264583;stroke-opacity:1"
+       id="rect3279"
+       width="31.478033"
+       height="8.7276134"
+       x="1.1924431"
+       y="12.832292"
+       inkscape:path-effect="#path-effect3281"
+       d="M 2.1924431,12.832292 H 31.670476 a 1,1 45 0 1 1,1 v 6.727613 a 1,1 135 0 1 -1,1 H 2.1924431 a 1,1 45 0 1 -1,-1 v -6.727613 a 1,1 135 0 1 1,-1 z"
+       sodipodi:type="rect" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.69035px;line-height:1.25;font-family:'Courier New';-inkscape-font-specification:'Courier New, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.24226"
+       x="1.9172512"
+       y="18.105591"
+       id="text31513"
+       transform="scale(0.8764603,1.140953)"><tspan
+         sodipodi:role="line"
+         id="tspan31511"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.69035px;font-family:'Courier New';-inkscape-font-specification:'Courier New, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.24226"
+         x="1.9172512"
+         y="18.105591">123987</tspan></text>
+    <path
+       style="fill:none;fill-opacity:1;stroke:url(#linearGradient57303);stroke-width:0.267758;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect56705"
+       width="33.331818"
+       height="28.041292"
+       x="0.26742569"
+       y="3.1778424"
+       inkscape:path-effect="#path-effect57205"
+       d="M 1.2674257,3.1778424 H 32.599243 a 1,1 45 0 1 1,1 V 30.219135 a 1,1 135 0 1 -1,1 H 1.2674257 a 1,1 45 0 1 -1.00000001,-1 V 4.1778424 a 1,1 135 0 1 1.00000001,-1 z"
+       sodipodi:type="rect" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="elementary icon" />
+</svg>

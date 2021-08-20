@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Mauborgne
+GenericName=2FA TOTP Code Generator
+Comment=Generates TOTP Codes for use with 2FA environments
+Categories=Utility;Security;
+Exec=io.github.jhaygood86.mauborgne
+Icon=io.github.jhaygood86.mauborgne
+Terminal=false
+Type=Application
+Keywords=Mauborgne;2FA;OTP;
