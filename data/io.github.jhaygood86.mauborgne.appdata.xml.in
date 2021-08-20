@@ -44,7 +44,6 @@
     <content_attribute id="drugs-tobacco">none</content_attribute>
     <content_attribute id="sex-nudity">none</content_attribute>
     <content_attribute id="sex-themes">none</content_attribute>
-    <content_attribute id="sex-homosexuality">none</content_attribute>
     <content_attribute id="sex-prostitution">none</content_attribute>
     <content_attribute id="sex-adultery">none</content_attribute>
     <content_attribute id="sex-appearance">none</content_attribute>
@@ -63,4 +62,10 @@
   <developer_name>Justin Haygood</developer_name>
   <url type="homepage">https://jhaygood86.github.io/mauborgne/</url>
   <url type="bugtracker">https://github.com/jhaygood86/mauborgne/issues</url>
+  <custom>
+    <value key="x-appcenter-color-primary">#0e9a83</value>
+    <value key="x-appcenter-color-primary-text">rgb(255, 255, 255)</value>
+    <value key="x-appcenter-suggested-price">3</value>
+    <value key="x-appcenter-stripe">pk_live_51JQWYDHZX5xcE5RZsPJymrVxQa2FF1xD2mCl9dsb4JMhFJPJN9WKwTVuHMzOGx8y1tzjLknRIuDA7iRiIuAVQYS1003BJHg0C1</value>
+  </custom>
 </component>
