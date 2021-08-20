@@ -31,7 +31,14 @@ flatpak-builder build  io.github.jhaygood86.mauborgne.yml --user --install --for
 flatpak run io.github.jhaygood86.mauborgne
 ```
 
+### Special Thanks
 
+Mauborgne utilizes the following open source software that we would like to think:http
 
+ * **[libcotp](https://github.com/paolostivanin/libcotp)** We utilize libcotp for generating the OTP tokens
+ * **[quirc](https://github.com/dlbeer/quirc/)** We utilize quirc for parsing QR Codes
+ * **[elementary](https://www.elementary.io)** We are built on top of the elementary OS platform
+ * **[flatpak](https://www.flatpak.org)** The future of app distribution. We also utilize their libportal to make taking screenshots easier
+ * **[gnome](https://www.gnome.org)** GNOME provides core parts of the platform we depend on, including GLib and GTK+
 
 
