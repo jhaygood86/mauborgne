@@ -12,9 +12,12 @@ public class OneTimePadLibrary : Object {
     public void add(OneTimePad otp) {
         pads_set.add(otp);
         changed ();
-        
-        var file = otp.to_keyfile ();
-        var file_name = otp.get_file_name ();
+        save(otp);
+    }
+
+    public void save(OneTimePad pad) {
+        var file = pad.to_keyfile ();
+        var file_name = pad.get_file_name ();
         
         var dst_file_name = Path.build_filename(Environment.get_user_data_dir(), file_name);
         

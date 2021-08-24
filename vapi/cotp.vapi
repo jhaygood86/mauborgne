@@ -21,4 +21,7 @@ namespace Cotp {
     
     [CCode (cname = "get_totp")]
     public string get_totp(string base32_encoded_secret, int digits, int period, Algorithm algorithm, out Error error);
+
+    [CCode (cname = "get_hotp")]
+    public string get_hotp(string base32_encoded_secret, int counter, int digits, Algorithm algorithm, out Error error);
 }

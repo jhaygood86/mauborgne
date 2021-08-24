@@ -234,25 +234,46 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
             title_label.label = pad.account_name;
             
             switch_to_code_display();
-            subtitle_label.label = pad.get_otp_code();
+            subtitle_label.label = get_otp_code(pad);
             
-            Timeout.add(1,() => {
-                if(source_list.selected == item){
-                    subtitle_label.label = pad.get_otp_code();
-                    set_remaining_time();
-                    return true;
-                } else {
-                    return false;
-                }
-            });
+            if(pad.pad_type == OneTimePadType.TOTP){
+
+                code_remaining_progress.visible = true;
             
-            set_remaining_time();
+                Timeout.add(1000,() => {
+
+                    print("timer\n");
+
+                    if(source_list.selected == item){
+
+                        print("timer item selected\n");
+
+                        subtitle_label.label = get_otp_code(pad);
+                        set_remaining_time();
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+
+                set_remaining_time();
+            } else {
+                code_remaining_progress.visible = false;
+            }
+
+
         }
     }
     
+    private string get_otp_code(OneTimePad pad) {
+        var code = pad.get_otp_code ();
+        otp_library.save(pad);
+        return code;
+    }
+
     private void set_remaining_time() {
         var item = source_list.selected;
-        
+
          if(item is Granite.Widgets.SourceList.Item && !(item is Granite.Widgets.SourceList.ExpandableItem)){
             var account_name = item.name;
             var issuer_name = item.parent.name;

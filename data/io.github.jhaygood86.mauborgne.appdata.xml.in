@@ -12,6 +12,15 @@
     </p>
   </description>
   <releases>
+    <release version="0.0.2" date="2021-08-24" urgency="medium">
+      <description>
+        <p>First Update</p>
+        <ul>
+          <li>Fixes QR Code Parser to handle more forms of QR Codes</li>
+          <li>Generates HOTP Codes</li>
+        </ul>
+      </description>
+    </release>>
     <release version="0.0.1" date="2021-08-20" urgency="medium">
       <description>
         <p>Initial Release</p>

@@ -84,6 +84,11 @@ public class OneTimePad {
                 period = int.parse(period_value);
             }
             
+            if(issuer == null && account_name.contains(":")) {
+                var account_name_parts = account_name.split(":",2);
+                issuer = account_name_parts[0];
+                account_name = account_name_parts[1];
+            }
         }
     }
     
@@ -116,12 +121,6 @@ public class OneTimePad {
         return issuer + "_" + account_name + ".txt";
     }
     
-    public void save_to_file() {
-        var file = to_keyfile ();
-        var file_name = get_file_name();
-        
-    }
-    
     public string get_otp_code () {
         
         Cotp.Error error = Cotp.Error.VALID;
@@ -129,6 +128,8 @@ public class OneTimePad {
         switch(pad_type) {
             case TOTP:
                 return Cotp.get_totp(secret, digits, period, get_cotp_algorithm(algorithm), out error);
+            case HOTP:
+                return Cotp.get_hotp(secret, ++counter, digits, get_cotp_algorithm(algorithm), out error);
         }
         
         print("Error Code: %d",error);

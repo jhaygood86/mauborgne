@@ -1,7 +1,7 @@
 project(
     'io.github.jhaygood86.mauborgne', 'vala', 'c',
     meson_version: '>= 0.49',
-    version: '0.0.1'
+    version: '0.0.2'
 )
 
 vapi_dir = meson.current_source_dir() / 'vapi'
