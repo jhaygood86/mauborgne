@@ -20,7 +20,7 @@
           <li>Generates HOTP Codes</li>
         </ul>
       </description>
-    </release>>
+    </release>
     <release version="0.0.1" date="2021-08-20" urgency="medium">
       <description>
         <p>Initial Release</p>
