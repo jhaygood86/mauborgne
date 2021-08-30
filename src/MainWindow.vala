@@ -19,12 +19,11 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
     Xdp.Portal portal;
     Granite.Widgets.SourceList source_list;
     OneTimePadLibrary otp_library;
-    Granite.Widgets.Welcome welcome_screen;
-    Gtk.Label title_label;
-    Gtk.Label subtitle_label;
-    Gtk.Grid codeview_grid;
-    Gtk.ProgressBar code_remaining_progress;
-    
+
+
+    OneTimePadView onetimepad_view;
+
+
     construct {
         portal = new Xdp.Portal();
         
@@ -97,65 +96,24 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
         
         unowned Gtk.StyleContext sidebar_style_context = sidebar.get_style_context ();
         sidebar_style_context.add_class (Gtk.STYLE_CLASS_SIDEBAR);
-        
-        var codeview_header = new Hdy.HeaderBar () {
-            has_subtitle = false,
-            decoration_layout = ":maximize",
-            show_close_button = true,
-            title = "Mauborgne"
-        };
-        
-        welcome_screen = new Granite.Widgets.Welcome (_("Add a One Time Pad"),
-            _("Add a one time pad from a provider"));
-            
-        welcome_screen.append ("screenshot", _("Add Pad From Screenshot"),
-            _("Add a pad using a screenshot of a QR code"));
 
-        welcome_screen.activated.connect (welcome_screen_activated);
+        onetimepad_view = new OneTimePadView ();
         
-        title_label = new Gtk.Label (_("One Time Pad"));
-        title_label.justify = Gtk.Justification.CENTER;
-        title_label.hexpand = true;
-        title_label.get_style_context ().add_class (Granite.STYLE_CLASS_H1_LABEL);
-        title_label.visible = true;
+        onetimepad_view.add_code_from_screenshot_clicked.connect(() => {
+            add_code_from_screenshot();
+        });
         
-        subtitle_label = new Gtk.Label (null);
-        subtitle_label.justify = Gtk.Justification.CENTER;
-        subtitle_label.hexpand = true;
-        subtitle_label.wrap = true;
-        subtitle_label.wrap_mode = Pango.WrapMode.WORD;
-        subtitle_label.visible = true;
-        
-        var subtitle_label_context = subtitle_label.get_style_context ();
-        subtitle_label_context.add_class (Gtk.STYLE_CLASS_DIM_LABEL);
-        subtitle_label_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
-        
-        code_remaining_progress = new Gtk.ProgressBar ();
-        code_remaining_progress.show_text = true;
-        code_remaining_progress.visible = true;
-        
-        var code_remaining_progress_context = code_remaining_progress.get_style_context ();
-        code_remaining_progress_context.add_class ("remaining-time");
-        
-        get_style_context ().add_class ("unread-message");
-        
-        codeview_grid = new Gtk.Grid ();
-        codeview_grid.attach (codeview_header, 0, 0);
-        codeview_grid.attach (welcome_screen, 0, 1);
-        
+        onetimepad_view.code_retrieved.connect(() => {
+            otp_library.save(onetimepad_view.pad);
+        });
+
         var paned = new Gtk.Paned (Gtk.Orientation.HORIZONTAL);
         paned.pack1 (sidebar, false, false);
-        paned.pack2 (codeview_grid, true, false);
+        paned.pack2 (onetimepad_view, true, false);
         
         add (paned);
         
         bind_pads_to_source_list();
-    }
-    
-    private void welcome_screen_activated (int index) {
-        if (index == 0) {
-            add_code_from_screenshot ();
-        }
     }
     
     private void acquire_from_screenshot_clicked(Gtk.Button button) {
@@ -185,7 +143,7 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
             
             var pixbuf = new Gdk.Pixbuf.from_stream (file_stream);
             
-            var payload = QrRecognizer.get_payload_from_pixbuf (pixbuf);
+            var payload = QrHelpers.get_payload_from_pixbuf (pixbuf);
             
             print("payload: %s\n",payload);
             
@@ -231,69 +189,8 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
             
             var pad = otp_library.get_pad(issuer_name,account_name);
             
-            title_label.label = pad.account_name;
-            
-            switch_to_code_display();
-            subtitle_label.label = get_otp_code(pad);
-            
-            if(pad.pad_type == OneTimePadType.TOTP){
-
-                code_remaining_progress.visible = true;
-            
-                Timeout.add(1000,() => {
-
-                    print("timer\n");
-
-                    if(source_list.selected == item){
-
-                        print("timer item selected\n");
-
-                        subtitle_label.label = get_otp_code(pad);
-                        set_remaining_time();
-                        return true;
-                    } else {
-                        return false;
-                    }
-                });
-
-                set_remaining_time();
-            } else {
-                code_remaining_progress.visible = false;
-            }
-
-
+            onetimepad_view.pad = pad;
         }
-    }
-    
-    private string get_otp_code(OneTimePad pad) {
-        var code = pad.get_otp_code ();
-        otp_library.save(pad);
-        return code;
-    }
-
-    private void set_remaining_time() {
-        var item = source_list.selected;
-
-         if(item is Granite.Widgets.SourceList.Item && !(item is Granite.Widgets.SourceList.ExpandableItem)){
-            var account_name = item.name;
-            var issuer_name = item.parent.name;
-            
-            var pad = otp_library.get_pad(issuer_name,account_name);
-            
-            var remaining_time = pad.get_remaining_time();
-            
-            code_remaining_progress.text = "Code Changes In %d seconds".printf(remaining_time);
-            
-            var ratio = ((double)remaining_time) / ((double)pad.period);
-            code_remaining_progress.set_fraction(ratio); 
-         }
-    }
-        
-    private void switch_to_code_display() {
-        codeview_grid.remove(welcome_screen);
-        codeview_grid.attach(title_label, 0, 1);
-        codeview_grid.attach(subtitle_label, 0, 2);
-        codeview_grid.attach(code_remaining_progress, 0, 3);
     }
 }
 

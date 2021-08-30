@@ -30,6 +30,9 @@ icon_res = gnome.compile_resources(
 quirc_proj = subproject('quirc')
 quirc_dep = quirc_proj.get_variable('quirc_dep')
 
+qrcodegen_proj = subproject('qrcodegen')
+qrcodegen_dep = qrcodegen_proj.get_variable('qrcodegen_dep')
+
 mauborgne_deps = [
     dependency('gobject-2.0'),
     dependency('gtk+-3.0'),
@@ -39,6 +42,8 @@ mauborgne_deps = [
     dependency('cotp'),
     quirc_dep,
     meson.get_compiler('vala').find_library('quirc', dirs: vapi_dir),
+    qrcodegen_dep,
+    meson.get_compiler('vala').find_library('qrcodegen', dirs: vapi_dir),
 ]
 
 executable(
@@ -47,9 +52,11 @@ executable(
     config_file,
     'src/Application.vala',
     'src/MainWindow.vala',
-    'src/QrRecognizer.vala',
+    'src/QrHelpers.vala',
     'src/OneTimePad.vala',
     'src/OneTimePadLibrary.vala',
+    'src/Widgets/OneTimePadView.vala',
+    'src/Widgets/ExportWindow.vala',
     dependencies: mauborgne_deps,
     install: true
 )

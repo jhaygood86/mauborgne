@@ -117,6 +117,57 @@ public class OneTimePad {
         return file;
     }
     
+    public string to_uri () {
+        var sb = new StringBuilder ();
+        sb.append("otpauth://");
+
+        switch(pad_type) {
+            case TOTP:
+                sb.append("totp");
+                break;
+            case HOTP:
+                sb.append("hotp");
+                break;
+        }
+
+        sb.append("/");
+        sb.append(Uri.escape_string(issuer));
+        sb.append(":");
+        sb.append(Uri.escape_string(account_name));
+        sb.append("?secret=");
+        sb.append(secret);
+        sb.append("&issuer=");
+        sb.append(Uri.escape_string(issuer));
+        sb.append("&algorithm=");
+
+        switch(algorithm) {
+            case SHA1:
+                sb.append("SHA1");
+                break;
+            case SHA256:
+                sb.append("SHA256");
+                break;
+            case SHA512:
+                sb.append("SHA512");
+                break;
+        }
+
+        sb.append("&digits=");
+        sb.append_printf("%d",digits);
+
+        if(pad_type == OneTimePadType.HOTP){
+            sb.append("&counter=");
+            sb.append_printf("%d",counter + 1);
+        }
+
+        if(pad_type == OneTimePadType.TOTP){
+            sb.append("&period=");
+            sb.append_printf("%d",period);
+        }
+
+        return (string)sb.data;
+    }
+
     public string get_file_name() {
         return issuer + "_" + account_name + ".txt";
     }
