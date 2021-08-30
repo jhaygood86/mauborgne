@@ -12,6 +12,14 @@
     </p>
   </description>
   <releases>
+    <release version="0.1.1" date="2021-08-30" urgency="medium">
+      <description>
+        <p>Feature Release</p>
+        <ul>
+          <li>Adds ability to export codes to other apps via QR Codes</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.0.2" date="2021-08-24" urgency="medium">
       <description>
         <p>First Update</p>
