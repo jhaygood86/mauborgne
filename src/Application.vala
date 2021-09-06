@@ -12,6 +12,8 @@ public class MauborgneApp : Gtk.Application {
     }
     
     protected override void activate () {
+        init_theme ();
+
         weak Gtk.IconTheme default_theme = Gtk.IconTheme.get_default ();
         default_theme.add_resource_path ("/io/github/jhaygood86/mauborgne/");
     
@@ -33,6 +35,15 @@ public class MauborgneApp : Gtk.Application {
         Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
     
+    private void init_theme () {
+         GLib.Value value = GLib.Value (GLib.Type.STRING);
+         Gtk.Settings.get_default ().get_property ("gtk-theme-name", ref value);
+         if (!value.get_string ().has_prefix ("io.elementary.")) {
+             Gtk.Settings.get_default ().set_property ("gtk-icon-theme-name", "elementary");
+             Gtk.Settings.get_default ().set_property ("gtk-theme-name", "io.elementary.stylesheet.blueberry");
+         }
+    }
+
     public static int main (string[] args) {
         return new MauborgneApp ().run (args);
     }
