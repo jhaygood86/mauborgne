@@ -16,14 +16,36 @@ public class OneTimePadLibrary : Object {
     }
 
     public void save(OneTimePad pad) {
-        var file = pad.to_keyfile ();
-        var file_name = pad.get_file_name ();
-        
-        var dst_file_name = Path.build_filename(Environment.get_user_data_dir(), file_name);
-        
-        file.save_to_file(dst_file_name);
+
+        if(pads_set.contains(pad)){
+            var file = pad.to_keyfile ();
+            var file_name = pad.get_file_name ();
+
+            var dst_file_name = Path.build_filename(Environment.get_user_data_dir(), file_name);
+
+            file.save_to_file(dst_file_name);
+        }
     }
-    
+
+    public void remove(OneTimePad pad) {
+        pads_set.remove(pad);
+
+        var file_name = pad.get_file_name ();
+
+        var dst_file_name = Path.build_filename(Environment.get_user_data_dir(), file_name);
+
+        print("deleting file: %s\n",dst_file_name);
+
+        var file = File.new_for_path (dst_file_name);
+
+        try {
+		    file.delete ();
+	    } catch (Error e) {
+		    print ("Error: %s\n", e.message);
+	    }
+
+    }
+
     public OneTimePad get_pad(string issuer, string account_name) {
         foreach(var pad in pads_set) {
             if(pad.issuer == issuer && pad.account_name == account_name) {

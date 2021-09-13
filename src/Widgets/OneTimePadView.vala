@@ -2,6 +2,7 @@ public class OneTimePadView : Gtk.Grid {
 
     public signal void add_code_from_screenshot_clicked ();
     public signal void code_retrieved ();
+    public signal void delete_requested (OneTimePad pad);
 
     public OneTimePad pad { get; set; }
 
@@ -9,6 +10,8 @@ public class OneTimePadView : Gtk.Grid {
     Gtk.Label title_label;
     Gtk.Label subtitle_label;
     Gtk.ProgressBar code_remaining_progress;
+    Gtk.Button export_button;
+    Gtk.Button delete_button;
     Hdy.HeaderBar codeview_header;
 
     construct {
@@ -57,9 +60,10 @@ public class OneTimePadView : Gtk.Grid {
             on_pad_set();
         });
 
-        var export_button = new Gtk.Button () {
+        export_button = new Gtk.Button () {
             image = new Gtk.Image.from_icon_name ("document-export", Gtk.IconSize.LARGE_TOOLBAR),
             tooltip_text = _("Export"),
+            sensitive = false
         };
 
         export_button.clicked.connect(() => {
@@ -68,6 +72,19 @@ public class OneTimePadView : Gtk.Grid {
         });
 
         codeview_header.pack_start(export_button);
+
+        delete_button = new Gtk.Button () {
+            image = new Gtk.Image.from_icon_name ("edit-delete", Gtk.IconSize.LARGE_TOOLBAR),
+            tooltip_text = _("Delete"),
+            sensitive = false
+        };
+
+        delete_button.clicked.connect(() => {
+            switch_to_welcome_screen ();
+            delete_requested (pad);
+        });
+
+        codeview_header.pack_start(delete_button);
     }
 
     private void welcome_screen_activated (int index) {
@@ -84,6 +101,9 @@ public class OneTimePadView : Gtk.Grid {
 
         switch_to_code_display();
         subtitle_label.label = get_otp_code();
+
+        export_button.sensitive = true;
+        delete_button.sensitive = true;
 
         var current_pad = pad;
 
@@ -127,5 +147,15 @@ public class OneTimePadView : Gtk.Grid {
         attach(title_label, 0, 1);
         attach(subtitle_label, 0, 2);
         attach(code_remaining_progress, 0, 3);
+    }
+
+    private void switch_to_welcome_screen() {
+        remove(title_label);
+        remove(subtitle_label);
+        remove(code_remaining_progress);
+        attach (welcome_screen, 0, 1);
+
+        export_button.sensitive = false;
+        delete_button.sensitive = false;
     }
 }

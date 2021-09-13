@@ -138,29 +138,34 @@ public class OneTimePad {
         sb.append(secret);
         sb.append("&issuer=");
         sb.append(Uri.escape_string(issuer));
-        sb.append("&algorithm=");
 
-        switch(algorithm) {
-            case SHA1:
-                sb.append("SHA1");
-                break;
-            case SHA256:
-                sb.append("SHA256");
-                break;
-            case SHA512:
-                sb.append("SHA512");
-                break;
+        if(algorithm != OneTimePadAlgorithm.SHA1){
+            sb.append("&algorithm=");
+
+            switch(algorithm) {
+                case SHA1:
+                    sb.append("SHA1");
+                    break;
+                case SHA256:
+                    sb.append("SHA256");
+                    break;
+                case SHA512:
+                    sb.append("SHA512");
+                    break;
+            }
         }
 
-        sb.append("&digits=");
-        sb.append_printf("%d",digits);
+        if (digits != 6) {
+            sb.append("&digits=");
+            sb.append_printf("%d",digits);
+        }
 
         if(pad_type == OneTimePadType.HOTP){
             sb.append("&counter=");
             sb.append_printf("%d",counter + 1);
         }
 
-        if(pad_type == OneTimePadType.TOTP){
+        if(pad_type == OneTimePadType.TOTP && period != 30){
             sb.append("&period=");
             sb.append_printf("%d",period);
         }
