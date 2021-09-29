@@ -4,19 +4,18 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0+</project_license>
   <name>Maurborgne</name>
-  <summary>2FA TOTP Code Generator</summary>
+  <summary>2FA OTP Code Generator</summary>
   <description>
     <p>
-      Import TOTP Pads from QR Codes and Generate OTP Codes for secure 2FA logins
+      Import OTP Pads from QR Codes and Generate OTP Codes for secure 2FA logins
     </p>
   </description>
   <releases>
-    <release version="0.2.0" date="2021-09-13" urgency="medium">
+    <release version="0.3.0" date="2021-09-29" urgency="medium">
       <description>
         <p>Feature Release</p>
         <ul>
-          <li>Adds ability to delete pads</li>
-          <li>Improves Export QR Code Generation</li>
+          <li>Stores pad secrets securely</li>
         </ul>
       </description>
     </release>
@@ -64,7 +63,7 @@
   <custom>
     <value key="x-appcenter-color-primary">#0e9a83</value>
     <value key="x-appcenter-color-primary-text">rgb(255, 255, 255)</value>
-    <value key="x-appcenter-suggested-price">3</value>
+    <value key="x-appcenter-suggested-price">10</value>
     <value key="x-appcenter-stripe">pk_live_51JQWYDHZX5xcE5RZsPJymrVxQa2FF1xD2mCl9dsb4JMhFJPJN9WKwTVuHMzOGx8y1tzjLknRIuDA7iRiIuAVQYS1003BJHg0C1</value>
   </custom>
 </component>

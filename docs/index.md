@@ -4,7 +4,7 @@ Maurborgne is a 2FA OTP generator that generates TOTP codes for you, similar to 
 
 ### Getting Mauborgne
 
-Mauborgne is available exclusively for elementary OS currently with a suggested retail price of $3.
+Mauborgne is available exclusively for elementary OS currently with a suggested retail price of $10.
 
 ### Support or Contact
 

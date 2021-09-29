@@ -100,7 +100,7 @@ public class OneTimePadView : Gtk.Grid {
         codeview_header.subtitle = pad.issuer;
 
         switch_to_code_display();
-        subtitle_label.label = get_otp_code();
+        set_otp_code_label ();
 
         export_button.sensitive = true;
         delete_button.sensitive = true;
@@ -113,8 +113,8 @@ public class OneTimePadView : Gtk.Grid {
 
             Timeout.add(1000,() => {
                 if(current_pad == pad){
-                    subtitle_label.label = get_otp_code();
-                    set_remaining_time();
+                    set_otp_code_label ();
+                    set_remaining_time ();
                     return true;
                 } else {
                     return false;
@@ -127,8 +127,15 @@ public class OneTimePadView : Gtk.Grid {
         }
     }
 
-    private string get_otp_code() {
-        var code = pad.get_otp_code ();
+    private void set_otp_code_label () {
+        get_otp_code.begin((obj,res) => {
+            var code = get_otp_code.end (res);
+            subtitle_label.label = code;
+        });
+    }
+
+    private async string get_otp_code() {
+        var code = yield pad.get_otp_code ();
         code_retrieved ();
         return code;
     }

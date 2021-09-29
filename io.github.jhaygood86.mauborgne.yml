@@ -25,18 +25,29 @@ modules:
     - type: git
       url: https://github.com/paolostivanin/libbaseencode.git
       branch: v1.0.11
+
   - name: libctop
     buildsystem: cmake
     sources:
     - type: git
       url: https://github.com/paolostivanin/libcotp.git
       branch: v1.2.3
+
   - name: libportal
     buildsystem: meson
     sources:
     - type: git
       url: https://github.com/flatpak/libportal.git
-      branch: 0.4
+      branch: '0.4'
+
+  - name: libsecret
+    buildsystem: meson
+    sources:
+    - type: git
+      url: https://gitlab.gnome.org/GNOME/libsecret.git
+      tag: 0.20.4
+      commit: 3fe635e64efd4b8dbc9ec3548b0bc8034c7665c4
+
   - name: mauborgne
     buildsystem: meson
     sources:

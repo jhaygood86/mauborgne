@@ -40,6 +40,7 @@ mauborgne_deps = [
     dependency('granite', version: '>=6.0.0'),
     dependency('libportal'),
     dependency('cotp'),
+    dependency('libsecret-1'),
     quirc_dep,
     meson.get_compiler('vala').find_library('quirc', dirs: vapi_dir),
     qrcodegen_dep,

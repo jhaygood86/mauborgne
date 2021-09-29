@@ -27,7 +27,7 @@ public class OneTimePadLibrary : Object {
         }
     }
 
-    public void remove(OneTimePad pad) {
+    public async void remove(OneTimePad pad) {
         pads_set.remove(pad);
 
         var file_name = pad.get_file_name ();
@@ -39,14 +39,16 @@ public class OneTimePadLibrary : Object {
         var file = File.new_for_path (dst_file_name);
 
         try {
-		    file.delete ();
+		    yield file.delete_async ();
+		    yield pad.clear_secret ();
+
 	    } catch (Error e) {
 		    print ("Error: %s\n", e.message);
 	    }
 
     }
 
-    public OneTimePad get_pad(string issuer, string account_name) {
+    public OneTimePad? get_pad(string issuer, string account_name) {
         foreach(var pad in pads_set) {
             if(pad.issuer == issuer && pad.account_name == account_name) {
                 return pad;
@@ -67,17 +69,14 @@ public class OneTimePadLibrary : Object {
     
     private void load_existing_files_for_file (File file, string space = "", Cancellable? cancellable = null) throws Error {
 	    FileEnumerator enumerator = file.enumerate_children (
-		    "standard::*",
+		    "standard::*.txt",
 		    FileQueryInfoFlags.NOFOLLOW_SYMLINKS, 
 		    cancellable);
 
 	    FileInfo info = null;
+
 	    while (cancellable.is_cancelled () == false && ((info = enumerator.next_file (cancellable)) != null)) {
-		    if (info.get_file_type () == FileType.DIRECTORY) {
-			    File subdir = file.resolve_relative_path (info.get_name ());
-			    load_existing_files_for_file (subdir, space + " ", cancellable);
-		    } else {
-		    
+		    if (info.get_file_type () == FileType.REGULAR) {
 		        var src_file_name = Path.build_filename(Environment.get_user_data_dir(), info.get_name());
 		        
 		        print("file: %s\n",src_file_name);

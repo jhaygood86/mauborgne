@@ -108,8 +108,10 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
         });
 
         onetimepad_view.delete_requested.connect((pad) => {
-            otp_library.remove(pad);
-            bind_pads_to_source_list ();
+            otp_library.remove.begin(pad, (obj,res) => {
+                otp_library.remove.end(res);
+                bind_pads_to_source_list ();
+            });
         });
 
         var paned = new Gtk.Paned (Gtk.Orientation.HORIZONTAL);
