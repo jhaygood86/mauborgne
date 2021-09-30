@@ -131,7 +131,7 @@ public class OneTimePad {
         return file;
     }
     
-    public string to_uri () {
+    public async string to_uri () {
         var sb = new StringBuilder ();
         sb.append("otpauth://");
 
@@ -148,8 +148,12 @@ public class OneTimePad {
         sb.append(Uri.escape_string(issuer));
         sb.append(":");
         sb.append(Uri.escape_string(account_name));
+
+        var secret_value = yield lookup_secret ();
+
         sb.append("?secret=");
-        sb.append(secret);
+        sb.append(secret_value);
+
         sb.append("&issuer=");
         sb.append(Uri.escape_string(issuer));
 
