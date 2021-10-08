@@ -1,0 +1,5 @@
+src/MainWindow.vala
+src/Widgets/ExportWindow.vala
+src/Widgets/OneTimePadView.vala
+data/io.github.jhaygood86.mauborgne.appdata.xml.in
+data/io.github.jhaygood86.mauborgne.desktop.in
