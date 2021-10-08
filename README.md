@@ -31,6 +31,10 @@ flatpak-builder build  io.github.jhaygood86.mauborgne.yml --user --install --for
 flatpak run io.github.jhaygood86.mauborgne
 ```
 
+### Translations
+
+Translations will be using Weblate once fully set up.
+
 ### Special Thanks
 
 Mauborgne utilizes the following open source software that we would like to thank!
