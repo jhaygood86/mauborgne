@@ -7,7 +7,7 @@
   <summary>2FA OTP Code Generator</summary>
   <description>
     <p>
-      Import OTP Pads from QR Codes and Generate OTP Codes for secure 2FA logins
+      Import OTP pads from QR codes and generate OTP codes for secure 2FA logins
     </p>
   </description>
   <releases>
