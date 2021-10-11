@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
 "Report-Msgid-Bugs-To: jhaygood86@gmail.com\n"
 "POT-Creation-Date: 2021-10-08 13:32-0400\n"
-"PO-Revision-Date: 2021-10-09 21:44+0000\n"
+"PO-Revision-Date: 2021-10-11 00:04+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/maurbogne/"
 "maurbogne/fr/>\n"
@@ -24,78 +24,80 @@ msgstr "Mauborgne"
 
 #: src/MainWindow.vala:60 src/Widgets/OneTimePadView.vala:27
 msgid "Add Pad From Screenshot"
-msgstr ""
+msgstr "Ajouter un bloc à partir d'une capture d'écran"
 
 #: src/MainWindow.vala:64
 msgid "Add Pad From Camera"
-msgstr ""
+msgstr "Ajouter un bloc à partir de l'appareil photo"
 
 #: src/MainWindow.vala:68
 msgid "Add Pad From Token"
-msgstr ""
+msgstr "Ajouter un bloc à partir d'un jeton"
 
 #: src/MainWindow.vala:78
 msgid "Add One Time Pad…"
-msgstr ""
+msgstr "Ajouter un bloc-notes à usage unique…"
 
 #: src/Widgets/OneTimePadView.vala:24
 msgid "Add a One Time Pad"
-msgstr ""
+msgstr "Ajouter un bloc-notes à usage unique"
 
 #: src/Widgets/OneTimePadView.vala:25
 msgid "Add a one time pad from a provider"
-msgstr ""
+msgstr "Ajouter un bloc-notes à usage unique depuis un fournisseur"
 
 #: src/Widgets/OneTimePadView.vala:28
 msgid "Add a pad using a screenshot of a QR code"
-msgstr ""
+msgstr "Ajouter un bloc-notes à l'aide d'une capture d'écran d'un code QR"
 
 #: src/Widgets/OneTimePadView.vala:32
 msgid "One Time Pad"
-msgstr ""
+msgstr "Bloc-notes à usage unique"
 
 #: src/Widgets/OneTimePadView.vala:65
 msgid "Export"
-msgstr ""
+msgstr "Exporter"
 
 #: src/Widgets/OneTimePadView.vala:78
 msgid "Delete"
-msgstr ""
+msgstr "Supprimer"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:6
 msgid "Maurborgne"
-msgstr ""
+msgstr "Maurborgne"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:7
 #: data/io.github.jhaygood86.mauborgne.desktop.in:4
 msgid "2FA OTP Code Generator"
-msgstr ""
+msgstr "Générateur de code A2F à usage unique"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:9
 msgid ""
 "Import OTP Pads from QR Codes and Generate OTP Codes for secure 2FA logins"
 msgstr ""
+"Importez des blocs à mots de passe à usage unique à partir de codes QR et "
+"générez des codes à usage unique pour des connexions A2F sécurisées"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:16
 msgid "Feature Release"
-msgstr ""
+msgstr "Publication des fonctions"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:18
 msgid "Stores pad secrets securely"
-msgstr ""
+msgstr "Stocke les secrets du bloc en toute sécurité"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:60
 msgid "Justin Haygood"
-msgstr ""
+msgstr "Justin Haygood"
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:5
 msgid "Generates OTP Codes for use with 2FA environments"
-msgstr ""
+msgstr "Génère des codes à usage unique à utiliser avec les environnements A2F"
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:8
 msgid "io.github.jhaygood86.mauborgne"
-msgstr ""
+msgstr "io.github.jhaygood86.mauborgne"
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:11
 msgid "Mauborgne;2FA;OTP;"
-msgstr ""
+msgstr "Mauborgne;A2F;2FA;OTP;"
