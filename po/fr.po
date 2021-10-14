@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-14 16:00-0400\n"
+"POT-Creation-Date: 2021-10-14 16:06-0400\n"
 "PO-Revision-Date: 2021-10-11 00:04+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/maurbogne/"
@@ -118,7 +118,23 @@ msgstr "Publication des fonctions"
 msgid "Adds support for importing from Aegis JSON vaults"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:60
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:20
+msgid "Updated Translations"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:22
+msgid "Spanish"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:23
+msgid "French"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:24
+msgid "Norwegian"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:66
 msgid "Justin Haygood"
 msgstr "Justin Haygood"
 

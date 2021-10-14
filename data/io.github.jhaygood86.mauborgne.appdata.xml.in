@@ -17,6 +17,12 @@
         <ul>
           <li>Adds support for importing from Aegis JSON vaults</li>
         </ul>
+        <p>Updated Translations</p>
+        <ul>
+          <li>Spanish</li>
+          <li>French</li>
+          <li>Norwegian</li>
+        </ul>
       </description>
     </release>
   </releases>
