@@ -5,31 +5,34 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-14 15:56-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"Report-Msgid-Bugs-To: jhaygood86@gmail.com\n"
+"POT-Creation-Date: 2021-10-08 13:32-0400\n"
+"PO-Revision-Date: 2021-10-09 21:44+0000\n"
+"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
+"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
+"maurbogne/maurbogne/nb_NO/>\n"
 "Language: nb_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 #: src/MainWindow.vala:11 data/io.github.jhaygood86.mauborgne.desktop.in:3
 msgid "Mauborgne"
-msgstr ""
+msgstr "Maurborgne"
 
 #: src/MainWindow.vala:60 src/Widgets/OneTimePadView.vala:27
 msgid "Add Pad From Screenshot"
-msgstr ""
+msgstr "Legg til notis fra skjermavbildning"
 
 #: src/MainWindow.vala:64
 msgid "Add Pad From Camera"
-msgstr ""
+msgstr "Legg til notis fra kamera"
 
 #: src/MainWindow.vala:68
 msgid "Add Pad From Token"
-msgstr ""
+msgstr "Legg til notis fra symbol"
 
 #: src/MainWindow.vala:72
 msgid "Add Pad(s) From Aegis Encrypted JSON"
@@ -37,7 +40,7 @@ msgstr ""
 
 #: src/MainWindow.vala:83
 msgid "Add One Time Pad…"
-msgstr ""
+msgstr "Legg til éngangsnotis …"
 
 #: src/Services/AegisImporter.vala:29
 msgid "Unable to lock vault. Please try a different password"
@@ -45,27 +48,27 @@ msgstr ""
 
 #: src/Widgets/OneTimePadView.vala:24
 msgid "Add a One Time Pad"
-msgstr ""
+msgstr "Legg til en éngangsnotis"
 
 #: src/Widgets/OneTimePadView.vala:25
 msgid "Add a one time pad from a provider"
-msgstr ""
+msgstr "Legg til en éngangsnotis fra en tilbyder"
 
 #: src/Widgets/OneTimePadView.vala:28
 msgid "Add a pad using a screenshot of a QR code"
-msgstr ""
+msgstr "Legg til en éngangsnotis ved bruk av skjermavbildning av en QR-kode"
 
 #: src/Widgets/OneTimePadView.vala:32
 msgid "One Time Pad"
-msgstr ""
+msgstr "Éngangsnotis"
 
 #: src/Widgets/OneTimePadView.vala:65
 msgid "Export"
-msgstr ""
+msgstr "Eksporter"
 
 #: src/Widgets/OneTimePadView.vala:78
 msgid "Delete"
-msgstr ""
+msgstr "Slett"
 
 #: src/Widgets/PasswordDialog.vala:9 src/Widgets/PasswordDialog.vala:15
 msgid "Aegis Vault Unlock Password"
@@ -93,38 +96,41 @@ msgstr ""
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:6
 msgid "Maurborgne"
-msgstr ""
+msgstr "Maurborgne"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:7
 #: data/io.github.jhaygood86.mauborgne.desktop.in:4
 msgid "2FA OTP Code Generator"
-msgstr ""
+msgstr "Tofaktor-éngangspassord-kodegenerator"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:9
+#, fuzzy
 msgid ""
 "Import OTP pads from QR codes and generate OTP codes for secure 2FA logins"
 msgstr ""
+"Importer éngangspassordnotiser fra QR-koder, og generer éngangspassordkoder "
+"for sikre tofaktorsinnlogginger"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:16
 msgid "Feature Release"
-msgstr ""
+msgstr "Funksjonsutgivelse"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:18
 msgid "Stores pad secrets securely"
-msgstr ""
+msgstr "Lagrer notishemmeligheter sikkert"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:60
 msgid "Justin Haygood"
-msgstr ""
+msgstr "Justin Haygood"
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:5
 msgid "Generates OTP Codes for use with 2FA environments"
-msgstr ""
+msgstr "Genererer éngangspassordkoder til bruk i to-faktorøyemed"
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:8
 msgid "io.github.jhaygood86.mauborgne"
-msgstr ""
+msgstr "io.github.jhaygood86.mauborgne"
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:11
 msgid "Mauborgne;2FA;OTP;"
-msgstr ""
+msgstr "Mauborgne;2FA;OTP;"
