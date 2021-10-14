@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-14 15:56-0400\n"
+"POT-Creation-Date: 2021-10-14 16:00-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -112,7 +112,7 @@ msgid "Feature Release"
 msgstr ""
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:18
-msgid "Stores pad secrets securely"
+msgid "Adds support for importing from Aegis JSON vaults"
 msgstr ""
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:60

@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
-"Report-Msgid-Bugs-To: jhaygood86@gmail.com\n"
-"POT-Creation-Date: 2021-10-08 13:32-0400\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-14 16:00-0400\n"
 "PO-Revision-Date: 2021-10-09 21:44+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
@@ -116,8 +116,8 @@ msgid "Feature Release"
 msgstr "Funksjonsutgivelse"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:18
-msgid "Stores pad secrets securely"
-msgstr "Lagrer notishemmeligheter sikkert"
+msgid "Adds support for importing from Aegis JSON vaults"
+msgstr ""
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:60
 msgid "Justin Haygood"
@@ -134,3 +134,6 @@ msgstr "io.github.jhaygood86.mauborgne"
 #: data/io.github.jhaygood86.mauborgne.desktop.in:11
 msgid "Mauborgne;2FA;OTP;"
 msgstr "Mauborgne;2FA;OTP;"
+
+#~ msgid "Stores pad secrets securely"
+#~ msgstr "Lagrer notishemmeligheter sikkert"

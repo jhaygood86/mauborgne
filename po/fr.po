@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
-"Report-Msgid-Bugs-To: jhaygood86@gmail.com\n"
-"POT-Creation-Date: 2021-10-08 13:32-0400\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-14 16:00-0400\n"
 "PO-Revision-Date: 2021-10-11 00:04+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/maurbogne/"
@@ -115,8 +115,8 @@ msgid "Feature Release"
 msgstr "Publication des fonctions"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:18
-msgid "Stores pad secrets securely"
-msgstr "Stocke les secrets du bloc en toute sécurité"
+msgid "Adds support for importing from Aegis JSON vaults"
+msgstr ""
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:60
 msgid "Justin Haygood"
@@ -133,3 +133,6 @@ msgstr "io.github.jhaygood86.mauborgne"
 #: data/io.github.jhaygood86.mauborgne.desktop.in:11
 msgid "Mauborgne;2FA;OTP;"
 msgstr "Mauborgne;A2F;2FA;OTP;"
+
+#~ msgid "Stores pad secrets securely"
+#~ msgstr "Stocke les secrets du bloc en toute sécurité"

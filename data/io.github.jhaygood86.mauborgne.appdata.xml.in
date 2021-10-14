@@ -11,11 +11,11 @@
     </p>
   </description>
   <releases>
-    <release version="0.3.1" date="2021-09-29" urgency="medium">
+    <release version="0.4.0" date="2021-10-14" urgency="medium">
       <description>
         <p>Feature Release</p>
         <ul>
-          <li>Stores pad secrets securely</li>
+          <li>Adds support for importing from Aegis JSON vaults</li>
         </ul>
       </description>
     </release>
