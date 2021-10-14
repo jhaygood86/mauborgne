@@ -68,10 +68,15 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
             label = _("Add Pad From Token")
         };
         
+        var add_pad_from_aegis_vault = new Gtk.ModelButton () {
+            label = _("Add Pad(s) From Aegis Encrypted JSON")
+        };
+
         var add_pad_popover = new Gtk.Popover (null);
         add_pad_popover.add (add_pad_grid);
         
         add_pad_grid.attach (add_pad_screenshot_button, 0, 0);
+        add_pad_grid.attach (add_pad_from_aegis_vault, 0, 1);
         add_pad_grid.show_all ();
         
         var add_pad_button = new Gtk.MenuButton () {
@@ -82,6 +87,7 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
         };
         
         add_pad_screenshot_button.clicked.connect(acquire_from_screenshot_clicked);
+        add_pad_from_aegis_vault.clicked.connect(acquire_from_aegis_encrypted_vault_clicked);
 
         var actionbar = new Gtk.ActionBar ();
         actionbar.add (add_pad_button);
@@ -127,6 +133,29 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
         add_code_from_screenshot ();
     }
     
+    private void acquire_from_aegis_encrypted_vault_clicked(Gtk.Button button) {
+        add_codes_from_aegis_encrypted_json ();
+    }
+
+    private void add_codes_from_aegis_encrypted_json () {
+        var chooser = new Gtk.FileChooserNative ("Open Aegis Vault File", this, Gtk.FileChooserAction.OPEN, null, null);
+
+        var response = chooser.run ();
+
+        if (response == Gtk.ResponseType.ACCEPT) {
+            var file = chooser.get_filename ();
+
+            var vault = AegisImporter.import_from_json_file(file, this);
+
+            if (vault != null) {
+                foreach (var entry in vault.entries) {
+                    var otp = new OneTimePad.from_aegis_vault_entry(entry);
+                    otp_library.add(otp);
+                }
+            }
+        }
+    }
+
     private void add_code_from_screenshot() {
         acquire_from_screenshot.begin((obj,res) => {
                 var qr_code_uri = acquire_from_screenshot.end(res);

@@ -41,10 +41,14 @@ mauborgne_deps = [
     dependency('libportal'),
     dependency('cotp'),
     dependency('libsecret-1'),
+    dependency('gee-0.8'),
+    dependency('json-glib-1.0'),
     quirc_dep,
     meson.get_compiler('vala').find_library('quirc', dirs: vapi_dir),
     qrcodegen_dep,
     meson.get_compiler('vala').find_library('qrcodegen', dirs: vapi_dir),
+    meson.get_compiler('c').find_library('libgcrypt'),
+    meson.get_compiler('vala').find_library('gcrypt', dirs: vapi_dir)
 ]
 
 executable(
@@ -56,8 +60,12 @@ executable(
     'src/QrHelpers.vala',
     'src/OneTimePad.vala',
     'src/OneTimePadLibrary.vala',
-    'src/Widgets/OneTimePadView.vala',
+    'src/Services/AegisImporter.vala',
+    'src/Services/Models/AegisVault.vala',
+    'src/Services/Models/AegisVaultContent.vala',
     'src/Widgets/ExportWindow.vala',
+    'src/Widgets/OneTimePadView.vala',
+    'src/Widgets/PasswordDialog.vala',
     dependencies: mauborgne_deps,
     install: true
 )

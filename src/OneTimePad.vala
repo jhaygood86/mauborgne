@@ -118,6 +118,22 @@ public class OneTimePad {
         period = file.get_integer("PadSettings","Period");
     }
     
+    public OneTimePad.from_aegis_vault_entry (AegisVaultContent.AegisTotpVaultEntry entry) {
+        pad_type = OneTimePadType.TOTP;
+        issuer = entry.issuer;
+        account_name = entry.name;
+        secret = entry.info.secret;
+
+        switch (entry.info.algo) {
+            case "sha1":
+                algorithm = OneTimePadAlgorithm.SHA1;
+                break;
+        }
+
+        digits = entry.info.digits;
+        period = entry.info.period;
+    }
+
     public KeyFile to_keyfile() {
         var file = new KeyFile ();
         file.set_integer("PadSettings","PadType",pad_type);
@@ -199,6 +215,7 @@ public class OneTimePad {
 
         if (secret != null) {
             yield store_secret(secret);
+            secret = null;
         }
 
         var secret_value = yield lookup_secret ();

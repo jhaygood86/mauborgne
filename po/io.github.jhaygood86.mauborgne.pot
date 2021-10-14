@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-08 13:32-0400\n"
+"POT-Creation-Date: 2021-10-14 15:56-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,8 +33,16 @@ msgstr ""
 msgid "Add Pad From Token"
 msgstr ""
 
-#: src/MainWindow.vala:78
+#: src/MainWindow.vala:72
+msgid "Add Pad(s) From Aegis Encrypted JSON"
+msgstr ""
+
+#: src/MainWindow.vala:83
 msgid "Add One Time Pad…"
+msgstr ""
+
+#: src/Services/AegisImporter.vala:29
+msgid "Unable to lock vault. Please try a different password"
 msgstr ""
 
 #: src/Widgets/OneTimePadView.vala:24
@@ -61,6 +69,30 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+#: src/Widgets/PasswordDialog.vala:9 src/Widgets/PasswordDialog.vala:15
+msgid "Aegis Vault Unlock Password"
+msgstr ""
+
+#: src/Widgets/PasswordDialog.vala:17
+msgid "Password Required"
+msgstr ""
+
+#: src/Widgets/PasswordDialog.vala:18
+msgid "Need the password to access the Aegis Vault file"
+msgstr ""
+
+#: src/Widgets/PasswordDialog.vala:24
+msgid "Password"
+msgstr ""
+
+#: src/Widgets/PasswordDialog.vala:51
+msgid "Cancel"
+msgstr ""
+
+#: src/Widgets/PasswordDialog.vala:53
+msgid "Unlock"
+msgstr ""
+
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:6
 msgid "Maurborgne"
 msgstr ""
@@ -72,7 +104,7 @@ msgstr ""
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:9
 msgid ""
-"Import OTP Pads from QR Codes and Generate OTP Codes for secure 2FA logins"
+"Import OTP pads from QR codes and generate OTP codes for secure 2FA logins"
 msgstr ""
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:16

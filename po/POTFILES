@@ -1,5 +1,7 @@
 src/MainWindow.vala
+src/Services/AegisImporter.vala
 src/Widgets/ExportWindow.vala
 src/Widgets/OneTimePadView.vala
+src/Widgets/PasswordDialog.vala
 data/io.github.jhaygood86.mauborgne.appdata.xml.in
 data/io.github.jhaygood86.mauborgne.desktop.in
