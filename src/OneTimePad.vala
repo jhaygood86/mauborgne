@@ -99,6 +99,8 @@ public class OneTimePad {
                 account_name = account_name_parts[1];
             }
 
+            account_name = get_cleaned_account_name (issuer, account_name);
+
             store_secret.begin(secret);
         }
     }
@@ -107,6 +109,8 @@ public class OneTimePad {
         pad_type = (OneTimePadType)file.get_integer("PadSettings","PadType");
         issuer = file.get_string("PadSettings","Issuer");
         account_name = file.get_string("PadSettings","AccountName");
+
+        account_name = get_cleaned_account_name (issuer, account_name);
 
         if (file.has_key("PadSettings", "Secret")) {
             secret = file.get_string("PadSettings","Secret");
@@ -132,6 +136,8 @@ public class OneTimePad {
 
         digits = entry.info.digits;
         period = entry.info.period;
+
+        account_name = get_cleaned_account_name (issuer, account_name);
     }
 
     public KeyFile to_keyfile() {
@@ -211,6 +217,10 @@ public class OneTimePad {
         return issuer + "_" + account_name + ".txt";
     }
     
+    public string get_file_name_with_issuer_in_account_name () {
+        return issuer + "_" + issuer + ":" + account_name + ".txt";
+    }
+
     public async string get_otp_code () {
 
         if (secret != null) {
@@ -275,15 +285,46 @@ public class OneTimePad {
     private async string lookup_secret () {
         var attributes = get_secret_attributes ();
 
-        return yield Secret.password_lookupv(schema, attributes, null);
+        var secret_value = yield Secret.password_lookupv(schema, attributes, null);
+
+        if (secret_value == null) {
+            var attributes_with_issuer_in_account_name = get_secret_attributes (true);
+            secret_value = yield Secret.password_lookupv(schema, attributes_with_issuer_in_account_name, null);
+
+            if (secret_value != null) {
+                yield store_secret (secret_value);
+                yield Secret.password_clearv (schema, attributes_with_issuer_in_account_name, null);
+            }
+        }
+
+        return secret_value;
     }
 
-    private GLib.HashTable<string,string> get_secret_attributes () {
+    private GLib.HashTable<string,string> get_secret_attributes (bool use_issuer_in_account_name = false) {
+
+        var account_name_for_lookup = account_name;
+
+        if (use_issuer_in_account_name) {
+            account_name_for_lookup = issuer + ":" + account_name;
+        }
+
         var attributes = new GLib.HashTable<string,string> (str_hash, str_equal);
         attributes["issuer"] = issuer;
-        attributes["account_name"] = account_name;
+        attributes["account_name"] = account_name_for_lookup;
 
         return attributes;
+    }
+
+    private string get_cleaned_account_name(string issuer, string account_name) {
+
+        var prefix = issuer + ":";
+        var prefix_length = prefix.char_count ();
+
+        if(account_name.has_prefix(prefix)) {
+            return account_name.substring(prefix_length);
+        }
+
+        return account_name;
     }
 }
 

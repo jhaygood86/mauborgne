@@ -20,6 +20,15 @@ public class OneTimePadLibrary : Object {
             var file = pad.to_keyfile ();
             var file_name = pad.get_file_name ();
 
+            var file_name_with_issuer_in_account_name = pad.get_file_name_with_issuer_in_account_name ();
+            var path_with_issuer_in_account_name = Path.build_filename(Environment.get_user_data_dir (), file_name_with_issuer_in_account_name);
+
+            var file_with_issuer_in_account_name = File.new_for_path (path_with_issuer_in_account_name);
+
+            if (file_with_issuer_in_account_name.query_exists ()) {
+                file_with_issuer_in_account_name.delete_async.begin();
+            }
+
             var dst_file_name = Path.build_filename(Environment.get_user_data_dir(), file_name);
 
             file.save_to_file(dst_file_name);
