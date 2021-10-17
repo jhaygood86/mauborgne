@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-14 16:06-0400\n"
+"POT-Creation-Date: 2021-10-17 18:53-0400\n"
 "PO-Revision-Date: 2021-10-11 00:04+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/maurbogne/"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "Mauborgne"
 msgstr "Mauborgne"
 
-#: src/MainWindow.vala:60 src/Widgets/OneTimePadView.vala:27
+#: src/MainWindow.vala:60 src/Widgets/OneTimePadView.vala:29
 msgid "Add Pad From Screenshot"
 msgstr "Ajouter un bloc à partir d'une capture d'écran"
 
@@ -46,27 +46,36 @@ msgstr "Ajouter un bloc-notes à usage unique…"
 msgid "Unable to lock vault. Please try a different password"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:24
+#: src/Widgets/OneTimePadView.vala:26
 msgid "Add a One Time Pad"
 msgstr "Ajouter un bloc-notes à usage unique"
 
-#: src/Widgets/OneTimePadView.vala:25
+#: src/Widgets/OneTimePadView.vala:27
 msgid "Add a one time pad from a provider"
 msgstr "Ajouter un bloc-notes à usage unique depuis un fournisseur"
 
-#: src/Widgets/OneTimePadView.vala:28
+#: src/Widgets/OneTimePadView.vala:30
 msgid "Add a pad using a screenshot of a QR code"
 msgstr "Ajouter un bloc-notes à l'aide d'une capture d'écran d'un code QR"
 
 #: src/Widgets/OneTimePadView.vala:32
+#, fuzzy
+msgid "Add Pad From Aegis JSON"
+msgstr "Ajouter un bloc à partir d'un jeton"
+
+#: src/Widgets/OneTimePadView.vala:33
+msgid "Add a pad using an export of an Aegis encrypted JSON vault file"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:37
 msgid "One Time Pad"
 msgstr "Bloc-notes à usage unique"
 
-#: src/Widgets/OneTimePadView.vala:65
+#: src/Widgets/OneTimePadView.vala:70
 msgid "Export"
 msgstr "Exporter"
 
-#: src/Widgets/OneTimePadView.vala:78
+#: src/Widgets/OneTimePadView.vala:83
 msgid "Delete"
 msgstr "Supprimer"
 
