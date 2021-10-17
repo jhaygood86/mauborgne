@@ -1,6 +1,8 @@
 public class OneTimePadView : Gtk.Grid {
 
     public signal void add_code_from_screenshot_clicked ();
+    public signal void add_code_from_aegis_clicked ();
+
     public signal void code_retrieved ();
     public signal void delete_requested (OneTimePad pad);
 
@@ -26,6 +28,9 @@ public class OneTimePadView : Gtk.Grid {
 
         welcome_screen.append ("screenshot", _("Add Pad From Screenshot"),
             _("Add a pad using a screenshot of a QR code"));
+
+        welcome_screen.append ("aegis", _("Add Pad From Aegis JSON"),
+            _("Add a pad using an export of an Aegis encrypted JSON vault file"));
 
         welcome_screen.activated.connect (welcome_screen_activated);
 
@@ -90,6 +95,10 @@ public class OneTimePadView : Gtk.Grid {
     private void welcome_screen_activated (int index) {
         if (index == 0) {
             add_code_from_screenshot_clicked ();
+        }
+
+        if (index == 1) {
+            add_code_from_aegis_clicked ();
         }
     }
 

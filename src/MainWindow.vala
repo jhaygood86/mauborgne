@@ -106,9 +106,13 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
         onetimepad_view = new OneTimePadView ();
         
         onetimepad_view.add_code_from_screenshot_clicked.connect(() => {
-            add_code_from_screenshot();
+            add_code_from_screenshot ();
         });
         
+        onetimepad_view.add_code_from_aegis_clicked.connect(() => {
+            add_codes_from_aegis_encrypted_json ();
+        });
+
         onetimepad_view.code_retrieved.connect(() => {
             otp_library.save(onetimepad_view.pad);
         });

@@ -3,5 +3,6 @@
   <gresource prefix="/io/github/jhaygood86/mauborgne">
     <file alias="application.css" compressed="true">application.css</file>
     <file alias="screenshot.svg" compressed="true" preprocess="xml-stripblanks">screenshot.svg</file>
+    <file alias="aegis.png" compressed="true">aegis.png</file>
   </gresource>
 </gresources>
