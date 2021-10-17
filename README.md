@@ -33,7 +33,7 @@ flatpak run io.github.jhaygood86.mauborgne
 
 ### Translations
 
-Translations will be using Weblate once fully set up.
+Translations use Weblate. Contribute at https://hosted.weblate.org/projects/maurbogne/
 
 ### Special Thanks
 
