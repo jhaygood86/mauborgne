@@ -4,7 +4,7 @@ public class OneTimePadView : Gtk.Grid {
     public signal void code_retrieved ();
     public signal void delete_requested (OneTimePad pad);
 
-    public OneTimePad pad { get; set; }
+    public OneTimePad? pad { get; set; }
 
     Granite.Widgets.Welcome welcome_screen;
     Gtk.Label title_label;
@@ -80,8 +80,8 @@ public class OneTimePadView : Gtk.Grid {
         };
 
         delete_button.clicked.connect(() => {
-            switch_to_welcome_screen ();
             delete_requested (pad);
+            pad = null;
         });
 
         codeview_header.pack_start(delete_button);
@@ -94,6 +94,12 @@ public class OneTimePadView : Gtk.Grid {
     }
 
     private void on_pad_set() {
+
+        if (pad == null) {
+            switch_to_welcome_screen ();
+            return;
+        }
+
         switch_to_code_display ();
 
         title_label.label = pad.account_name;
@@ -134,10 +140,15 @@ public class OneTimePadView : Gtk.Grid {
         });
     }
 
-    private async string get_otp_code() {
+    private async string? get_otp_code() {
         var code = yield pad.get_otp_code ();
-        code_retrieved ();
-        return code;
+
+        if (pad != null) {
+            code_retrieved ();
+            return code;
+        }
+
+        return null;
     }
 
     private void set_remaining_time() {

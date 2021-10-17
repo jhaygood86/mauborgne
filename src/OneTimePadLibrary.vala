@@ -16,7 +16,6 @@ public class OneTimePadLibrary : Object {
     }
 
     public void save(OneTimePad pad) {
-
         if(pads_set.contains(pad)){
             var file = pad.to_keyfile ();
             var file_name = pad.get_file_name ();
@@ -39,11 +38,10 @@ public class OneTimePadLibrary : Object {
         var file = File.new_for_path (dst_file_name);
 
         try {
-		    yield file.delete_async ();
 		    yield pad.clear_secret ();
-
+		    yield file.delete_async ();
 	    } catch (Error e) {
-		    print ("Error: %s\n", e.message);
+		    critical ("Error: %s\n", e.message);
 	    }
 
     }
@@ -76,9 +74,10 @@ public class OneTimePadLibrary : Object {
 	    FileInfo info = null;
 
 	    while (cancellable.is_cancelled () == false && ((info = enumerator.next_file (cancellable)) != null)) {
-		    if (info.get_file_type () == FileType.REGULAR) {
+		    if (info.get_file_type () == FileType.REGULAR && info.get_name().has_suffix(".txt")) {
+
 		        var src_file_name = Path.build_filename(Environment.get_user_data_dir(), info.get_name());
-		        
+
 		        print("file: %s\n",src_file_name);
 		        
 		        var key_file = new KeyFile ();
