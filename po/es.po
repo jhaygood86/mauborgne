@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
-"Report-Msgid-Bugs-To: jhaygood86@gmail.com\n"
-"POT-Creation-Date: 2021-10-17 18:53-0400\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-22 19:43-0400\n"
 "PO-Revision-Date: 2021-10-18 23:36+0000\n"
 "Last-Translator: Justin Haygood <jhaygood86@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/maurbogne/"
@@ -22,60 +22,76 @@ msgstr ""
 msgid "Mauborgne"
 msgstr "Mauborgne"
 
-#: src/MainWindow.vala:60 src/Widgets/OneTimePadView.vala:29
+#: src/MainWindow.vala:57 src/Widgets/OneTimePadView.vala:34
 msgid "Add Pad From Screenshot"
 msgstr "Añadir una Libreta desde una Captura de pantalla"
 
-#: src/MainWindow.vala:64
+#: src/MainWindow.vala:61
 msgid "Add Pad From Camera"
 msgstr "Añadir una Libreta desde la Cámara"
 
-#: src/MainWindow.vala:68
+#: src/MainWindow.vala:65
 msgid "Add Pad From Token"
 msgstr ""
 
-#: src/MainWindow.vala:72
+#: src/MainWindow.vala:69
 msgid "Add Pad(s) From Aegis Encrypted JSON"
 msgstr ""
 
-#: src/MainWindow.vala:83
+#: src/MainWindow.vala:80
 msgid "Add One Time Pad…"
 msgstr "Añadir una Libreta de un solo uso…"
 
-#: src/Services/AegisImporter.vala:29
+#: src/OneTimePad.vala:148
+msgid "Cannot determine pad type"
+msgstr ""
+
+#: src/Services/AegisManager.vala:33
 msgid "Unable to lock vault. Please try a different password"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:26
+#: src/Widgets/OneTimePadView.vala:31
 msgid "Add a One Time Pad"
 msgstr "Añadir una Libreta de un solo uso"
 
-#: src/Widgets/OneTimePadView.vala:27
+#: src/Widgets/OneTimePadView.vala:32
 msgid "Add a one time pad from a provider"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:30
+#: src/Widgets/OneTimePadView.vala:35
 msgid "Add a pad using a screenshot of a QR code"
 msgstr "Agregue una Libreta desde una Captura de pantalla de un Código QR"
 
-#: src/Widgets/OneTimePadView.vala:32
+#: src/Widgets/OneTimePadView.vala:37
 #, fuzzy
 msgid "Add Pad From Aegis JSON"
 msgstr "Añadir una Libreta desde la Cámara"
 
-#: src/Widgets/OneTimePadView.vala:33
+#: src/Widgets/OneTimePadView.vala:38
 msgid "Add a pad using an export of an Aegis encrypted JSON vault file"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:37
+#: src/Widgets/OneTimePadView.vala:42
 msgid "One Time Pad"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:70
+#: src/Widgets/OneTimePadView.vala:73
+msgid "Export as QR Code"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:77
+msgid "Export this pad as Aegis Vault JSON"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:81
+msgid "Export all pads as Aegis Vault JSON"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:91
 msgid "Export"
 msgstr "Exportar"
 
-#: src/Widgets/OneTimePadView.vala:83
+#: src/Widgets/OneTimePadView.vala:112
 msgid "Delete"
 msgstr ""
 
@@ -122,26 +138,28 @@ msgid "Feature Release"
 msgstr ""
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:18
-msgid "Adds support for importing from Aegis JSON vaults"
+msgid "Adds support for exporting pad(s) in Aegis encrypted JSON format"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:19
+msgid "Fix crashes when deleting a pad"
 msgstr ""
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:20
-msgid "Updated Translations"
+msgid "Adds missing button to import from Aegis files on welcome screen"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:21
+msgid ""
+"Clean up account names for accounts where the issuer name is repeated in the "
+"account name"
 msgstr ""
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:22
-msgid "Spanish"
+msgid "Updated icons!"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:23
-msgid "French"
-msgstr ""
-
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:24
-msgid "Norwegian"
-msgstr ""
-
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:66
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:64
 msgid "Justin Haygood"
 msgstr ""
 
