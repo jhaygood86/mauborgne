@@ -11,10 +11,11 @@
     </p>
   </description>
   <releases>
-    <release version="0.4.1" date="2021-10-17" urgency="medium">
+    <release version="0.5.0" date="2021-10-22" urgency="medium">
       <description>
-        <p>Bugfix Release</p>
+        <p>Feature Release</p>
         <ul>
+          <li>Adds support for exporting pad(s) in Aegis encrypted JSON format</li>
           <li>Fix crashes when deleting a pad</li>
           <li>Adds missing button to import from Aegis files on welcome screen</li>
           <li>Clean up account names for accounts where the issuer name is repeated in the account name</li>
