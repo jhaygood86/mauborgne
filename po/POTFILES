@@ -1,5 +1,6 @@
 src/MainWindow.vala
-src/Services/AegisImporter.vala
+src/OneTimePad.vala
+src/Services/AegisManager.vala
 src/Widgets/ExportWindow.vala
 src/Widgets/OneTimePadView.vala
 src/Widgets/PasswordDialog.vala

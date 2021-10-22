@@ -3,12 +3,22 @@ public class OneTimePadLibrary : Object {
     
     public signal void changed ();
     
-    public OneTimePadLibrary() {
+    private static OneTimePadLibrary? _instance;
+
+    private OneTimePadLibrary() {
         pads_set = new Gee.HashSet<OneTimePad>();
         
         load_existing_files();
     }
     
+    public static OneTimePadLibrary get_default () {
+        if (_instance == null) {
+            _instance = new OneTimePadLibrary ();
+        }
+
+        return _instance;
+    }
+
     public void add(OneTimePad otp) {
         pads_set.add(otp);
         changed ();
@@ -69,6 +79,45 @@ public class OneTimePadLibrary : Object {
         return pads_set;
     }
     
+    public async void export (OneTimePad pad, Gtk.Window parent_window) {
+        var pads = new Gee.ArrayList<OneTimePad> ();
+        pads.add (pad);
+
+        yield export_pads (pads, parent_window);
+    }
+
+    public async void export_all (Gtk.Window parent_window) {
+        yield export_pads (pads_set, parent_window);
+    }
+
+    private async void export_pads (Gee.Collection<OneTimePad> pads, Gtk.Window parent_window) {
+
+        var vault_content = new AegisVaultContent ();
+        vault_content.version = 1;
+        vault_content.entries = new Gee.ArrayList<AegisVaultContent.AegisVaultEntry> ();
+
+        foreach (var pad in pads) {
+            var vault_entry = yield pad.to_aegis_vault_entry ();
+            vault_content.entries.add (vault_entry);
+        }
+
+        var vault_json = AegisManager.export_to_json_string(parent_window, vault_content);
+
+        print("json to save: %s\n", vault_json);
+
+        var save_dialog = new Gtk.FileChooserNative (_("Save Aegis Vault JSON"), parent_window, Gtk.FileChooserAction.SAVE, null, null);
+        save_dialog.set_current_name("aegis-vault.json");
+
+        var response = save_dialog.run ();
+
+        if (response == Gtk.ResponseType.ACCEPT) {
+            var uri = save_dialog.get_uri();
+            var file = File.new_for_uri(uri);
+
+            yield file.replace_contents_async(vault_json.data, null, false, FileCreateFlags.NONE, null, null);
+        }
+    }
+
     private void load_existing_files () {
         var file = File.new_for_path (Environment.get_user_data_dir());
         load_existing_files_for_file(file);

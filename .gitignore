@@ -2,6 +2,6 @@
 build/*
 build_/*
 .flatpak-builder/*
-
+io.github.jhaygood86.mauborgne.json
 
 _build/

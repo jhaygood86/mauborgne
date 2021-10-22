@@ -1,3 +1,7 @@
+public errordomain OneTimePadError {
+    UNKNOWN_PAD_TYPE
+}
+
 public class OneTimePad {
 
     private static Secret.Schema schema;
@@ -8,7 +12,7 @@ public class OneTimePad {
     public string secret { get; set; }
     public OneTimePadAlgorithm algorithm { get; set; }
     public int digits { get; set; }
-    public int counter { get; set; }
+    public int64 counter { get; set; }
     public int period { get; set; }
     
     static construct {
@@ -85,7 +89,7 @@ public class OneTimePad {
             
             if(uri_params.contains ("counter")){
                 var counter_value = uri_params["counter"];
-                counter = int.parse(counter_value);
+                counter = int64.parse(counter_value);
             }
             
             if(uri_params.contains ("period")){
@@ -118,24 +122,49 @@ public class OneTimePad {
 
         algorithm = (OneTimePadAlgorithm)file.get_integer("PadSettings","Algorithm");
         digits = file.get_integer("PadSettings","Digits");
-        counter = file.get_integer("PadSettings","Counter");
+        counter = file.get_int64("PadSettings","Counter");
         period = file.get_integer("PadSettings","Period");
     }
     
-    public OneTimePad.from_aegis_vault_entry (AegisVaultContent.AegisTotpVaultEntry entry) {
-        pad_type = OneTimePadType.TOTP;
+    public OneTimePad.from_aegis_vault_entry (AegisVaultContent.AegisVaultEntry entry) throws OneTimePadError {
+
+        AegisVaultContent.AegisVaultEntryInfo? info = null;
+
+        if (entry is AegisVaultContent.AegisTotpVaultEntry) {
+            AegisVaultContent.AegisTotpVaultEntry totp_entry = (AegisVaultContent.AegisTotpVaultEntry)entry;
+            pad_type = OneTimePadType.TOTP;
+            period = totp_entry.info.period;
+            info = totp_entry.info;
+        }
+
+        if (entry is AegisVaultContent.AegisHotpVaultEntry) {
+            AegisVaultContent.AegisHotpVaultEntry hotp_entry = (AegisVaultContent.AegisHotpVaultEntry)entry;
+            pad_type = OneTimePadType.HOTP;
+            counter = hotp_entry.info.counter;
+            info = hotp_entry.info;
+        }
+
+        if (info == null) {
+            throw new OneTimePadError.UNKNOWN_PAD_TYPE(_("Cannot determine pad type"));
+        }
+
         issuer = entry.issuer;
         account_name = entry.name;
-        secret = entry.info.secret;
+        secret = info.secret;
 
-        switch (entry.info.algo) {
-            case "sha1":
+        switch (info.algo) {
+            case "SHA1":
                 algorithm = OneTimePadAlgorithm.SHA1;
+                break;
+            case "SHA256":
+                algorithm = OneTimePadAlgorithm.SHA256;
+                break;
+            case "SHA512":
+                algorithm = OneTimePadAlgorithm.SHA512;
                 break;
         }
 
-        digits = entry.info.digits;
-        period = entry.info.period;
+        digits = info.digits;
 
         account_name = get_cleaned_account_name (issuer, account_name);
     }
@@ -147,7 +176,7 @@ public class OneTimePad {
         file.set_string("PadSettings","AccountName",account_name);
         file.set_integer("PadSettings","Algorithm",algorithm);
         file.set_integer("PadSettings","Digits",digits);
-        file.set_integer("PadSettings","Counter",counter);
+        file.set_int64("PadSettings","Counter",counter);
         file.set_integer("PadSettings","Period",period);
         
         return file;
@@ -202,7 +231,7 @@ public class OneTimePad {
 
         if(pad_type == OneTimePadType.HOTP){
             sb.append("&counter=");
-            sb.append_printf("%d",counter + 1);
+            sb.append_printf("%lld",counter + 1);
         }
 
         if(pad_type == OneTimePadType.TOTP && period != 30){
@@ -211,6 +240,57 @@ public class OneTimePad {
         }
 
         return (string)sb.data;
+    }
+
+    public async AegisVaultContent.AegisVaultEntry to_aegis_vault_entry () {
+        AegisVaultContent.AegisVaultEntry? entry = null;
+        AegisVaultContent.AegisVaultEntryInfo? info = null;
+
+        if (pad_type == OneTimePadType.TOTP) {
+            var totp_entry = new AegisVaultContent.AegisTotpVaultEntry ();
+            entry = totp_entry;
+            totp_entry.info = new AegisVaultContent.AegisTotpVaultEntryInfo ();
+            info = totp_entry.info;
+
+            totp_entry.info.period = period;
+        }
+
+        if (pad_type == OneTimePadType.HOTP) {
+            var hotp_entry = new AegisVaultContent.AegisHotpVaultEntry ();
+            entry = hotp_entry;
+            hotp_entry.info = new AegisVaultContent.AegisHotpVaultEntryInfo ();
+            info = hotp_entry.info;
+
+            hotp_entry.info.counter = counter;
+        }
+
+        entry.uuid = GLib.Uuid.string_random();
+        entry.name = account_name;
+        entry.issuer = issuer;
+
+        var secret_value = yield lookup_secret ();
+
+        info.secret = secret_value;
+
+        switch (algorithm) {
+            case OneTimePadAlgorithm.SHA1:
+                info.algo = "SHA1";
+                break;
+            case OneTimePadAlgorithm.SHA256:
+                info.algo = "SHA256";
+                break;
+            case OneTimePadAlgorithm.SHA512:
+                info.algo = "SHA512";
+                break;
+        }
+
+        info.digits = digits;
+
+        return entry;
+    }
+
+    public Variant to_variant_identifier () {
+        return new Variant("(ss)", issuer, account_name);
     }
 
     public string get_file_name() {

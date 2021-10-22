@@ -6,6 +6,9 @@ public class OneTimePadView : Gtk.Grid {
     public signal void code_retrieved ();
     public signal void delete_requested (OneTimePad pad);
 
+    public signal void export_pad_as_aegis (OneTimePad pad);
+    public signal void export_all_pads_as_aegis ();
+
     public OneTimePad? pad { get; set; }
 
     Granite.Widgets.Welcome welcome_screen;
@@ -15,6 +18,8 @@ public class OneTimePadView : Gtk.Grid {
     Gtk.Button export_button;
     Gtk.Button delete_button;
     Hdy.HeaderBar codeview_header;
+
+    public bool has_pad { get; set; default = false; }
 
     construct {
         codeview_header = new Hdy.HeaderBar () {
@@ -65,15 +70,39 @@ public class OneTimePadView : Gtk.Grid {
             on_pad_set();
         });
 
-        export_button = new Gtk.Button () {
-            image = new Gtk.Image.from_icon_name ("document-export", Gtk.IconSize.LARGE_TOOLBAR),
-            tooltip_text = _("Export"),
+        var export_qr_code_menu_item = new Gtk.MenuItem.with_label (_("Export as QR Code")) {
             sensitive = false
         };
 
-        export_button.clicked.connect(() => {
-            var export_window = new ExportWindow (pad);
-            export_window.show_all ();
+        var export_aegis_vault_menu_item = new Gtk.MenuItem.with_label (_("Export this pad as Aegis Vault JSON")) {
+            sensitive = false
+        };
+
+        var export_all_aegis_vault_menu_item = new Gtk.MenuItem.with_label (_("Export all pads as Aegis Vault JSON"));
+
+        var export_menu = new Gtk.Menu ();
+        export_menu.add (export_qr_code_menu_item);
+        export_menu.add (export_aegis_vault_menu_item);
+        export_menu.add (export_all_aegis_vault_menu_item);
+        export_menu.show_all ();
+
+        export_button = new Gtk.MenuButton () {
+            image = new Gtk.Image.from_icon_name ("document-export", Gtk.IconSize.LARGE_TOOLBAR),
+            tooltip_text = _("Export"),
+            popup = export_menu
+        };
+
+        export_qr_code_menu_item.activate.connect(() => {
+           var export_window = new ExportWindow (pad);
+           export_window.show_all ();
+        });
+
+        export_aegis_vault_menu_item.activate.connect(() => {
+            export_pad_as_aegis (pad);
+        });
+
+        export_all_aegis_vault_menu_item.activate.connect(() => {
+            export_all_pads_as_aegis ();
         });
 
         codeview_header.pack_start(export_button);
@@ -81,7 +110,6 @@ public class OneTimePadView : Gtk.Grid {
         delete_button = new Gtk.Button () {
             image = new Gtk.Image.from_icon_name ("edit-delete", Gtk.IconSize.LARGE_TOOLBAR),
             tooltip_text = _("Delete"),
-            sensitive = false
         };
 
         delete_button.clicked.connect(() => {
@@ -90,6 +118,22 @@ public class OneTimePadView : Gtk.Grid {
         });
 
         codeview_header.pack_start(delete_button);
+
+        bind_property ("has-pad", delete_button, "sensitive", BindingFlags.SYNC_CREATE);
+        bind_property ("has-pad", export_aegis_vault_menu_item, "sensitive", BindingFlags.SYNC_CREATE);
+        bind_property ("has-pad", export_qr_code_menu_item, "sensitive", BindingFlags.SYNC_CREATE);
+    }
+
+    private async void export_to_aegis_format () {
+        AegisVaultContent vault_content = new AegisVaultContent ();
+        vault_content.version = 1;
+        vault_content.entries = new Gee.ArrayList<AegisVaultContent.AegisVaultEntry> ();
+
+        var aegis_vault_entry = yield pad.to_aegis_vault_entry ();
+        vault_content.entries.add (aegis_vault_entry);
+
+        var exported_json = AegisManager.export_to_json_string((Gtk.Window)get_toplevel(), vault_content);
+
     }
 
     private void welcome_screen_activated (int index) {
@@ -105,9 +149,12 @@ public class OneTimePadView : Gtk.Grid {
     private void on_pad_set() {
 
         if (pad == null) {
+            has_pad = false;
             switch_to_welcome_screen ();
             return;
         }
+
+        has_pad = true;
 
         switch_to_code_display ();
 
@@ -116,9 +163,6 @@ public class OneTimePadView : Gtk.Grid {
 
         switch_to_code_display();
         set_otp_code_label ();
-
-        export_button.sensitive = true;
-        delete_button.sensitive = true;
 
         var current_pad = pad;
 

@@ -19,15 +19,12 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
     Xdp.Portal portal;
     Granite.Widgets.SourceList source_list;
     OneTimePadLibrary otp_library;
-
-
     OneTimePadView onetimepad_view;
-
 
     construct {
         portal = new Xdp.Portal();
         
-        otp_library = new OneTimePadLibrary();
+        otp_library = OneTimePadLibrary.get_default ();
         otp_library.changed.connect (bind_pads_to_source_list);
     
         var sidebar_header = new Hdy.HeaderBar () {
@@ -117,6 +114,18 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
             otp_library.save(onetimepad_view.pad);
         });
 
+        onetimepad_view.export_pad_as_aegis.connect((pad) => {
+            otp_library.export.begin(pad, this, (obj,res) => {
+                otp_library.export.end(res);
+            });
+        });
+
+        onetimepad_view.export_all_pads_as_aegis.connect(() => {
+            otp_library.export_all.begin(this, (obj,res) => {
+                otp_library.export_all.end(res);
+            });
+        });
+
         onetimepad_view.delete_requested.connect((pad) => {
             otp_library.remove.begin(pad, (obj,res) => {
                 otp_library.remove.end(res);
@@ -149,7 +158,7 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
         if (response == Gtk.ResponseType.ACCEPT) {
             var file = chooser.get_filename ();
 
-            var vault = AegisImporter.import_from_json_file(file, this);
+            var vault = AegisManager.import_from_json_file(file, this);
 
             if (vault != null) {
                 foreach (var entry in vault.entries) {
