@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: jhaygood86@gmail.com\n"
 "POT-Creation-Date: 2021-10-17 18:53-0400\n"
-"PO-Revision-Date: 2021-10-08 18:00+0000\n"
+"PO-Revision-Date: 2021-10-18 23:36+0000\n"
 "Last-Translator: Justin Haygood <jhaygood86@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/maurbogne/"
 "maurbogne/es/>\n"
@@ -73,7 +73,7 @@ msgstr ""
 
 #: src/Widgets/OneTimePadView.vala:70
 msgid "Export"
-msgstr ""
+msgstr "Exportar"
 
 #: src/Widgets/OneTimePadView.vala:83
 msgid "Delete"
