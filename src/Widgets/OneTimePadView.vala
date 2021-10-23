@@ -148,13 +148,12 @@ public class OneTimePadView : Gtk.Grid {
 
     private void on_pad_set() {
 
+        has_pad = pad != null;
+
         if (pad == null) {
-            has_pad = false;
             switch_to_welcome_screen ();
             return;
         }
-
-        has_pad = true;
 
         switch_to_code_display ();
 

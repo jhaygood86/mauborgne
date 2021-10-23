@@ -163,7 +163,7 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
             if (vault != null) {
                 foreach (var entry in vault.entries) {
                     var otp = new OneTimePad.from_aegis_vault_entry(entry);
-                    otp_library.add(otp);
+                    otp_library.add.begin(otp);
                 }
             }
         }
@@ -176,7 +176,7 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
                 
                 if(qr_code_uri.length > 0){
                     var otp = new OneTimePad.from_uri(qr_code_uri);
-                    otp_library.add(otp);
+                    otp_library.add.begin(otp);
                 }
                 
         });

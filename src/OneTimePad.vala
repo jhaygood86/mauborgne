@@ -303,10 +303,7 @@ public class OneTimePad {
 
     public async string get_otp_code () {
 
-        if (secret != null) {
-            yield store_secret(secret);
-            secret = null;
-        }
+        yield save_secret ();
 
         var secret_value = yield lookup_secret ();
         
@@ -338,6 +335,24 @@ public class OneTimePad {
         var attributes = get_secret_attributes ();
 
         return yield Secret.password_clearv (schema, attributes, null);
+    }
+
+    public async void save_secret () {
+        if (secret != null) {
+
+            print("storing secret using libsecret...\n");
+
+            var existing_secret = yield lookup_secret();
+
+            if (existing_secret != null) {
+                yield clear_secret ();
+            }
+
+            yield store_secret(secret);
+            secret = null;
+
+            print("secret stored successfully\n");
+        }
     }
 
     private static Cotp.Algorithm get_cotp_algorithm(OneTimePadAlgorithm algorithm) {

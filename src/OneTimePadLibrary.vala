@@ -19,14 +19,17 @@ public class OneTimePadLibrary : Object {
         return _instance;
     }
 
-    public void add(OneTimePad otp) {
-        pads_set.add(otp);
+    public async void add(OneTimePad otp) {
+        pads_set.add (otp);
+        yield save (otp);
         changed ();
-        save(otp);
     }
 
-    public void save(OneTimePad pad) {
+    public async void save(OneTimePad pad) {
         if(pads_set.contains(pad)){
+
+            yield pad.save_secret();
+
             var file = pad.to_keyfile ();
             var file_name = pad.get_file_name ();
 
