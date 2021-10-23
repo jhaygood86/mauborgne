@@ -11,7 +11,7 @@ Maurborgne is a 2FA OTP generator that can generate HOTP and TOTP codes in order
 
 ### Getting Mauborgne
 
-Mauborgne is available for elementary OS with a suggested retail price of $10. Users of other operating systems can install it using [Flatpak](http://jhaygood86.github.io/maurborgne/maurborgne.flatpakref)
+Mauborgne is available for elementary OS with a suggested retail price of $10. Users of other Flatpak-compatible operating systems can install it using [Flatpak](http://jhaygood86.github.io/maurborgne/maurborgne.flatpakref)
 
 ### Support or Contact
 
