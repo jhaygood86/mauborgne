@@ -224,8 +224,5 @@ public class OneTimePadView : Gtk.Grid {
         remove(subtitle_label);
         remove(code_remaining_progress);
         attach (welcome_screen, 0, 1);
-
-        export_button.sensitive = false;
-        delete_button.sensitive = false;
     }
 }
