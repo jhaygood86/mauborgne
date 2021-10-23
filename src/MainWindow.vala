@@ -20,11 +20,15 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
     Granite.Widgets.SourceList source_list;
     OneTimePadLibrary otp_library;
     OneTimePadView onetimepad_view;
+    KeyFile brand_mapping_file;
+    Settings settings;
 
     construct {
 
-        default_width = 1280;
-        default_height = 720;
+        settings = new GLib.Settings ("io.github.jhaygood86.mauborgne");
+
+        default_width = settings.get_int ("window-width");
+        default_height = settings.get_int ("window-height");
 
         portal = new Xdp.Portal();
         
@@ -47,6 +51,9 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
         };
         
         source_list = new Granite.Widgets.SourceList();
+
+        source_list.hadjustment.value = settings.get_int ("pad-list-width");
+
         source_list.item_selected.connect(pad_item_selected);
     
         scrolledwindow.add(source_list);
@@ -141,9 +148,28 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
         paned.pack1 (sidebar, false, false);
         paned.pack2 (onetimepad_view, true, false);
         
+        paned.position = settings.get_int ("pad-list-width");
+
+        paned.notify["position"].connect(() => {
+           settings.set_int ("pad-list-width", paned.position);
+        });
+
         add (paned);
         
+        brand_mapping_file = new KeyFile ();
+        brand_mapping_file.load_from_data_dirs("io.github.jhaygood86.mauborgne/brand_mapping.ini", null, KeyFileFlags.NONE);
+
         bind_pads_to_source_list();
+
+        this.configure_event.connect(() => {
+           var rect = Gdk.Rectangle ();
+           get_size(out rect.width, out rect.height);
+
+           settings.set_int("window-width", rect.width);
+           settings.set_int("window-height", rect.height);
+
+           return false;
+        });
     }
     
     private void acquire_from_screenshot_clicked(Gtk.Button button) {
@@ -211,6 +237,9 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
     
     private void bind_pads_to_source_list() {
   
+        var totp_item = new Granite.Widgets.SourceList.ExpandableItem(_("Time-based One Time Pads"));
+        var hotp_item = new Granite.Widgets.SourceList.ExpandableItem(_("Counter-based One Time Pads"));
+
         var issuers = new Gee.HashMap<string, Granite.Widgets.SourceList.ExpandableItem>();
         
         foreach(var pad in otp_library.get_set()) {
@@ -218,19 +247,35 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
             if(!issuers.keys.contains(pad.issuer)) {
                 var item = new Granite.Widgets.SourceList.ExpandableItem(pad.issuer);
                 issuers[pad.issuer] = item;
+
+                if (brand_mapping_file.has_key("Brand Icons", pad.issuer)) {
+                    var brand_icon_name = brand_mapping_file.get_string ("Brand Icons", pad.issuer) + "-symbolic";
+
+                    if (has_brand_icon(brand_icon_name)) {
+                        item.icon = new ThemedIcon(brand_icon_name);
+                    }
+                }
+
+                if (pad.pad_type == OneTimePadType.TOTP) {
+                    totp_item.add (item);
+                }
+
+                if (pad.pad_type == OneTimePadType.HOTP) {
+                    hotp_item.add (item);
+                }
             }
             
             var issuer_item = issuers[pad.issuer];
             
             var account_item = new Granite.Widgets.SourceList.Item(pad.account_name);
+
             issuer_item.add(account_item);
         }
         
         source_list.root.clear();
         
-        foreach(var issuer_item in issuers.values) {
-            source_list.root.add(issuer_item);
-        }
+        source_list.root.add(totp_item);
+        source_list.root.add(hotp_item);
         
         source_list.root.expand_all();
     }
@@ -244,6 +289,13 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
             
             onetimepad_view.pad = pad;
         }
+    }
+
+    private bool has_brand_icon (string brand_icon_name) {
+        print ("has brand icon: %s\n", brand_icon_name);
+
+        var icon_theme = Gtk.IconTheme.get_default ();
+        return icon_theme.has_icon (brand_icon_name);
     }
 }
 

@@ -72,5 +72,7 @@ executable(
     install: true
 )
 
+meson.add_install_script('build-aux/post_install.py')
+
 subdir('data')
 subdir('po')

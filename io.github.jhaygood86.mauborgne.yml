@@ -55,6 +55,16 @@ modules:
       url: https://gitlab.gnome.org/jhaygood86/json-glib.git
       commit: 405bc0e2a5b0248cd12c37235752d50156e204f3
 
+  - name: fontawesome
+    buildsystem: simple
+    build-commands:
+      - cd svgs/brands/; for filename in *; do install -D ${filename} /app/share/icons/hicolor/scalable/apps/${filename%.svg}-symbolic.svg; done
+    sources:
+    - type: git
+      url: https://github.com/FortAwesome/Font-Awesome.git
+      tag: 5.15.4
+      commit: 7d3d774145ac38663f6d1effc6def0334b68ab7e
+
   - name: mauborgne
     buildsystem: meson
     sources:

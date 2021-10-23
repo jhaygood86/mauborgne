@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema path="/io/github/jhaygood86/mauborgne/" id="io.github.jhaygood86.mauborgne">
+    <key name="pad-list-width" type="i">
+      <default>300</default>
+      <summary>Pad List Width</summary>
+      <description>Stores the width of the pad list</description>
+    </key>
+    <key name="window-width" type="i">
+      <default>1280</default>
+      <summary>Window Width</summary>
+      <description>Stores the width of the window</description>
+    </key>
+    <key name="window-height" type="i">
+      <default>720</default>
+      <summary>Window Height</summary>
+      <description>Stores the height of the width</description>
+    </key>
+  </schema>
+</schemalist>

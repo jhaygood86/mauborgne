@@ -1,6 +1,6 @@
-install_data('test_qr_code.png')
+install_data('brand_mapping.ini')
 
-icon_sizes = ['128']
+icon_sizes = ['16','24','32','48','64','128']
 
 foreach i : icon_sizes
     install_data(
@@ -14,6 +14,21 @@ foreach i : icon_sizes
         rename: meson.project_name() + '.svg'
     )
 endforeach
+
+install_data (
+    'gschema.xml',
+    install_dir: get_option('datadir') / 'glib-2.0' / 'schemas',
+    rename: meson.project_name() + '.gschema.xml'
+)
+
+compile_schemas = find_program('glib-compile-schemas', required: false)
+
+if compile_schemas.found()
+  test('Validate schema file', compile_schemas,
+    args: ['--strict', '--dry-run', meson.current_source_dir()]
+  )
+endif
+
 
 i18n.merge_file(
     input: 'io.github.jhaygood86.mauborgne.desktop.in',
