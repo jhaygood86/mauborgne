@@ -22,6 +22,10 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
     OneTimePadView onetimepad_view;
 
     construct {
+
+        default_width = 1280;
+        default_height = 720;
+
         portal = new Xdp.Portal();
         
         otp_library = OneTimePadLibrary.get_default ();
@@ -111,7 +115,7 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
         });
 
         onetimepad_view.code_retrieved.connect(() => {
-            otp_library.save(onetimepad_view.pad);
+            otp_library.save.begin(onetimepad_view.pad);
         });
 
         onetimepad_view.export_pad_as_aegis.connect((pad) => {

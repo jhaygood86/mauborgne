@@ -108,6 +108,10 @@ public class OneTimePadLibrary : Object {
 
         print("json to save: %s\n", vault_json);
 
+        if (vault_json == null) {
+            return;
+        }
+
         var save_dialog = new Gtk.FileChooserNative (_("Save Aegis Vault JSON"), parent_window, Gtk.FileChooserAction.SAVE, null, null);
         save_dialog.set_current_name("aegis-vault.json");
 

@@ -124,18 +124,6 @@ public class OneTimePadView : Gtk.Grid {
         bind_property ("has-pad", export_qr_code_menu_item, "sensitive", BindingFlags.SYNC_CREATE);
     }
 
-    private async void export_to_aegis_format () {
-        AegisVaultContent vault_content = new AegisVaultContent ();
-        vault_content.version = 1;
-        vault_content.entries = new Gee.ArrayList<AegisVaultContent.AegisVaultEntry> ();
-
-        var aegis_vault_entry = yield pad.to_aegis_vault_entry ();
-        vault_content.entries.add (aegis_vault_entry);
-
-        var exported_json = AegisManager.export_to_json_string((Gtk.Window)get_toplevel(), vault_content);
-
-    }
-
     private void welcome_screen_activated (int index) {
         if (index == 0) {
             add_code_from_screenshot_clicked ();
