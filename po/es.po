@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: jhaygood86@gmail.com\n"
 "POT-Creation-Date: 2021-10-22 19:43-0400\n"
-"PO-Revision-Date: 2021-10-18 23:36+0000\n"
+"PO-Revision-Date: 2021-10-24 00:58+0000\n"
 "Last-Translator: Justin Haygood <jhaygood86@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/maurbogne/"
 "maurbogne/es/>\n"
@@ -73,7 +73,7 @@ msgstr ""
 
 #: src/Widgets/OneTimePadView.vala:42
 msgid "One Time Pad"
-msgstr ""
+msgstr "Libreta de un Solo Uso"
 
 #: src/Widgets/OneTimePadView.vala:73
 msgid "Export as QR Code"
