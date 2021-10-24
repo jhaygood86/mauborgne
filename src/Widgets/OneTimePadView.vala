@@ -19,9 +19,15 @@ public class OneTimePadView : Gtk.Grid {
     Gtk.Button delete_button;
     Hdy.HeaderBar codeview_header;
 
+    Gtk.Clipboard? clipboard;
+
+    Gee.List<OneTimePadClipboardOwner> clipboard_owners;
+
     public bool has_pad { get; set; default = false; }
 
     construct {
+        clipboard_owners = new Gee.ArrayList<OneTimePadClipboardOwner> ();
+
         codeview_header = new Hdy.HeaderBar () {
             decoration_layout = ":maximize",
             show_close_button = true,
@@ -70,6 +76,17 @@ public class OneTimePadView : Gtk.Grid {
             on_pad_set();
         });
 
+        var copy_button = new Gtk.Button () {
+            image = new Gtk.Image.from_icon_name ("edit-copy", Gtk.IconSize.LARGE_TOOLBAR),
+            tooltip_text = _("Copy"),
+        };
+
+        copy_button.clicked.connect(() => {
+            copy_code_to_clipboard ();
+        });
+
+        codeview_header.pack_start(copy_button);
+
         var export_qr_code_menu_item = new Gtk.MenuItem.with_label (_("Export as QR Code")) {
             sensitive = false
         };
@@ -105,7 +122,7 @@ public class OneTimePadView : Gtk.Grid {
             export_all_pads_as_aegis ();
         });
 
-        codeview_header.pack_start(export_button);
+        codeview_header.pack_end(export_button);
 
         delete_button = new Gtk.Button () {
             image = new Gtk.Image.from_icon_name ("edit-delete", Gtk.IconSize.LARGE_TOOLBAR),
@@ -117,11 +134,12 @@ public class OneTimePadView : Gtk.Grid {
             pad = null;
         });
 
-        codeview_header.pack_start(delete_button);
+        codeview_header.pack_end(delete_button);
 
         bind_property ("has-pad", delete_button, "sensitive", BindingFlags.SYNC_CREATE);
         bind_property ("has-pad", export_aegis_vault_menu_item, "sensitive", BindingFlags.SYNC_CREATE);
         bind_property ("has-pad", export_qr_code_menu_item, "sensitive", BindingFlags.SYNC_CREATE);
+        bind_property ("has-pad", copy_button, "sensitive", BindingFlags.SYNC_CREATE);
     }
 
     private void welcome_screen_activated (int index) {
@@ -200,17 +218,88 @@ public class OneTimePadView : Gtk.Grid {
         code_remaining_progress.set_fraction(ratio);
     }
 
+    private void copy_code_to_clipboard () {
+        if (clipboard == null) {
+            clipboard = Gtk.Clipboard.get_default (get_display());
+        }
+
+        print("copying code to clipboard\n");
+
+        Gtk.TargetEntry target_entry_utf8 = {"UTF8_STRING", 0, 0};
+        Gtk.TargetEntry target_entry_text = {"TEXT", 0, 0};
+        Gtk.TargetEntry target_entry_ctext = {"COMPOUND_TEXT", 0, 0};
+        Gtk.TargetEntry target_entry_text_plain = {"text/plain", 0, 0};
+        Gtk.TargetEntry target_entry_text_plain_utf8 = {"text/plain;charset=utf-8", 0, 0};
+
+        Gtk.TargetEntry[] text_targets = {target_entry_utf8, target_entry_text, target_entry_ctext, target_entry_text_plain, target_entry_text_plain_utf8};
+
+        var owner = new OneTimePadClipboardOwner (pad, subtitle_label.label);
+        clipboard_owners.add (owner);
+
+        owner.cancelled.connect(() => {
+           clipboard_owners.remove (owner);
+        });
+
+        clipboard.set_with_owner(text_targets, clipboard_get_code, clipboard_clear, owner);
+    }
+
+    private static void clipboard_get_code (Gtk.Clipboard clipboard, Gtk.SelectionData selection_data, uint info, void* owner) {
+        print ("clipboard get code called\n");
+
+        var clipboard_owner = owner as OneTimePadClipboardOwner;
+
+        var code = clipboard_owner.code;
+
+        selection_data.set_text (code, -1);
+    }
+
+    private static void clipboard_clear (Gtk.Clipboard clipboard, void* owner) {
+        var clipboard_owner = owner as OneTimePadClipboardOwner;
+        clipboard_owner.cancel ();
+    }
+
     private void switch_to_code_display() {
-        remove(welcome_screen);
-        attach(title_label, 0, 1);
-        attach(subtitle_label, 0, 2);
-        attach(code_remaining_progress, 0, 3);
+        remove (welcome_screen);
+        attach (title_label, 0, 1);
+        attach (subtitle_label, 0, 2);
+        attach (code_remaining_progress, 0, 3);
     }
 
     private void switch_to_welcome_screen() {
-        remove(title_label);
-        remove(subtitle_label);
-        remove(code_remaining_progress);
+        remove (title_label);
+        remove (subtitle_label);
+        remove (code_remaining_progress);
         attach (welcome_screen, 0, 1);
+    }
+
+    private class OneTimePadClipboardOwner : Object {
+
+        public string code { get; private set; }
+
+        public signal void cancelled ();
+
+        private OneTimePad pad;
+        private uint timer;
+
+        public OneTimePadClipboardOwner (OneTimePad pad, string initial_code) {
+            this.pad = pad;
+            this.code = initial_code;
+
+            set_current_code.begin ();
+
+            timer = Timeout.add(1000,() => {
+                set_current_code.begin ();
+                return true;
+            });
+        }
+
+        private async void set_current_code() {
+            code = yield pad.get_otp_code ();
+        }
+
+        public void cancel () {
+            Source.remove (timer);
+            cancelled ();
+        }
     }
 }

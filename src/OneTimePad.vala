@@ -2,7 +2,7 @@ public errordomain OneTimePadError {
     UNKNOWN_PAD_TYPE
 }
 
-public class OneTimePad {
+public class OneTimePad : Object {
 
     private static Secret.Schema schema;
 
