@@ -279,18 +279,20 @@ public class OneTimePadView : Gtk.Grid {
         public signal void cancelled ();
 
         private OneTimePad pad;
-        private uint timer;
+        private uint timer = -1;
 
         public OneTimePadClipboardOwner (OneTimePad pad, string initial_code) {
             this.pad = pad;
             this.code = initial_code;
 
-            set_current_code.begin ();
-
-            timer = Timeout.add(1000,() => {
+            if (pad.pad_type == OneTimePadType.TOTP) {
                 set_current_code.begin ();
-                return true;
-            });
+
+                timer = Timeout.add(1000,() => {
+                    set_current_code.begin ();
+                    return true;
+                });
+            }
         }
 
         private async void set_current_code() {
@@ -298,7 +300,11 @@ public class OneTimePadView : Gtk.Grid {
         }
 
         public void cancel () {
-            Source.remove (timer);
+            if (timer > -1) {
+                Source.remove (timer);
+                timer = -1;
+            }
+
             cancelled ();
         }
     }
