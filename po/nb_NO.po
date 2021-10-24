@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-22 19:43-0400\n"
+"POT-Creation-Date: 2021-10-24 15:04-0400\n"
 "PO-Revision-Date: 2021-10-09 21:44+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
@@ -22,25 +22,35 @@ msgstr ""
 msgid "Mauborgne"
 msgstr "Maurborgne"
 
-#: src/MainWindow.vala:57 src/Widgets/OneTimePadView.vala:34
+#: src/MainWindow.vala:68 src/Widgets/OneTimePadView.vala:40
 msgid "Add Pad From Screenshot"
 msgstr "Legg til notis fra skjermavbildning"
 
-#: src/MainWindow.vala:61
+#: src/MainWindow.vala:72
 msgid "Add Pad From Camera"
 msgstr "Legg til notis fra kamera"
 
-#: src/MainWindow.vala:65
+#: src/MainWindow.vala:76
 msgid "Add Pad From Token"
 msgstr "Legg til notis fra symbol"
 
-#: src/MainWindow.vala:69
+#: src/MainWindow.vala:80
 msgid "Add Pad(s) From Aegis Encrypted JSON"
 msgstr ""
 
-#: src/MainWindow.vala:80
+#: src/MainWindow.vala:91
 msgid "Add One Time Pad…"
 msgstr "Legg til éngangsnotis …"
+
+#: src/MainWindow.vala:240
+#, fuzzy
+msgid "Time-based One Time Pads"
+msgstr "Legg til en éngangsnotis"
+
+#: src/MainWindow.vala:241
+#, fuzzy
+msgid "Counter-based One Time Pads"
+msgstr "Legg til en éngangsnotis"
 
 #: src/OneTimePad.vala:148
 msgid "Cannot determine pad type"
@@ -50,48 +60,52 @@ msgstr ""
 msgid "Unable to lock vault. Please try a different password"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:31
+#: src/Widgets/OneTimePadView.vala:37
 msgid "Add a One Time Pad"
 msgstr "Legg til en éngangsnotis"
 
-#: src/Widgets/OneTimePadView.vala:32
+#: src/Widgets/OneTimePadView.vala:38
 msgid "Add a one time pad from a provider"
 msgstr "Legg til en éngangsnotis fra en tilbyder"
 
-#: src/Widgets/OneTimePadView.vala:35
+#: src/Widgets/OneTimePadView.vala:41
 msgid "Add a pad using a screenshot of a QR code"
 msgstr "Legg til en éngangsnotis ved bruk av skjermavbildning av en QR-kode"
 
-#: src/Widgets/OneTimePadView.vala:37
+#: src/Widgets/OneTimePadView.vala:43
 #, fuzzy
 msgid "Add Pad From Aegis JSON"
 msgstr "Legg til notis fra symbol"
 
-#: src/Widgets/OneTimePadView.vala:38
+#: src/Widgets/OneTimePadView.vala:44
 msgid "Add a pad using an export of an Aegis encrypted JSON vault file"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:42
+#: src/Widgets/OneTimePadView.vala:48
 msgid "One Time Pad"
 msgstr "Éngangsnotis"
 
-#: src/Widgets/OneTimePadView.vala:73
+#: src/Widgets/OneTimePadView.vala:81
+msgid "Copy"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:90
 msgid "Export as QR Code"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:77
+#: src/Widgets/OneTimePadView.vala:94
 msgid "Export this pad as Aegis Vault JSON"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:81
+#: src/Widgets/OneTimePadView.vala:98
 msgid "Export all pads as Aegis Vault JSON"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:91
+#: src/Widgets/OneTimePadView.vala:108
 msgid "Export"
 msgstr "Eksporter"
 
-#: src/Widgets/OneTimePadView.vala:112
+#: src/Widgets/OneTimePadView.vala:129
 msgid "Delete"
 msgstr "Slett"
 
