@@ -83,7 +83,7 @@ public class EditDialog : Hdy.Window {
         });
 
         save_button.clicked.connect (() => {
-           pad.account_name = account_name_entry.text;
+           pad.account_name_display = account_name_entry.text;
            pad.note = note_entry.text;
 
            if (pad.pad_type == OneTimePadType.HOTP) {
@@ -96,7 +96,7 @@ public class EditDialog : Hdy.Window {
            destroy ();
         });
 
-        account_name_entry.text = pad.account_name;
+        account_name_entry.text = pad.account_name_display;
         note_entry.text = pad.note;
 
         if (pad.pad_type == OneTimePadType.HOTP) {

@@ -9,6 +9,7 @@ public class OneTimePad : Object {
     public OneTimePadType pad_type { get; set; }
     public string issuer { get; set; }
     public string account_name { get; set; }
+    public string account_name_display { get; set;}
     public string secret { get; set; }
     public OneTimePadAlgorithm algorithm { get; set; }
     public int digits { get; set; }
@@ -106,6 +107,7 @@ public class OneTimePad : Object {
             }
 
             account_name = get_cleaned_account_name (issuer, account_name);
+            account_name_display = account_name;
 
             store_secret.begin(secret);
         }
@@ -131,6 +133,23 @@ public class OneTimePad : Object {
             note = file.get_string ("Additional Data", "Note");
         } else {
             note = "";
+        }
+
+        if (file.has_group ("Additional Data")) {
+            if (file.has_key ("Additional Data", "Note")) {
+                note = file.get_string ("Additional Data", "Note");
+            } else {
+                note = "";
+            }
+
+            if (file.has_key ("Additional Data", "Account Display Name")) {
+                account_name_display = file.get_string ("Additional Data", "Account Display Name");
+            } else {
+                account_name_display = account_name;
+            }
+        } else {
+            note = "";
+            account_name_display = account_name;
         }
     }
     
@@ -176,6 +195,7 @@ public class OneTimePad : Object {
         note = entry.note;
 
         account_name = get_cleaned_account_name (issuer, account_name);
+        account_name_display = account_name;
     }
 
     public KeyFile to_keyfile() {
@@ -188,7 +208,8 @@ public class OneTimePad : Object {
         file.set_int64("PadSettings","Counter",counter);
         file.set_integer("PadSettings","Period",period);
         
-        file.set_string("Additional Data", "Note", note);
+        file.set_string ("Additional Data", "Note", note);
+        file.set_string ("Additional Data", "Account Display Name", account_name_display);
 
         return file;
     }

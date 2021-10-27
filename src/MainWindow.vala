@@ -145,7 +145,10 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
         });
 
         onetimepad_view.save_requested.connect((pad) => {
-            otp_library.save.begin(pad);
+            otp_library.save.begin(pad, (obj,res) => {
+                otp_library.save.end(res);
+                bind_pads_to_source_list();
+            });
         });
 
         var paned = new Gtk.Paned (Gtk.Orientation.HORIZONTAL);
@@ -271,7 +274,16 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
             
             var issuer_item = issuers[pad.issuer];
             
-            var account_item = new Granite.Widgets.SourceList.Item(pad.account_name);
+            var account_item = new Granite.Widgets.SourceList.Item(pad.account_name_display) {
+                editable = true
+            };
+
+            account_item.edited.connect((new_name) => {
+                pad.account_name_display = new_name;
+                otp_library.save.begin(pad);
+            });
+
+            account_item.set_data("account-name", pad.account_name);
 
             issuer_item.add(account_item);
         }
@@ -286,7 +298,7 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
     
     private void pad_item_selected(Granite.Widgets.SourceList source_list, Granite.Widgets.SourceList.Item? item){
         if(item is Granite.Widgets.SourceList.Item && !(item is Granite.Widgets.SourceList.ExpandableItem)){
-            var account_name = item.name;
+            var account_name = item.get_data<string>("account-name");
             var issuer_name = item.parent.name;
             
             var pad = otp_library.get_pad(issuer_name,account_name);

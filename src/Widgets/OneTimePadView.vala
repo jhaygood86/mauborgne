@@ -15,6 +15,7 @@ public class OneTimePadView : Gtk.Grid {
     Granite.Widgets.Welcome welcome_screen;
     Gtk.Label title_label;
     Gtk.Label subtitle_label;
+    Gtk.Label note_label;
     Gtk.ProgressBar code_remaining_progress;
     Gtk.Button edit_button;
     Gtk.Button export_button;
@@ -63,6 +64,13 @@ public class OneTimePadView : Gtk.Grid {
         var subtitle_label_context = subtitle_label.get_style_context ();
         subtitle_label_context.add_class (Gtk.STYLE_CLASS_DIM_LABEL);
         subtitle_label_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
+
+        note_label = new Gtk.Label (null);
+        note_label.justify = Gtk.Justification.CENTER;
+        note_label.hexpand = true;
+        note_label.wrap = true;
+        note_label.wrap_mode = Pango.WrapMode.WORD;
+        note_label.visible = true;
 
         code_remaining_progress = new Gtk.ProgressBar ();
         code_remaining_progress.show_text = true;
@@ -149,6 +157,7 @@ public class OneTimePadView : Gtk.Grid {
 
             edit_dialog.save_requested.connect ((pad) => {
                 save_requested (pad);
+                on_pad_set ();
             });
         });
 
@@ -182,8 +191,10 @@ public class OneTimePadView : Gtk.Grid {
 
         switch_to_code_display ();
 
-        title_label.label = pad.account_name;
+        pad.bind_property ("account-name-display", title_label, "label", BindingFlags.SYNC_CREATE);
+
         codeview_header.subtitle = pad.issuer;
+        note_label.label = pad.note;
 
         switch_to_code_display();
         set_otp_code_label ();
@@ -281,13 +292,19 @@ public class OneTimePadView : Gtk.Grid {
         remove (welcome_screen);
         attach (title_label, 0, 1);
         attach (subtitle_label, 0, 2);
-        attach (code_remaining_progress, 0, 3);
+
+        if (pad.note.length > 0) {
+            attach (note_label, 0, 3);
+        }
+
+        attach (code_remaining_progress, 0, 4);
     }
 
     private void switch_to_welcome_screen() {
         remove (title_label);
         remove (subtitle_label);
         remove (code_remaining_progress);
+        remove (note_label);
         attach (welcome_screen, 0, 1);
     }
 
