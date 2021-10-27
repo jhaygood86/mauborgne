@@ -252,7 +252,18 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
         foreach(var pad in otp_library.get_set()) {
             
             if(!issuers.keys.contains(pad.issuer)) {
-                var item = new Granite.Widgets.SourceList.ExpandableItem(pad.issuer);
+                var issuer_display_name = otp_library.get_issuer_display_name (pad.issuer);
+
+                var item = new Granite.Widgets.SourceList.ExpandableItem(issuer_display_name) {
+                    editable = true
+                };
+
+                item.edited.connect((new_name) => {
+                    otp_library.set_issuer_display_name(pad.issuer, new_name);
+                });
+
+                item.set_data("issuer", pad.issuer);
+
                 issuers[pad.issuer] = item;
 
                 if (brand_mapping_file.has_key("Brand Icons", pad.issuer)) {
@@ -299,7 +310,7 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
     private void pad_item_selected(Granite.Widgets.SourceList source_list, Granite.Widgets.SourceList.Item? item){
         if(item is Granite.Widgets.SourceList.Item && !(item is Granite.Widgets.SourceList.ExpandableItem)){
             var account_name = item.get_data<string>("account-name");
-            var issuer_name = item.parent.name;
+            var issuer_name = item.parent.get_data<string>("issuer");
             
             var pad = otp_library.get_pad(issuer_name,account_name);
             

@@ -1,12 +1,15 @@
 public class OneTimePadLibrary : Object {
     private Gee.Set<OneTimePad> pads_set;
+    private Gee.Map<string,string> issuer_display_name_map;
     
     public signal void changed ();
+    public signal void issuer_display_name_changed ();
     
     private static OneTimePadLibrary? _instance;
 
     private OneTimePadLibrary() {
         pads_set = new Gee.HashSet<OneTimePad>();
+        issuer_display_name_map = new Gee.HashMap<string,string> ();
         
         load_existing_files();
     }
@@ -85,6 +88,31 @@ public class OneTimePadLibrary : Object {
         return null;
     }
     
+    public string get_issuer_display_name (string issuer) {
+        if (issuer_display_name_map.has_key (issuer)) {
+            return issuer_display_name_map[issuer];
+        }
+
+        return issuer;
+    }
+
+    public void set_issuer_display_name (string issuer, string display_name) {
+        issuer_display_name_map[issuer] = display_name;
+
+        var issuer_file = new KeyFile ();
+
+        issuer_display_name_map.@foreach((entry) => {
+            issuer_file.set_string ("Issuer Names", entry.key, entry.value);
+            return true;
+        });
+
+        var dst_file_name = Path.build_filename(Environment.get_user_data_dir(), "issuers.txt");
+
+        issuer_file.save_to_file (dst_file_name);
+
+        issuer_display_name_changed ();
+    }
+
     public Gee.Set<OneTimePad> get_set(){
         return pads_set;
     }
@@ -155,12 +183,24 @@ public class OneTimePadLibrary : Object {
 		        var key_file = new KeyFile ();
 		        key_file.load_from_file(src_file_name, KeyFileFlags.NONE);
 		        
-		        var otp = new OneTimePad.from_keyfile(key_file);
+		        if (key_file.has_group("Issuer Names")) {
+
+		            var issuers = key_file.get_keys ("Issuer Names");
+
+		            foreach (var issuer in issuers) {
+		                issuer_display_name_map[issuer] = key_file.get_string ("Issuer Names", issuer);
+		            }
+
+		        } else {
+    		        var otp = new OneTimePad.from_keyfile(key_file);
 		        
-		        print("otp issuer: %s\n",otp.issuer);
+		            print("otp issuer: %s\n",otp.issuer);
+
+                    pads_set.add(otp);
+                    changed ();
+		        }
 		        
-                pads_set.add(otp);
-                changed ();
+
 		    }
 	    }
 

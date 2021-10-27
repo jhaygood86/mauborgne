@@ -189,11 +189,17 @@ public class OneTimePadView : Gtk.Grid {
             return;
         }
 
+        var library = OneTimePadLibrary.get_default ();
+
+        library.issuer_display_name_changed.connect(() => {
+            codeview_header.subtitle = library.get_issuer_display_name(pad.issuer);
+        });
+
         switch_to_code_display ();
 
         pad.bind_property ("account-name-display", title_label, "label", BindingFlags.SYNC_CREATE);
 
-        codeview_header.subtitle = pad.issuer;
+        codeview_header.subtitle = library.get_issuer_display_name(pad.issuer);
         note_label.label = pad.note;
 
         switch_to_code_display();
