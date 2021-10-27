@@ -14,6 +14,7 @@ public class OneTimePad : Object {
     public int digits { get; set; }
     public int64 counter { get; set; }
     public int period { get; set; }
+    public string note { get; set; }
     
     static construct {
         schema = new Secret.Schema ("io.github.jhaygood86.mauborgne", Secret.SchemaFlags.NONE,
@@ -26,6 +27,7 @@ public class OneTimePad : Object {
         algorithm = OneTimePadAlgorithm.SHA1;
         digits = 6;
         period = 30;
+        note = "";
     
         var parsed_uri = GLib.Uri.parse(uri, UriFlags.PARSE_RELAXED);
         
@@ -124,6 +126,12 @@ public class OneTimePad : Object {
         digits = file.get_integer("PadSettings","Digits");
         counter = file.get_int64("PadSettings","Counter");
         period = file.get_integer("PadSettings","Period");
+
+        if (file.has_group ("Additional Data") && file.has_key ("Additional Data", "Note")) {
+            note = file.get_string ("Additional Data", "Note");
+        } else {
+            note = "";
+        }
     }
     
     public OneTimePad.from_aegis_vault_entry (AegisVaultContent.AegisVaultEntry entry) throws OneTimePadError {
@@ -165,6 +173,7 @@ public class OneTimePad : Object {
         }
 
         digits = info.digits;
+        note = entry.note;
 
         account_name = get_cleaned_account_name (issuer, account_name);
     }
@@ -179,6 +188,8 @@ public class OneTimePad : Object {
         file.set_int64("PadSettings","Counter",counter);
         file.set_integer("PadSettings","Period",period);
         
+        file.set_string("Additional Data", "Note", note);
+
         return file;
     }
     
@@ -267,6 +278,7 @@ public class OneTimePad : Object {
         entry.uuid = GLib.Uuid.string_random();
         entry.name = account_name;
         entry.issuer = issuer;
+        entry.note = note;
 
         var secret_value = yield lookup_secret ();
 

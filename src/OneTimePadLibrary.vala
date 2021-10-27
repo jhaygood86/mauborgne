@@ -20,6 +20,13 @@ public class OneTimePadLibrary : Object {
     }
 
     public async void add(OneTimePad otp) {
+
+        var existing_pad = get_pad (otp.issuer, otp.account_name);
+
+        if (existing_pad != null) {
+            yield remove (existing_pad);
+        }
+
         pads_set.add (otp);
         yield save (otp);
         changed ();

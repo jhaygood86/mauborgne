@@ -5,6 +5,7 @@ public class OneTimePadView : Gtk.Grid {
 
     public signal void code_retrieved ();
     public signal void delete_requested (OneTimePad pad);
+    public signal void save_requested (OneTimePad pad);
 
     public signal void export_pad_as_aegis (OneTimePad pad);
     public signal void export_all_pads_as_aegis ();
@@ -15,6 +16,7 @@ public class OneTimePadView : Gtk.Grid {
     Gtk.Label title_label;
     Gtk.Label subtitle_label;
     Gtk.ProgressBar code_remaining_progress;
+    Gtk.Button edit_button;
     Gtk.Button export_button;
     Gtk.Button delete_button;
     Hdy.HeaderBar codeview_header;
@@ -136,10 +138,27 @@ public class OneTimePadView : Gtk.Grid {
 
         codeview_header.pack_end(delete_button);
 
+        edit_button = new Gtk.Button () {
+            image = new Gtk.Image.from_icon_name ("document-edit", Gtk.IconSize.LARGE_TOOLBAR),
+            tooltip_text = _("Edit"),
+        };
+
+        edit_button.clicked.connect(() => {
+            var edit_dialog = new EditDialog (pad);
+            edit_dialog.show_all ();
+
+            edit_dialog.save_requested.connect ((pad) => {
+                save_requested (pad);
+            });
+        });
+
+        codeview_header.pack_end(edit_button);
+
         bind_property ("has-pad", delete_button, "sensitive", BindingFlags.SYNC_CREATE);
         bind_property ("has-pad", export_aegis_vault_menu_item, "sensitive", BindingFlags.SYNC_CREATE);
         bind_property ("has-pad", export_qr_code_menu_item, "sensitive", BindingFlags.SYNC_CREATE);
         bind_property ("has-pad", copy_button, "sensitive", BindingFlags.SYNC_CREATE);
+        bind_property ("has-pad", edit_button, "sensitive", BindingFlags.SYNC_CREATE);
     }
 
     private void welcome_screen_activated (int index) {

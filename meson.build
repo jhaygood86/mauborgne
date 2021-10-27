@@ -65,6 +65,7 @@ executable(
     'src/Services/Models/AegisVault.vala',
     'src/Services/Models/AegisVaultContent.vala',
     'src/Widgets/CreatePasswordDialog.vala',
+    'src/Widgets/EditDialog.vala',
     'src/Widgets/ExportWindow.vala',
     'src/Widgets/OneTimePadView.vala',
     'src/Widgets/PasswordDialog.vala',
