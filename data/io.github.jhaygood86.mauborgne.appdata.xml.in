@@ -11,6 +11,16 @@
     </p>
   </description>
   <releases>
+    <release version="0.6.0" date="2021-10-27" urgency="medium">
+      <description>
+        <p>Feature Release</p>
+        <ul>
+          <li>Add support for copying codes, including pasting the current code on TOTP pads</li>
+          <li>Remove access to AccountService thanks to elementary OS updates</li>
+          <li>Add support for editing pads</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.5.0" date="2021-10-22" urgency="medium">
       <description>
         <p>Feature Release</p>
