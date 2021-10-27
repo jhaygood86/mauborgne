@@ -17,7 +17,7 @@
         <ul>
           <li>Add support for copying codes, including pasting the current code on TOTP pads</li>
           <li>Remove access to AccountService thanks to elementary OS updates</li>
-          <li>Add support for editing pads</li>
+          <li>Add support for editing pads, issuer names, and account names</li>
         </ul>
       </description>
     </release>

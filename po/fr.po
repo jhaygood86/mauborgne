@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-27 12:23-0400\n"
+"POT-Creation-Date: 2021-10-27 13:17-0400\n"
 "PO-Revision-Date: 2021-10-11 00:04+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/maurbogne/"
@@ -169,7 +169,7 @@ msgid "Remove access to AccountService thanks to elementary OS updates"
 msgstr ""
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:20
-msgid "Add support for editing pads"
+msgid "Add support for editing pads, issuer names, and account names"
 msgstr ""
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:28
