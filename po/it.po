@@ -5,23 +5,26 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: jhaygood86@gmail.com\n"
 "POT-Creation-Date: 2021-10-27 13:17-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-10-31 12:20+0000\n"
+"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/maurbogne/"
+"maurbogne/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 #: src/MainWindow.vala:11 data/io.github.jhaygood86.mauborgne.desktop.in:3
 msgid "Mauborgne"
-msgstr ""
+msgstr "Mauborgne"
 
 #: src/MainWindow.vala:68 src/Widgets/OneTimePadView.vala:43
 msgid "Add Pad From Screenshot"
-msgstr ""
+msgstr "Aggiungi Pad da screenshot"
 
 #: src/MainWindow.vala:72
 msgid "Add Pad From Camera"
@@ -54,6 +57,7 @@ msgstr ""
 #: src/Services/AegisManager.vala:33
 msgid "Unable to lock vault. Please try a different password"
 msgstr ""
+"Impossibile bloccare la cassaforte. Si prega di provare una password diversa"
 
 #: src/Widgets/OneTimePadView.vala:40
 msgid "Add a One Time Pad"
@@ -81,11 +85,11 @@ msgstr ""
 
 #: src/Widgets/OneTimePadView.vala:91
 msgid "Copy"
-msgstr ""
+msgstr "Copia"
 
 #: src/Widgets/OneTimePadView.vala:100
 msgid "Export as QR Code"
-msgstr ""
+msgstr "Esporta come codice QR"
 
 #: src/Widgets/OneTimePadView.vala:104
 msgid "Export this pad as Aegis Vault JSON"
@@ -97,15 +101,15 @@ msgstr ""
 
 #: src/Widgets/OneTimePadView.vala:118
 msgid "Export"
-msgstr ""
+msgstr "Esporta"
 
 #: src/Widgets/OneTimePadView.vala:139
 msgid "Delete"
-msgstr ""
+msgstr "Cancella"
 
 #: src/Widgets/OneTimePadView.vala:151
 msgid "Edit"
-msgstr ""
+msgstr "Modifica"
 
 #: src/Widgets/PasswordDialog.vala:9 src/Widgets/PasswordDialog.vala:15
 msgid "Aegis Vault Unlock Password"
@@ -113,7 +117,7 @@ msgstr ""
 
 #: src/Widgets/PasswordDialog.vala:17
 msgid "Password Required"
-msgstr ""
+msgstr "Password Richiesta"
 
 #: src/Widgets/PasswordDialog.vala:18
 msgid "Need the password to access the Aegis Vault file"
@@ -121,24 +125,24 @@ msgstr ""
 
 #: src/Widgets/PasswordDialog.vala:24
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 #: src/Widgets/PasswordDialog.vala:51
 msgid "Cancel"
-msgstr ""
+msgstr "Cancella"
 
 #: src/Widgets/PasswordDialog.vala:53
 msgid "Unlock"
-msgstr ""
+msgstr "Sblocca"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:6
 msgid "Maurborgne"
-msgstr ""
+msgstr "Maurborgne"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:7
 #: data/io.github.jhaygood86.mauborgne.desktop.in:4
 msgid "2FA OTP Code Generator"
-msgstr ""
+msgstr "Generatore di codice OTP 2FA"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:9
 msgid ""
@@ -159,6 +163,8 @@ msgstr ""
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:19
 msgid "Remove access to AccountService thanks to elementary OS updates"
 msgstr ""
+"Rimuovere l'accesso a AccountService grazie agli aggiornamenti di elementary "
+"OS"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:20
 msgid "Add support for editing pads, issuer names, and account names"
@@ -184,7 +190,7 @@ msgstr ""
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:32
 msgid "Updated icons!"
-msgstr ""
+msgstr "Icone aggiornate!"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:74
 msgid "Justin Haygood"
@@ -192,12 +198,12 @@ msgstr ""
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:5
 msgid "Generates OTP Codes for use with 2FA environments"
-msgstr ""
+msgstr "Genera codici OTP da utilizzare con ambienti 2FA"
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:8
 msgid "io.github.jhaygood86.mauborgne"
-msgstr ""
+msgstr "io.github.jhaygood86.mauborgne"
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:11
 msgid "Mauborgne;2FA;OTP;"
-msgstr ""
+msgstr "Mauborgne;2FA;OTP;"
