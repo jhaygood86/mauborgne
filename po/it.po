@@ -1,0 +1,203 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the io.github.jhaygood86.mauborgne package.
+# albanobattistella <albano_battistella@hotmail.com>, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: io.github.jhaygood86.mauborgne\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-27 13:17-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/MainWindow.vala:11 data/io.github.jhaygood86.mauborgne.desktop.in:3
+msgid "Mauborgne"
+msgstr ""
+
+#: src/MainWindow.vala:68 src/Widgets/OneTimePadView.vala:43
+msgid "Add Pad From Screenshot"
+msgstr ""
+
+#: src/MainWindow.vala:72
+msgid "Add Pad From Camera"
+msgstr ""
+
+#: src/MainWindow.vala:76
+msgid "Add Pad From Token"
+msgstr ""
+
+#: src/MainWindow.vala:80
+msgid "Add Pad(s) From Aegis Encrypted JSON"
+msgstr ""
+
+#: src/MainWindow.vala:91
+msgid "Add One Time Pad…"
+msgstr ""
+
+#: src/MainWindow.vala:247
+msgid "Time-based One Time Pads"
+msgstr ""
+
+#: src/MainWindow.vala:248
+msgid "Counter-based One Time Pads"
+msgstr ""
+
+#: src/OneTimePad.vala:175
+msgid "Cannot determine pad type"
+msgstr ""
+
+#: src/Services/AegisManager.vala:33
+msgid "Unable to lock vault. Please try a different password"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:40
+msgid "Add a One Time Pad"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:41
+msgid "Add a one time pad from a provider"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:44
+msgid "Add a pad using a screenshot of a QR code"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:46
+msgid "Add Pad From Aegis JSON"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:47
+msgid "Add a pad using an export of an Aegis encrypted JSON vault file"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:51
+msgid "One Time Pad"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:91
+msgid "Copy"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:100
+msgid "Export as QR Code"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:104
+msgid "Export this pad as Aegis Vault JSON"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:108
+msgid "Export all pads as Aegis Vault JSON"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:118
+msgid "Export"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:139
+msgid "Delete"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:151
+msgid "Edit"
+msgstr ""
+
+#: src/Widgets/PasswordDialog.vala:9 src/Widgets/PasswordDialog.vala:15
+msgid "Aegis Vault Unlock Password"
+msgstr ""
+
+#: src/Widgets/PasswordDialog.vala:17
+msgid "Password Required"
+msgstr ""
+
+#: src/Widgets/PasswordDialog.vala:18
+msgid "Need the password to access the Aegis Vault file"
+msgstr ""
+
+#: src/Widgets/PasswordDialog.vala:24
+msgid "Password"
+msgstr ""
+
+#: src/Widgets/PasswordDialog.vala:51
+msgid "Cancel"
+msgstr ""
+
+#: src/Widgets/PasswordDialog.vala:53
+msgid "Unlock"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:6
+msgid "Maurborgne"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:7
+#: data/io.github.jhaygood86.mauborgne.desktop.in:4
+msgid "2FA OTP Code Generator"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:9
+msgid ""
+"Import OTP pads from QR codes and generate OTP codes for secure 2FA logins"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:16
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:26
+msgid "Feature Release"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:18
+msgid ""
+"Add support for copying codes, including pasting the current code on TOTP "
+"pads"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:19
+msgid "Remove access to AccountService thanks to elementary OS updates"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:20
+msgid "Add support for editing pads, issuer names, and account names"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:28
+msgid "Adds support for exporting pad(s) in Aegis encrypted JSON format"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:29
+msgid "Fix crashes when deleting a pad"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:30
+msgid "Adds missing button to import from Aegis files on welcome screen"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:31
+msgid ""
+"Clean up account names for accounts where the issuer name is repeated in the "
+"account name"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:32
+msgid "Updated icons!"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:74
+msgid "Justin Haygood"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.desktop.in:5
+msgid "Generates OTP Codes for use with 2FA environments"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.desktop.in:8
+msgid "io.github.jhaygood86.mauborgne"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.desktop.in:11
+msgid "Mauborgne;2FA;OTP;"
+msgstr ""
