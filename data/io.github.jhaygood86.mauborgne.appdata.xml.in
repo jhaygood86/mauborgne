@@ -17,6 +17,10 @@
         <ul>
           <li>Detect dark mode on GNOME versions that do not support the freedesktop color scheme setting</li>
         </ul>
+        <p>Updated Translations</p>
+        <ul>
+          <li>Italian</li>
+        </ul>
       </description>
     </release>
     <release version="0.6.0" date="2021-10-27" urgency="medium">

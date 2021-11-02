@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-02 18:38-0400\n"
+"POT-Creation-Date: 2021-11-02 18:39-0400\n"
 "PO-Revision-Date: 2021-10-09 21:44+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
@@ -164,48 +164,56 @@ msgid ""
 "scheme setting"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:24
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:34
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:20
+msgid "Updated Translations"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:22
+msgid "Italian"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:28
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:38
 msgid "Feature Release"
 msgstr "Funksjonsutgivelse"
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:26
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:30
 msgid ""
 "Add support for copying codes, including pasting the current code on TOTP "
 "pads"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:27
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:31
 msgid "Remove access to AccountService thanks to elementary OS updates"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:28
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:32
 msgid "Add support for editing pads, issuer names, and account names"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:36
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:40
 msgid "Adds support for exporting pad(s) in Aegis encrypted JSON format"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:37
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:41
 msgid "Fix crashes when deleting a pad"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:38
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:42
 msgid "Adds missing button to import from Aegis files on welcome screen"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:39
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:43
 msgid ""
 "Clean up account names for accounts where the issuer name is repeated in the "
 "account name"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:40
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:44
 msgid "Updated icons!"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:82
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:86
 msgid "Justin Haygood"
 msgstr "Justin Haygood"
 
