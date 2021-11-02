@@ -11,6 +11,14 @@
     </p>
   </description>
   <releases>
+    <release version="0.6.1" data="2021-11-02" urgency="medium">
+      <description>
+        <p>Bugfixes</p>
+        <ul>
+          <li>Detect dark mode on GNOME versions that do not support the freedesktop color scheme setting</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.0" date="2021-10-27" urgency="medium">
       <description>
         <p>Feature Release</p>

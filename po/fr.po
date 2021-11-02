@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-27 13:17-0400\n"
+"POT-Creation-Date: 2021-11-02 18:38-0400\n"
 "PO-Revision-Date: 2021-10-11 00:04+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/maurbogne/"
@@ -154,47 +154,57 @@ msgstr ""
 "générez des codes à usage unique pour des connexions A2F sécurisées"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:16
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:26
+msgid "Bugfixes"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:18
+msgid ""
+"Detect dark mode on GNOME versions that do not support the freedesktop color "
+"scheme setting"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:24
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:34
 msgid "Feature Release"
 msgstr "Publication des fonctions"
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:18
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:26
 msgid ""
 "Add support for copying codes, including pasting the current code on TOTP "
 "pads"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:19
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:27
 msgid "Remove access to AccountService thanks to elementary OS updates"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:20
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:28
 msgid "Add support for editing pads, issuer names, and account names"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:28
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:36
 msgid "Adds support for exporting pad(s) in Aegis encrypted JSON format"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:29
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:37
 msgid "Fix crashes when deleting a pad"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:30
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:38
 msgid "Adds missing button to import from Aegis files on welcome screen"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:31
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:39
 msgid ""
 "Clean up account names for accounts where the issuer name is repeated in the "
 "account name"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:32
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:40
 msgid "Updated icons!"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:74
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:82
 msgid "Justin Haygood"
 msgstr "Justin Haygood"
 
@@ -202,13 +212,12 @@ msgstr "Justin Haygood"
 msgid "Generates OTP Codes for use with 2FA environments"
 msgstr "Génère des codes à usage unique à utiliser avec les environnements A2F"
 
-#: data/io.github.jhaygood86.mauborgne.desktop.in:8
-msgid "io.github.jhaygood86.mauborgne"
-msgstr "io.github.jhaygood86.mauborgne"
-
 #: data/io.github.jhaygood86.mauborgne.desktop.in:11
 msgid "Mauborgne;2FA;OTP;"
 msgstr "Mauborgne;A2F;2FA;OTP;"
+
+#~ msgid "io.github.jhaygood86.mauborgne"
+#~ msgstr "io.github.jhaygood86.mauborgne"
 
 #~ msgid "Stores pad secrets securely"
 #~ msgstr "Stocke les secrets du bloc en toute sécurité"
