@@ -4,6 +4,9 @@
  */
 
 public class MauborgneApp : Gtk.Application {
+
+    private Mauborgne.Portal.Settings? portal_settings;
+
     public MauborgneApp () {
         Object (
             application_id: "io.github.jhaygood86.mauborgne",
@@ -22,11 +25,28 @@ public class MauborgneApp : Gtk.Application {
         var granite_settings = Granite.Settings.get_default ();
         var gtk_settings = Gtk.Settings.get_default ();
 
-        gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
+        var preferred_color_scheme = granite_settings.prefers_color_scheme;
 
-        granite_settings.notify["prefers-color-scheme"].connect (() => {
-            gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
-        });
+        if (preferred_color_scheme == Granite.Settings.ColorScheme.NO_PREFERENCE && Environment.get_variable ("XDG_CURRENT_DESKTOP") == "GNOME") {
+            portal_settings = Mauborgne.Portal.Settings.get ();
+            var theme_name = portal_settings.read ("org.gnome.desktop.interface", "gtk-theme").get_variant ().get_string ();
+
+            gtk_settings.gtk_application_prefer_dark_theme = theme_name.has_suffix ("-dark");
+
+            portal_settings.setting_changed.connect ((scheme, key, value) => {
+
+                if (scheme == "org.gnome.desktop.interface" && key == "gtk-theme") {
+                    gtk_settings.gtk_application_prefer_dark_theme = value.get_string ().has_suffix ("-dark");
+                }
+            });
+
+        } else {
+            gtk_settings.gtk_application_prefer_dark_theme = preferred_color_scheme == Granite.Settings.ColorScheme.DARK;
+
+            granite_settings.notify["prefers-color-scheme"].connect (() => {
+                gtk_settings.gtk_application_prefer_dark_theme = granite_settings.prefers_color_scheme == Granite.Settings.ColorScheme.DARK;
+            });
+        }
         
         main_window.show_all ();
         
@@ -38,6 +58,7 @@ public class MauborgneApp : Gtk.Application {
     private void init_theme () {
          GLib.Value value = GLib.Value (GLib.Type.STRING);
          Gtk.Settings.get_default ().get_property ("gtk-theme-name", ref value);
+
          if (!value.get_string ().has_prefix ("io.elementary.")) {
              Gtk.Settings.get_default ().set_property ("gtk-icon-theme-name", "elementary");
              Gtk.Settings.get_default ().set_property ("gtk-theme-name", "io.elementary.stylesheet.blueberry");

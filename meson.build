@@ -62,6 +62,7 @@ executable(
     'src/OneTimePad.vala',
     'src/OneTimePadLibrary.vala',
     'src/Services/AegisManager.vala',
+    'src/Services/Portal.vala',
     'src/Services/Models/AegisVault.vala',
     'src/Services/Models/AegisVaultContent.vala',
     'src/Widgets/CreatePasswordDialog.vala',
