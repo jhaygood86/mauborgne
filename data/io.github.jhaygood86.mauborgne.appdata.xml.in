@@ -11,7 +11,7 @@
     </p>
   </description>
   <releases>
-    <release version="0.6.1" data="2021-11-02" urgency="medium">
+    <release version="0.6.1" date="2021-11-02" urgency="medium">
       <description>
         <p>Bugfixes</p>
         <ul>
