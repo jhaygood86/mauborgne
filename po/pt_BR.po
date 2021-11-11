@@ -5,213 +5,232 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: jhaygood86@gmail.com\n"
 "POT-Creation-Date: 2021-11-02 18:39-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-11-12 19:50+0000\n"
+"Last-Translator: inkhorn <inkhorn@hostux.ninja>\n"
+"Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
+"maurbogne/maurbogne/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.9.1-dev\n"
 
 #: src/MainWindow.vala:11 data/io.github.jhaygood86.mauborgne.desktop.in:3
 msgid "Mauborgne"
-msgstr ""
+msgstr "Mauborgne"
 
 #: src/MainWindow.vala:68 src/Widgets/OneTimePadView.vala:43
 msgid "Add Pad From Screenshot"
-msgstr ""
+msgstr "Adicionar Chave da captura de tela"
 
 #: src/MainWindow.vala:72
 msgid "Add Pad From Camera"
-msgstr ""
+msgstr "Adicionar Chave da câmera"
 
 #: src/MainWindow.vala:76
 msgid "Add Pad From Token"
-msgstr ""
+msgstr "Adicionar Chave do Token"
 
 #: src/MainWindow.vala:80
 msgid "Add Pad(s) From Aegis Encrypted JSON"
-msgstr ""
+msgstr "Adicionar Chave(s) JSON Criptografada(s) do Aegis"
 
 #: src/MainWindow.vala:91
 msgid "Add One Time Pad…"
-msgstr ""
+msgstr "Adicionar Chave de uso único…"
 
 #: src/MainWindow.vala:247
 msgid "Time-based One Time Pads"
-msgstr ""
+msgstr "Chaves de uso único baseado em tempo"
 
 #: src/MainWindow.vala:248
 msgid "Counter-based One Time Pads"
-msgstr ""
+msgstr "Chaves de uso único baseado em contador"
 
 #: src/OneTimePad.vala:175
 msgid "Cannot determine pad type"
-msgstr ""
+msgstr "Não é possível determinar o tipo da Chave"
 
 #: src/Services/AegisManager.vala:33
 msgid "Unable to lock vault. Please try a different password"
-msgstr ""
+msgstr "Impossível bloquear o cofre. Por favor, tente uma senha diferente"
 
 #: src/Widgets/OneTimePadView.vala:40
 msgid "Add a One Time Pad"
-msgstr ""
+msgstr "Adicionar uma Chave de uso único"
 
 #: src/Widgets/OneTimePadView.vala:41
 msgid "Add a one time pad from a provider"
-msgstr ""
+msgstr "Adicionar uma Chave de uso único do fornecedor"
 
 #: src/Widgets/OneTimePadView.vala:44
 msgid "Add a pad using a screenshot of a QR code"
-msgstr ""
+msgstr "Adicionar uma Chave de uso único via imagem de um código QR"
 
 #: src/Widgets/OneTimePadView.vala:46
 msgid "Add Pad From Aegis JSON"
-msgstr ""
+msgstr "Adicionar Chave de uso único JSON do Aegis"
 
 #: src/Widgets/OneTimePadView.vala:47
 msgid "Add a pad using an export of an Aegis encrypted JSON vault file"
 msgstr ""
+"Adicionar uma Chave de uso único via uma exportação de um arquivo JSON de "
+"cofre da Aegis"
 
 #: src/Widgets/OneTimePadView.vala:51
 msgid "One Time Pad"
-msgstr ""
+msgstr "Chave de uso único"
 
 #: src/Widgets/OneTimePadView.vala:91
 msgid "Copy"
-msgstr ""
+msgstr "Copiar"
 
 #: src/Widgets/OneTimePadView.vala:100
 msgid "Export as QR Code"
-msgstr ""
+msgstr "Exportar como código QR"
 
 #: src/Widgets/OneTimePadView.vala:104
 msgid "Export this pad as Aegis Vault JSON"
-msgstr ""
+msgstr "Exportar esta Chave como JSON de cofre da Aegis"
 
 #: src/Widgets/OneTimePadView.vala:108
 msgid "Export all pads as Aegis Vault JSON"
-msgstr ""
+msgstr "Exportar todas as Chaves as JSON de cofre da Aegis"
 
 #: src/Widgets/OneTimePadView.vala:118
 msgid "Export"
-msgstr ""
+msgstr "Exportar"
 
 #: src/Widgets/OneTimePadView.vala:139
 msgid "Delete"
-msgstr ""
+msgstr "Excluir"
 
 #: src/Widgets/OneTimePadView.vala:151
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 #: src/Widgets/PasswordDialog.vala:9 src/Widgets/PasswordDialog.vala:15
 msgid "Aegis Vault Unlock Password"
-msgstr ""
+msgstr "Senha de desbloqueio de cofre da Aegis"
 
 #: src/Widgets/PasswordDialog.vala:17
 msgid "Password Required"
-msgstr ""
+msgstr "Senha necessária"
 
 #: src/Widgets/PasswordDialog.vala:18
 msgid "Need the password to access the Aegis Vault file"
-msgstr ""
+msgstr "Necessária a senha para acessar o arquivo de cofre da Aegis"
 
 #: src/Widgets/PasswordDialog.vala:24
 msgid "Password"
-msgstr ""
+msgstr "Senha"
 
 #: src/Widgets/PasswordDialog.vala:51
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: src/Widgets/PasswordDialog.vala:53
 msgid "Unlock"
-msgstr ""
+msgstr "Desbloquear"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:6
 msgid "Maurborgne"
-msgstr ""
+msgstr "Maurborgne"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:7
 #: data/io.github.jhaygood86.mauborgne.desktop.in:4
 msgid "2FA OTP Code Generator"
-msgstr ""
+msgstr "Gerador de código OTP 2FA"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:9
 msgid ""
 "Import OTP pads from QR codes and generate OTP codes for secure 2FA logins"
 msgstr ""
+"Importar Chaves OTP a partir de códigos QR e gerar códigos OTP para logins "
+"seguros 2FA"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:16
 msgid "Bugfixes"
-msgstr ""
+msgstr "Correções de bugs"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:18
 msgid ""
 "Detect dark mode on GNOME versions that do not support the freedesktop color "
 "scheme setting"
 msgstr ""
+"Detectar modo escuro em versões do GNOME que não suportam a configuração do "
+"esquema de cores freedesktop"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:20
 msgid "Updated Translations"
-msgstr ""
+msgstr "Traduções atualizadas"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:22
 msgid "Italian"
-msgstr ""
+msgstr "Italiano"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:28
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:38
 msgid "Feature Release"
-msgstr ""
+msgstr "Lançamento de recursos"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:30
 msgid ""
 "Add support for copying codes, including pasting the current code on TOTP "
 "pads"
 msgstr ""
+"Adicionado o suporte para cópia de códigos, incluindo a colagem de código "
+"atual em Chaves TOTP"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:31
 msgid "Remove access to AccountService thanks to elementary OS updates"
 msgstr ""
+"Removido o acesso a serviço de conta graças às atualizações do elementary OS"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:32
 msgid "Add support for editing pads, issuer names, and account names"
 msgstr ""
+"Adicionado suporte para a edição de Chaves, nomes de emissores e nomes de "
+"contas"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:40
 msgid "Adds support for exporting pad(s) in Aegis encrypted JSON format"
 msgstr ""
+"Adicionado suporte à(s) Chave(s) de exportação em formato JSON criptografado "
+"da Aegis"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:41
 msgid "Fix crashes when deleting a pad"
-msgstr ""
+msgstr "Corrigidas falhas ao excluir uma Chave"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:42
 msgid "Adds missing button to import from Aegis files on welcome screen"
 msgstr ""
+"Adicionado botão ausente de importação via arquivos da Aegis na tela de boas-"
+"vindas"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:43
 msgid ""
 "Clean up account names for accounts where the issuer name is repeated in the "
 "account name"
 msgstr ""
+"Arrumados nomes de contas onde o nome do emitente é repetido em nome da conta"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:44
 msgid "Updated icons!"
-msgstr ""
+msgstr "Ícones atualizados!"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:86
 msgid "Justin Haygood"
-msgstr ""
+msgstr "Justin Haygood"
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:5
 msgid "Generates OTP Codes for use with 2FA environments"
-msgstr ""
+msgstr "Gera códigos OTP para uso em ambientes 2FA"
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:11
 msgid "Mauborgne;2FA;OTP;"
-msgstr ""
+msgstr "Mauborgne;2FA;OTP;"
