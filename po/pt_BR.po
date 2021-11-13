@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: jhaygood86@gmail.com\n"
 "POT-Creation-Date: 2021-11-13 11:27-0500\n"
-"PO-Revision-Date: 2021-11-12 19:50+0000\n"
+"PO-Revision-Date: 2021-11-15 10:50+0000\n"
 "Last-Translator: inkhorn <inkhorn@hostux.ninja>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "maurbogne/maurbogne/pt_BR/>\n"
@@ -24,12 +24,11 @@ msgstr "Mauborgne"
 
 #: src/MainWindow.vala:68 src/Widgets/OneTimePadView.vala:44
 msgid "Add Pad From Screenshot"
-msgstr "Adicionar Chave da captura de tela"
+msgstr "Adicionar Chave de captura da tela"
 
 #: src/MainWindow.vala:72 src/Widgets/OneTimePadView.vala:50
-#, fuzzy
 msgid "Add Pad From QR Code Image File"
-msgstr "Adicionar Chave da câmera"
+msgstr "Adicionar Chave de uso único via imagem com código QR"
 
 #: src/MainWindow.vala:76
 msgid "Add Pad From Camera"
@@ -49,23 +48,23 @@ msgstr "Adicionar Chave de uso único…"
 
 #: src/MainWindow.vala:282
 msgid "Time-based One Time Pads"
-msgstr "Chaves de uso único baseado em tempo"
+msgstr "Chaves de uso único baseados em tempo"
 
 #: src/MainWindow.vala:283
 msgid "Counter-based One Time Pads"
-msgstr "Chaves de uso único baseado em contador"
+msgstr "Chaves de uso único baseados em contador"
 
 #: src/OneTimePad.vala:175
 msgid "Cannot determine pad type"
-msgstr "Não é possível determinar o tipo da Chave"
+msgstr "Não foi possível determinar o tipo da Chave"
 
 #: src/OneTimePad.vala:344
 msgid "Invalid Secret. Please delete and re-import"
-msgstr ""
+msgstr "Segredo inválido. Favor excluir e importar outra vez"
 
 #: src/Services/AegisManager.vala:33
 msgid "Unable to lock vault. Please try a different password"
-msgstr "Impossível bloquear o cofre. Por favor, tente uma senha diferente"
+msgstr "Não é possível bloquear o cofre. Por favor, tente uma senha diferente"
 
 #: src/Widgets/OneTimePadView.vala:41
 msgid "Add a One Time Pad"
@@ -73,7 +72,7 @@ msgstr "Adicionar uma Chave de uso único"
 
 #: src/Widgets/OneTimePadView.vala:42
 msgid "Add a one time pad from a provider"
-msgstr "Adicionar uma Chave de uso único do fornecedor"
+msgstr "Adicionar uma Chave de uso único do provedor"
 
 #: src/Widgets/OneTimePadView.vala:45
 msgid "Add a pad using a screenshot of a QR code"
@@ -87,12 +86,13 @@ msgstr "Adicionar Chave de uso único JSON do Aegis"
 msgid "Add a pad using an export of an Aegis encrypted JSON vault file"
 msgstr ""
 "Adicionar uma Chave de uso único via uma exportação de um arquivo JSON de "
-"cofre da Aegis"
+"cofre do Aegis"
 
 #: src/Widgets/OneTimePadView.vala:51
-#, fuzzy
 msgid "Add a pad using an image file that contains a QR Code"
-msgstr "Adicionar uma Chave de uso único via imagem de um código QR"
+msgstr ""
+"Adicionar uma Chave de uso único via arquivo de imagem que contém um código "
+"QR"
 
 #: src/Widgets/OneTimePadView.vala:55
 msgid "One Time Pad"
@@ -108,11 +108,11 @@ msgstr "Exportar como código QR"
 
 #: src/Widgets/OneTimePadView.vala:108
 msgid "Export this pad as Aegis Vault JSON"
-msgstr "Exportar esta Chave como JSON de cofre da Aegis"
+msgstr "Exportar esta Chave como JSON de cofre do Aegis"
 
 #: src/Widgets/OneTimePadView.vala:112
 msgid "Export all pads as Aegis Vault JSON"
-msgstr "Exportar todas as Chaves as JSON de cofre da Aegis"
+msgstr "Exportar todas as Chaves como JSON de cofre do Aegis"
 
 #: src/Widgets/OneTimePadView.vala:122
 msgid "Export"
@@ -128,7 +128,7 @@ msgstr "Editar"
 
 #: src/Widgets/PasswordDialog.vala:9 src/Widgets/PasswordDialog.vala:15
 msgid "Aegis Vault Unlock Password"
-msgstr "Senha de desbloqueio de cofre da Aegis"
+msgstr "Senha de desbloqueio de cofre do Aegis"
 
 #: src/Widgets/PasswordDialog.vala:17
 msgid "Password Required"
@@ -136,7 +136,7 @@ msgstr "Senha necessária"
 
 #: src/Widgets/PasswordDialog.vala:18
 msgid "Need the password to access the Aegis Vault file"
-msgstr "Necessária a senha para acessar o arquivo de cofre da Aegis"
+msgstr "Necessária a senha para acessar o arquivo de cofre do Aegis"
 
 #: src/Widgets/PasswordDialog.vala:24
 msgid "Password"
@@ -164,29 +164,30 @@ msgid ""
 "Import OTP pads from QR codes and generate OTP codes for secure 2FA logins"
 msgstr ""
 "Importar Chaves OTP a partir de códigos QR e gerar códigos OTP para logins "
-"seguros 2FA"
+"seguros via 2FA"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:16
 msgid "New Features"
-msgstr ""
+msgstr "Novas funcionalidades"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:18
 msgid "Importing pads from image files containing QR Codes"
 msgstr ""
+"Importação de Chaves de uso único via arquivos de imagem que contém Códigos "
+"QR"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:20
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:32
-#, fuzzy
 msgid "New Translations"
-msgstr "Traduções atualizadas"
+msgstr "Novas traduções"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:22
 msgid "Portuguese (Brazil)"
-msgstr ""
+msgstr "Português do Brasil"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:28
 msgid "Bugfixes"
-msgstr "Correções de bugs"
+msgstr "Correções de erros"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:30
 msgid ""
@@ -194,7 +195,7 @@ msgid ""
 "scheme setting"
 msgstr ""
 "Detectar modo escuro em versões do GNOME que não suportam a configuração do "
-"esquema de cores freedesktop"
+"esquema de cores do Freedesktop"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:34
 msgid "Italian"
@@ -211,7 +212,7 @@ msgid ""
 "pads"
 msgstr ""
 "Adicionado o suporte para cópia de códigos, incluindo a colagem de código "
-"atual em Chaves TOTP"
+"atual em Chaves de TOTP"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:43
 msgid "Remove access to AccountService thanks to elementary OS updates"
@@ -228,17 +229,17 @@ msgstr ""
 msgid "Adds support for exporting pad(s) in Aegis encrypted JSON format"
 msgstr ""
 "Adicionado suporte à(s) Chave(s) de exportação em formato JSON criptografado "
-"da Aegis"
+"do Aegis"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:53
 msgid "Fix crashes when deleting a pad"
-msgstr "Corrigidas falhas ao excluir uma Chave"
+msgstr "Corrigidas falhas ao excluir a Chave"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:54
 msgid "Adds missing button to import from Aegis files on welcome screen"
 msgstr ""
-"Adicionado botão ausente de importação via arquivos da Aegis na tela de boas-"
-"vindas"
+"Adicionado botão inexistente de importação via arquivos do Aegis na tela de "
+"boas-vindas"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:55
 msgid ""
@@ -261,7 +262,7 @@ msgstr "Gera códigos OTP para uso em ambientes 2FA"
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:8
 msgid "io.github.jhaygood86.mauborgne"
-msgstr ""
+msgstr "io.github.jhaygood86.mauborgne"
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:11
 msgid "Mauborgne;2FA;OTP;"
