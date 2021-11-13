@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
-"Report-Msgid-Bugs-To: jhaygood86@gmail.com\n"
-"POT-Creation-Date: 2021-11-02 18:39-0400\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-13 11:10-0500\n"
 "PO-Revision-Date: 2021-11-12 19:50+0000\n"
 "Last-Translator: inkhorn <inkhorn@hostux.ninja>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
@@ -53,6 +53,10 @@ msgstr "Chaves de uso único baseado em contador"
 #: src/OneTimePad.vala:175
 msgid "Cannot determine pad type"
 msgstr "Não é possível determinar o tipo da Chave"
+
+#: src/OneTimePad.vala:344
+msgid "Invalid Secret. Please delete and re-import"
+msgstr ""
 
 #: src/Services/AegisManager.vala:33
 msgid "Unable to lock vault. Please try a different password"
@@ -230,6 +234,10 @@ msgstr "Justin Haygood"
 #: data/io.github.jhaygood86.mauborgne.desktop.in:5
 msgid "Generates OTP Codes for use with 2FA environments"
 msgstr "Gera códigos OTP para uso em ambientes 2FA"
+
+#: data/io.github.jhaygood86.mauborgne.desktop.in:8
+msgid "io.github.jhaygood86.mauborgne"
+msgstr ""
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:11
 msgid "Mauborgne;2FA;OTP;"

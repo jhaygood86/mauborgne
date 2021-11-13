@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-02 18:39-0400\n"
+"POT-Creation-Date: 2021-11-13 11:10-0500\n"
 "PO-Revision-Date: 2021-10-09 21:44+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
@@ -54,6 +54,10 @@ msgstr "Legg til en éngangsnotis"
 
 #: src/OneTimePad.vala:175
 msgid "Cannot determine pad type"
+msgstr ""
+
+#: src/OneTimePad.vala:344
+msgid "Invalid Secret. Please delete and re-import"
 msgstr ""
 
 #: src/Services/AegisManager.vala:33
@@ -221,12 +225,13 @@ msgstr "Justin Haygood"
 msgid "Generates OTP Codes for use with 2FA environments"
 msgstr "Genererer éngangspassordkoder til bruk i to-faktorøyemed"
 
+#: data/io.github.jhaygood86.mauborgne.desktop.in:8
+msgid "io.github.jhaygood86.mauborgne"
+msgstr "io.github.jhaygood86.mauborgne"
+
 #: data/io.github.jhaygood86.mauborgne.desktop.in:11
 msgid "Mauborgne;2FA;OTP;"
 msgstr "Mauborgne;2FA;OTP;"
-
-#~ msgid "io.github.jhaygood86.mauborgne"
-#~ msgstr "io.github.jhaygood86.mauborgne"
 
 #~ msgid "Stores pad secrets securely"
 #~ msgstr "Lagrer notishemmeligheter sikkert"

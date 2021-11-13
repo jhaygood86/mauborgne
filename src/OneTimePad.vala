@@ -340,6 +340,10 @@ public class OneTimePad : Object {
 
         var secret_value = yield lookup_secret ();
         
+        if (secret_value == null) {
+            return _("Invalid Secret. Please delete and re-import");
+        }
+
         Cotp.Error error = Cotp.Error.VALID;
         
         switch(pad_type) {

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-02 18:39-0400\n"
+"POT-Creation-Date: 2021-11-13 11:10-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,6 +51,10 @@ msgstr ""
 
 #: src/OneTimePad.vala:175
 msgid "Cannot determine pad type"
+msgstr ""
+
+#: src/OneTimePad.vala:344
+msgid "Invalid Secret. Please delete and re-import"
 msgstr ""
 
 #: src/Services/AegisManager.vala:33
@@ -212,6 +216,10 @@ msgstr ""
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:5
 msgid "Generates OTP Codes for use with 2FA environments"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.desktop.in:8
+msgid "io.github.jhaygood86.mauborgne"
 msgstr ""
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:11
