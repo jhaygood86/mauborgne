@@ -68,6 +68,10 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
             label = _("Add Pad From Screenshot")
         };
         
+        var add_pad_qr_file_button = new Gtk.ModelButton () {
+            label = _("Add Pad From QR Code Image File")
+        };
+
         var add_pad_camera_button = new Gtk.ModelButton () {
             label = _("Add Pad From Camera")
         };
@@ -84,7 +88,8 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
         add_pad_popover.add (add_pad_grid);
         
         add_pad_grid.attach (add_pad_screenshot_button, 0, 0);
-        add_pad_grid.attach (add_pad_from_aegis_vault, 0, 1);
+        add_pad_grid.attach (add_pad_qr_file_button, 0, 1);
+        add_pad_grid.attach (add_pad_from_aegis_vault, 0, 2);
         add_pad_grid.show_all ();
         
         var add_pad_button = new Gtk.MenuButton () {
@@ -96,6 +101,7 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
         
         add_pad_screenshot_button.clicked.connect(acquire_from_screenshot_clicked);
         add_pad_from_aegis_vault.clicked.connect(acquire_from_aegis_encrypted_vault_clicked);
+        add_pad_qr_file_button.clicked.connect(acquire_from_qr_code_file_clicked);
 
         var actionbar = new Gtk.ActionBar ();
         actionbar.add (add_pad_button);
@@ -119,6 +125,10 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
         
         onetimepad_view.add_code_from_aegis_clicked.connect(() => {
             add_codes_from_aegis_encrypted_json ();
+        });
+
+        onetimepad_view.add_code_from_qr_code_image_clicked.connect(() => {
+            add_code_from_qr_code_file ();
         });
 
         onetimepad_view.code_retrieved.connect(() => {
@@ -187,6 +197,10 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
         add_codes_from_aegis_encrypted_json ();
     }
 
+    private void acquire_from_qr_code_file_clicked(Gtk.Button button) {
+        add_code_from_qr_code_file ();
+    }
+
     private void add_codes_from_aegis_encrypted_json () {
         var chooser = new Gtk.FileChooserNative ("Open Aegis Vault File", this, Gtk.FileChooserAction.OPEN, null, null);
 
@@ -215,33 +229,54 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
                     var otp = new OneTimePad.from_uri(qr_code_uri);
                     otp_library.add.begin(otp);
                 }
-                
         });
     }
     
+    private void add_code_from_qr_code_file () {
+        var chooser = new Gtk.FileChooserNative ("Open QR Code Image File", this, Gtk.FileChooserAction.OPEN, null, null);
+
+        var response = chooser.run ();
+
+        if (response == Gtk.ResponseType.ACCEPT) {
+            var filename = chooser.get_filename ();
+
+            var file = File.new_for_path(filename);
+            var qr_code_uri = acquire_from_file (file);
+
+            if(qr_code_uri.length > 0){
+                var otp = new OneTimePad.from_uri(qr_code_uri);
+                otp_library.add.begin(otp);
+            }
+        }
+    }
+
     private async string acquire_from_screenshot() {
         try {
             var parent_window = Xdp.ParentWindow.new_gtk (this);
             var screenshot_uri = yield portal.take_screenshot(parent_window, Xdp.ScreenshotFlags.INTERACTIVE);
             
             var file = File.new_for_uri(screenshot_uri);
-            var file_stream = file.read ();
-            
-            var pixbuf = new Gdk.Pixbuf.from_stream (file_stream);
-            
-            var payload = QrHelpers.get_payload_from_pixbuf (pixbuf);
-            
-            print("payload: %s\n",payload);
-            
-            file_stream.close();
-            
-            return payload;
-                
+            return acquire_from_file (file);
         } catch (GLib.Error error) {
             return "";
         }
     }
-    
+
+
+    private string acquire_from_file (File file) {
+        var file_stream = file.read ();
+
+        var pixbuf = new Gdk.Pixbuf.from_stream (file_stream);
+
+        var payload = QrHelpers.get_payload_from_pixbuf (pixbuf);
+
+        print("payload: %s\n",payload);
+
+        file_stream.close();
+
+        return payload;
+    }
+
     private void bind_pads_to_source_list() {
   
         var totp_item = new Granite.Widgets.SourceList.ExpandableItem(_("Time-based One Time Pads"));

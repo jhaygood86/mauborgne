@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-13 11:10-0500\n"
+"POT-Creation-Date: 2021-11-13 11:27-0500\n"
 "PO-Revision-Date: 2021-10-09 21:44+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
@@ -22,32 +22,37 @@ msgstr ""
 msgid "Mauborgne"
 msgstr "Maurborgne"
 
-#: src/MainWindow.vala:68 src/Widgets/OneTimePadView.vala:43
+#: src/MainWindow.vala:68 src/Widgets/OneTimePadView.vala:44
 msgid "Add Pad From Screenshot"
 msgstr "Legg til notis fra skjermavbildning"
 
-#: src/MainWindow.vala:72
-msgid "Add Pad From Camera"
+#: src/MainWindow.vala:72 src/Widgets/OneTimePadView.vala:50
+#, fuzzy
+msgid "Add Pad From QR Code Image File"
 msgstr "Legg til notis fra kamera"
 
 #: src/MainWindow.vala:76
+msgid "Add Pad From Camera"
+msgstr "Legg til notis fra kamera"
+
+#: src/MainWindow.vala:80
 msgid "Add Pad From Token"
 msgstr "Legg til notis fra symbol"
 
-#: src/MainWindow.vala:80
+#: src/MainWindow.vala:84
 msgid "Add Pad(s) From Aegis Encrypted JSON"
 msgstr ""
 
-#: src/MainWindow.vala:91
+#: src/MainWindow.vala:96
 msgid "Add One Time Pad…"
 msgstr "Legg til éngangsnotis …"
 
-#: src/MainWindow.vala:247
+#: src/MainWindow.vala:282
 #, fuzzy
 msgid "Time-based One Time Pads"
 msgstr "Legg til en éngangsnotis"
 
-#: src/MainWindow.vala:248
+#: src/MainWindow.vala:283
 #, fuzzy
 msgid "Counter-based One Time Pads"
 msgstr "Legg til en éngangsnotis"
@@ -64,56 +69,61 @@ msgstr ""
 msgid "Unable to lock vault. Please try a different password"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:40
+#: src/Widgets/OneTimePadView.vala:41
 msgid "Add a One Time Pad"
 msgstr "Legg til en éngangsnotis"
 
-#: src/Widgets/OneTimePadView.vala:41
+#: src/Widgets/OneTimePadView.vala:42
 msgid "Add a one time pad from a provider"
 msgstr "Legg til en éngangsnotis fra en tilbyder"
 
-#: src/Widgets/OneTimePadView.vala:44
+#: src/Widgets/OneTimePadView.vala:45
 msgid "Add a pad using a screenshot of a QR code"
 msgstr "Legg til en éngangsnotis ved bruk av skjermavbildning av en QR-kode"
 
-#: src/Widgets/OneTimePadView.vala:46
+#: src/Widgets/OneTimePadView.vala:47
 #, fuzzy
 msgid "Add Pad From Aegis JSON"
 msgstr "Legg til notis fra symbol"
 
-#: src/Widgets/OneTimePadView.vala:47
+#: src/Widgets/OneTimePadView.vala:48
 msgid "Add a pad using an export of an Aegis encrypted JSON vault file"
 msgstr ""
 
 #: src/Widgets/OneTimePadView.vala:51
+#, fuzzy
+msgid "Add a pad using an image file that contains a QR Code"
+msgstr "Legg til en éngangsnotis ved bruk av skjermavbildning av en QR-kode"
+
+#: src/Widgets/OneTimePadView.vala:55
 msgid "One Time Pad"
 msgstr "Éngangsnotis"
 
-#: src/Widgets/OneTimePadView.vala:91
+#: src/Widgets/OneTimePadView.vala:95
 msgid "Copy"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:100
+#: src/Widgets/OneTimePadView.vala:104
 msgid "Export as QR Code"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:104
+#: src/Widgets/OneTimePadView.vala:108
 msgid "Export this pad as Aegis Vault JSON"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:108
+#: src/Widgets/OneTimePadView.vala:112
 msgid "Export all pads as Aegis Vault JSON"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:118
+#: src/Widgets/OneTimePadView.vala:122
 msgid "Export"
 msgstr "Eksporter"
 
-#: src/Widgets/OneTimePadView.vala:139
+#: src/Widgets/OneTimePadView.vala:143
 msgid "Delete"
 msgstr "Slett"
 
-#: src/Widgets/OneTimePadView.vala:151
+#: src/Widgets/OneTimePadView.vala:155
 msgid "Edit"
 msgstr ""
 
@@ -159,65 +169,78 @@ msgstr ""
 "for sikre tofaktorsinnlogginger"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:16
-msgid "Bugfixes"
+msgid "New Features"
 msgstr ""
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:18
+msgid "Importing pads from image files containing QR Codes"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:20
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:32
+msgid "New Translations"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:22
+msgid "Portuguese (Brazil)"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:28
+msgid "Bugfixes"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:30
 msgid ""
 "Detect dark mode on GNOME versions that do not support the freedesktop color "
 "scheme setting"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:20
-msgid "Updated Translations"
-msgstr ""
-
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:22
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:34
 msgid "Italian"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:28
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:38
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:40
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:50
 msgid "Feature Release"
 msgstr "Funksjonsutgivelse"
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:30
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:42
 msgid ""
 "Add support for copying codes, including pasting the current code on TOTP "
 "pads"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:31
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:43
 msgid "Remove access to AccountService thanks to elementary OS updates"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:32
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:44
 msgid "Add support for editing pads, issuer names, and account names"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:40
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:52
 msgid "Adds support for exporting pad(s) in Aegis encrypted JSON format"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:41
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:53
 msgid "Fix crashes when deleting a pad"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:42
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:54
 msgid "Adds missing button to import from Aegis files on welcome screen"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:43
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:55
 msgid ""
 "Clean up account names for accounts where the issuer name is repeated in the "
 "account name"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:44
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:56
 msgid "Updated icons!"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:86
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:98
 msgid "Justin Haygood"
 msgstr "Justin Haygood"
 

@@ -11,13 +11,25 @@
     </p>
   </description>
   <releases>
+      <release version="0.7.0" date="2021-11-13" urgency="medium">
+      <description>
+        <p>New Features</p>
+        <ul>
+          <li>Importing pads from image files containing QR Codes</li>
+        </ul>
+        <p>New Translations</p>
+        <ul>
+          <li>Portuguese (Brazil)</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.1" date="2021-11-02" urgency="medium">
       <description>
         <p>Bugfixes</p>
         <ul>
           <li>Detect dark mode on GNOME versions that do not support the freedesktop color scheme setting</li>
         </ul>
-        <p>Updated Translations</p>
+        <p>New Translations</p>
         <ul>
           <li>Italian</li>
         </ul>
