@@ -5,242 +5,245 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: jhaygood86@gmail.com\n"
 "POT-Creation-Date: 2021-11-13 11:27-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-11-15 10:50+0000\n"
+"Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/maurbogne/"
+"maurbogne/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.9.1-dev\n"
 
 #: src/MainWindow.vala:11 data/io.github.jhaygood86.mauborgne.desktop.in:3
 msgid "Mauborgne"
-msgstr ""
+msgstr "Mauborgne"
 
 #: src/MainWindow.vala:68 src/Widgets/OneTimePadView.vala:44
 msgid "Add Pad From Screenshot"
-msgstr ""
+msgstr "スクリーンショットからワンタイムパッドを追加"
 
 #: src/MainWindow.vala:72 src/Widgets/OneTimePadView.vala:50
 msgid "Add Pad From QR Code Image File"
-msgstr ""
+msgstr "QR コードの画像ファイルからワンタイムパッドを追加"
 
 #: src/MainWindow.vala:76
 msgid "Add Pad From Camera"
-msgstr ""
+msgstr "カメラからワンタイムパッドを追加"
 
 #: src/MainWindow.vala:80
 msgid "Add Pad From Token"
-msgstr ""
+msgstr "トークンからワンタイムパッドを追加"
 
 #: src/MainWindow.vala:84
 msgid "Add Pad(s) From Aegis Encrypted JSON"
-msgstr ""
+msgstr "Aegis 暗号化 JSON からワンタイムパッドを追加"
 
 #: src/MainWindow.vala:96
 msgid "Add One Time Pad…"
-msgstr ""
+msgstr "ワンタイムパッドを追加…"
 
 #: src/MainWindow.vala:282
 msgid "Time-based One Time Pads"
-msgstr ""
+msgstr "TOTP"
 
 #: src/MainWindow.vala:283
 msgid "Counter-based One Time Pads"
-msgstr ""
+msgstr "HOTP"
 
 #: src/OneTimePad.vala:175
 msgid "Cannot determine pad type"
-msgstr ""
+msgstr "パッドの種類を認識できません"
 
 #: src/OneTimePad.vala:344
 msgid "Invalid Secret. Please delete and re-import"
-msgstr ""
+msgstr "秘密鍵が不適切です。削除してもう一度インポートしてください"
 
 #: src/Services/AegisManager.vala:33
 msgid "Unable to lock vault. Please try a different password"
-msgstr ""
+msgstr "ロックできませんでした。別のパスワードをお試しください"
 
 #: src/Widgets/OneTimePadView.vala:41
 msgid "Add a One Time Pad"
-msgstr ""
+msgstr "ワンタイムパッドを追加しましょう"
 
 #: src/Widgets/OneTimePadView.vala:42
 msgid "Add a one time pad from a provider"
-msgstr ""
+msgstr "以下のいずれかの方法でワンタイムパッドを追加してください"
 
 #: src/Widgets/OneTimePadView.vala:45
 msgid "Add a pad using a screenshot of a QR code"
-msgstr ""
+msgstr "QR コードのスクリーンショットを使ってパッドを追加します"
 
 #: src/Widgets/OneTimePadView.vala:47
 msgid "Add Pad From Aegis JSON"
-msgstr ""
+msgstr "Aegis JSON ファイルからパッドを追加"
 
 #: src/Widgets/OneTimePadView.vala:48
 msgid "Add a pad using an export of an Aegis encrypted JSON vault file"
-msgstr ""
+msgstr "Aegis からエクスポートした JSON 暗号化ファイルを使ってパッドを追加します"
 
 #: src/Widgets/OneTimePadView.vala:51
 msgid "Add a pad using an image file that contains a QR Code"
-msgstr ""
+msgstr "QR コードを含む画像ファイルを使ってパッドを追加します"
 
 #: src/Widgets/OneTimePadView.vala:55
 msgid "One Time Pad"
-msgstr ""
+msgstr "ワンタイムパッド"
 
 #: src/Widgets/OneTimePadView.vala:95
 msgid "Copy"
-msgstr ""
+msgstr "コピー"
 
 #: src/Widgets/OneTimePadView.vala:104
 msgid "Export as QR Code"
-msgstr ""
+msgstr "QR コードとしてエクスポート"
 
 #: src/Widgets/OneTimePadView.vala:108
 msgid "Export this pad as Aegis Vault JSON"
-msgstr ""
+msgstr "Aegis 暗号化 JSON ファイル形式でこのパッドをエクスポート"
 
 #: src/Widgets/OneTimePadView.vala:112
 msgid "Export all pads as Aegis Vault JSON"
-msgstr ""
+msgstr "Aegis 暗号化 JSON ファイル形式ですべてのパッドをエクスポート"
 
 #: src/Widgets/OneTimePadView.vala:122
 msgid "Export"
-msgstr ""
+msgstr "エクスポート"
 
 #: src/Widgets/OneTimePadView.vala:143
 msgid "Delete"
-msgstr ""
+msgstr "削除"
 
 #: src/Widgets/OneTimePadView.vala:155
 msgid "Edit"
-msgstr ""
+msgstr "編集"
 
 #: src/Widgets/PasswordDialog.vala:9 src/Widgets/PasswordDialog.vala:15
 msgid "Aegis Vault Unlock Password"
-msgstr ""
+msgstr "Aegis 暗号化解除のパスワード"
 
 #: src/Widgets/PasswordDialog.vala:17
 msgid "Password Required"
-msgstr ""
+msgstr "パスワードが必要です"
 
 #: src/Widgets/PasswordDialog.vala:18
 msgid "Need the password to access the Aegis Vault file"
-msgstr ""
+msgstr "Aegis 暗号化ファイルにアクセスするにはパスワードが必要です"
 
 #: src/Widgets/PasswordDialog.vala:24
 msgid "Password"
-msgstr ""
+msgstr "パスワード"
 
 #: src/Widgets/PasswordDialog.vala:51
 msgid "Cancel"
-msgstr ""
+msgstr "キャンセル"
 
 #: src/Widgets/PasswordDialog.vala:53
 msgid "Unlock"
-msgstr ""
+msgstr "ロック解除"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:6
 msgid "Maurborgne"
-msgstr ""
+msgstr "Maurborgne"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:7
 #: data/io.github.jhaygood86.mauborgne.desktop.in:4
 msgid "2FA OTP Code Generator"
-msgstr ""
+msgstr "二段階認証用のワンタイムパスワードコードの生成アプリ"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:9
 msgid ""
 "Import OTP pads from QR codes and generate OTP codes for secure 2FA logins"
-msgstr ""
+msgstr "QR コードからワンタイムパスワードコードをインポートして、安全な二段階認証ログインに使用できるワンタイムパスワードを生成します"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:16
 msgid "New Features"
-msgstr ""
+msgstr "新機能"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:18
 msgid "Importing pads from image files containing QR Codes"
-msgstr ""
+msgstr "QR コードを含む画像ファイルからワンタイムパッドをインポートできる機能を追加"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:20
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:32
 msgid "New Translations"
-msgstr ""
+msgstr "翻訳の追加"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:22
 msgid "Portuguese (Brazil)"
-msgstr ""
+msgstr "ブラジルポルトガル語"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:28
 msgid "Bugfixes"
-msgstr ""
+msgstr "バグ修正"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:30
 msgid ""
 "Detect dark mode on GNOME versions that do not support the freedesktop color "
 "scheme setting"
-msgstr ""
+msgstr "FreeDesktop のカラースキーム設定に対応しない GNOME 版のアプリでダークモードを認識できるように修正"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:34
 msgid "Italian"
-msgstr ""
+msgstr "イタリア語"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:40
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:50
 msgid "Feature Release"
-msgstr ""
+msgstr "機能リリース"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:42
 msgid ""
 "Add support for copying codes, including pasting the current code on TOTP "
 "pads"
-msgstr ""
+msgstr "コードのコピーに対応しました。TOTP パッドの現在のコードも貼り付けできるようになりました"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:43
 msgid "Remove access to AccountService thanks to elementary OS updates"
-msgstr ""
+msgstr "elementary OS の仕様変更に伴い、AccountsService へのアクセス権限を削除"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:44
 msgid "Add support for editing pads, issuer names, and account names"
-msgstr ""
+msgstr "パッド・発行者名・アカウント名の編集に対応"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:52
 msgid "Adds support for exporting pad(s) in Aegis encrypted JSON format"
-msgstr ""
+msgstr "Aegis 暗号化 JSON 形式でのパッドのエクスポートに対応"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:53
 msgid "Fix crashes when deleting a pad"
-msgstr ""
+msgstr "パッドを削除するとクラッシュする不具合を修正"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:54
 msgid "Adds missing button to import from Aegis files on welcome screen"
-msgstr ""
+msgstr "ようこそ画面に Aegis ファイルからインポートするためのボタンがなかった不具合を修正"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:55
 msgid ""
 "Clean up account names for accounts where the issuer name is repeated in the "
 "account name"
-msgstr ""
+msgstr "発行者名がアカウント名にも含まれる場合、アカウント名からその部分の文字列を削除するように修正"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:56
 msgid "Updated icons!"
-msgstr ""
+msgstr "アイコンをアップデートしました！"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:98
 msgid "Justin Haygood"
-msgstr ""
+msgstr "Justin Haygood"
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:5
 msgid "Generates OTP Codes for use with 2FA environments"
-msgstr ""
+msgstr "二段階認証で使用できるワンタイムパスワードコードを生成します"
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:8
 msgid "io.github.jhaygood86.mauborgne"
-msgstr ""
+msgstr "io.github.jhaygood86.mauborgne"
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:11
 msgid "Mauborgne;2FA;OTP;"
-msgstr ""
+msgstr "Mauborgne;2FA;OTP;二段階認証;ワンタイムパスワード;"
