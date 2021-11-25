@@ -17,6 +17,11 @@
         <ul>
           <li>Updated icons</li>
         </ul>
+        <p>New &amp; Updated Translations</p>
+        <ul>
+          <li>Japanese</li>
+          <li>Portuguese (Brazil)</li>
+        </ul>
       </description>
     </release>
     <release version="0.7.0" date="2021-11-13" urgency="medium">
