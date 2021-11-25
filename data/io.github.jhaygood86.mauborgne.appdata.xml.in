@@ -11,7 +11,15 @@
     </p>
   </description>
   <releases>
-      <release version="0.7.0" date="2021-11-13" urgency="medium">
+    <release version="0.7.1" date="2021-11-25" urgency="medium">
+      <description>
+        <p>Bugfixes</p>
+        <ul>
+          <li>Updated icons</li>
+        </ul>
+      </description>
+    </release>
+    <release version="0.7.0" date="2021-11-13" urgency="medium">
       <description>
         <p>New Features</p>
         <ul>
