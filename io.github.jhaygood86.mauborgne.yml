@@ -1,6 +1,6 @@
 app-id: io.github.jhaygood86.mauborgne
 runtime: io.elementary.Platform
-runtime-version: '6'
+runtime-version: '6.1'
 sdk: io.elementary.Sdk
 command: io.github.jhaygood86.mauborgne
 finish-args:
@@ -37,14 +37,6 @@ modules:
     - type: git
       url: https://github.com/flatpak/libportal.git
       branch: '0.4'
-
-  - name: libsecret
-    buildsystem: meson
-    sources:
-    - type: git
-      url: https://gitlab.gnome.org/GNOME/libsecret.git
-      tag: 0.20.4
-      commit: 3fe635e64efd4b8dbc9ec3548b0bc8034c7665c4
 
   - name: json-glib
     buildsystem: meson
