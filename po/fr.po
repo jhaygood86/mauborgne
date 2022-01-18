@@ -2,13 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the io.github.jhaygood86.mauborgne package.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
+# Maxime Leroy <lisacintosh@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: jhaygood86@gmail.com\n"
 "POT-Creation-Date: 2021-11-13 11:27-0500\n"
-"PO-Revision-Date: 2021-10-11 00:04+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"PO-Revision-Date: 2022-01-19 06:53+0000\n"
+"Last-Translator: Maxime Leroy <lisacintosh@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/maurbogne/"
 "maurbogne/fr/>\n"
 "Language: fr\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.11-dev\n"
 
 #: src/MainWindow.vala:11 data/io.github.jhaygood86.mauborgne.desktop.in:3
 msgid "Mauborgne"
@@ -24,50 +25,48 @@ msgstr "Mauborgne"
 
 #: src/MainWindow.vala:68 src/Widgets/OneTimePadView.vala:44
 msgid "Add Pad From Screenshot"
-msgstr "Ajouter un bloc à partir d'une capture d'écran"
+msgstr "Ajouter un bloc-notes depuis une capture d'écran"
 
 #: src/MainWindow.vala:72 src/Widgets/OneTimePadView.vala:50
-#, fuzzy
 msgid "Add Pad From QR Code Image File"
-msgstr "Ajouter un bloc à partir de l'appareil photo"
+msgstr "Ajouter un bloc-notes depuis une image de QR code"
 
 #: src/MainWindow.vala:76
 msgid "Add Pad From Camera"
-msgstr "Ajouter un bloc à partir de l'appareil photo"
+msgstr "Ajouter un bloc-notes depuis l'appareil photo"
 
 #: src/MainWindow.vala:80
 msgid "Add Pad From Token"
-msgstr "Ajouter un bloc à partir d'un jeton"
+msgstr "Ajouter un bloc-notes à partir d'un jeton"
 
 #: src/MainWindow.vala:84
 msgid "Add Pad(s) From Aegis Encrypted JSON"
-msgstr ""
+msgstr "Ajouter des bloc-notes depuis les JSON Aegis cryptés"
 
 #: src/MainWindow.vala:96
 msgid "Add One Time Pad…"
 msgstr "Ajouter un bloc-notes à usage unique…"
 
 #: src/MainWindow.vala:282
-#, fuzzy
 msgid "Time-based One Time Pads"
-msgstr "Ajouter un bloc-notes à usage unique"
+msgstr "Ajouter un bloc-notes à usage unique horodaté"
 
 #: src/MainWindow.vala:283
-#, fuzzy
 msgid "Counter-based One Time Pads"
-msgstr "Ajouter un bloc-notes à usage unique"
+msgstr "Ajouter un bloc-notes à usage unique numéroté"
 
 #: src/OneTimePad.vala:175
 msgid "Cannot determine pad type"
-msgstr ""
+msgstr "Le type de bloc-notes n'a pu être déterminé"
 
 #: src/OneTimePad.vala:344
 msgid "Invalid Secret. Please delete and re-import"
-msgstr ""
+msgstr "Secret invalide. Veuillez le supprimer puis le ré-importer"
 
 #: src/Services/AegisManager.vala:33
 msgid "Unable to lock vault. Please try a different password"
 msgstr ""
+"Impossible de déverrouiller le coffre. Veuillez essayer un autre mot de passe"
 
 #: src/Widgets/OneTimePadView.vala:41
 msgid "Add a One Time Pad"
@@ -82,18 +81,18 @@ msgid "Add a pad using a screenshot of a QR code"
 msgstr "Ajouter un bloc-notes à l'aide d'une capture d'écran d'un code QR"
 
 #: src/Widgets/OneTimePadView.vala:47
-#, fuzzy
 msgid "Add Pad From Aegis JSON"
-msgstr "Ajouter un bloc à partir d'un jeton"
+msgstr "Ajouter un bloc-notes à partir d'un JSON Aegis"
 
 #: src/Widgets/OneTimePadView.vala:48
 msgid "Add a pad using an export of an Aegis encrypted JSON vault file"
 msgstr ""
+"Ajouter un bloc-notes en utilisant un export d'un fichier de JSON Aegis "
+"crypté"
 
 #: src/Widgets/OneTimePadView.vala:51
-#, fuzzy
 msgid "Add a pad using an image file that contains a QR Code"
-msgstr "Ajouter un bloc-notes à l'aide d'une capture d'écran d'un code QR"
+msgstr "Ajouter un bloc-notes à partir d'une image contenant un QR code"
 
 #: src/Widgets/OneTimePadView.vala:55
 msgid "One Time Pad"
@@ -101,19 +100,19 @@ msgstr "Bloc-notes à usage unique"
 
 #: src/Widgets/OneTimePadView.vala:95
 msgid "Copy"
-msgstr ""
+msgstr "Copier"
 
 #: src/Widgets/OneTimePadView.vala:104
 msgid "Export as QR Code"
-msgstr ""
+msgstr "Exporter en QR Code"
 
 #: src/Widgets/OneTimePadView.vala:108
 msgid "Export this pad as Aegis Vault JSON"
-msgstr ""
+msgstr "Exporter ce bloc-notes comme JSON Aegis Vault"
 
 #: src/Widgets/OneTimePadView.vala:112
 msgid "Export all pads as Aegis Vault JSON"
-msgstr ""
+msgstr "Exporter tous les bloc-notes comme JSON Aegis Vault"
 
 #: src/Widgets/OneTimePadView.vala:122
 msgid "Export"
@@ -125,31 +124,31 @@ msgstr "Supprimer"
 
 #: src/Widgets/OneTimePadView.vala:155
 msgid "Edit"
-msgstr ""
+msgstr "Modifier"
 
 #: src/Widgets/PasswordDialog.vala:9 src/Widgets/PasswordDialog.vala:15
 msgid "Aegis Vault Unlock Password"
-msgstr ""
+msgstr "Mot de passe du coffre Aegis"
 
 #: src/Widgets/PasswordDialog.vala:17
 msgid "Password Required"
-msgstr ""
+msgstr "Mot de passe requis"
 
 #: src/Widgets/PasswordDialog.vala:18
 msgid "Need the password to access the Aegis Vault file"
-msgstr ""
+msgstr "Un mot de passe est nécessaire pour accéder au coffre Aegis"
 
 #: src/Widgets/PasswordDialog.vala:24
 msgid "Password"
-msgstr ""
+msgstr "Mot de passe"
 
 #: src/Widgets/PasswordDialog.vala:51
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #: src/Widgets/PasswordDialog.vala:53
 msgid "Unlock"
-msgstr ""
+msgstr "Déverrouiller"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:6
 msgid "Maurborgne"
@@ -169,34 +168,36 @@ msgstr ""
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:16
 msgid "New Features"
-msgstr ""
+msgstr "Nouvelles fonctionnalités"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:18
 msgid "Importing pads from image files containing QR Codes"
-msgstr ""
+msgstr "Importation des bloc-notes depuis une image contenant des QR codes"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:20
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:32
 msgid "New Translations"
-msgstr ""
+msgstr "Nouvelles traductions"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:22
 msgid "Portuguese (Brazil)"
-msgstr ""
+msgstr "Portugais (Brésil)"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:28
 msgid "Bugfixes"
-msgstr ""
+msgstr "Corrections"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:30
 msgid ""
 "Detect dark mode on GNOME versions that do not support the freedesktop color "
 "scheme setting"
 msgstr ""
+"Détecte le mode sombre pour les versions de GNOME qui ne supporter pas le "
+"paramètre de couleur de freedesktop"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:34
 msgid "Italian"
-msgstr ""
+msgstr "Italien"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:40
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:50
@@ -208,36 +209,46 @@ msgid ""
 "Add support for copying codes, including pasting the current code on TOTP "
 "pads"
 msgstr ""
+"Ajout la possibilité de copier des codes, dont le collage de l'actuel code "
+"dans les bloc-notes TOTP"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:43
 msgid "Remove access to AccountService thanks to elementary OS updates"
 msgstr ""
+"Retire les accès à AccountService grâce à une mise à jour de « elementary OS "
+"»"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:44
 msgid "Add support for editing pads, issuer names, and account names"
 msgstr ""
+"Ajout du support pour modifier les bloc-notes, le nom du créateur, le nom "
+"des comptes"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:52
 msgid "Adds support for exporting pad(s) in Aegis encrypted JSON format"
 msgstr ""
+"Ajout de la possibilité d'exporter les bloc-notes au format JSON Aegis crypté"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:53
 msgid "Fix crashes when deleting a pad"
-msgstr ""
+msgstr "Correction d'un plantage lors de la suppression d'un bloc-notes"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:54
 msgid "Adds missing button to import from Aegis files on welcome screen"
 msgstr ""
+"Ajout d'un bouton pour importer les fichiers Aegis depuis l'écran d'accueil"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:55
 msgid ""
 "Clean up account names for accounts where the issuer name is repeated in the "
 "account name"
 msgstr ""
+"Nettoyage des noms des comptes où le nom du créateur était répété dans le "
+"nom du compte"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:56
 msgid "Updated icons!"
-msgstr ""
+msgstr "Icônes mises à jour !"
 
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:98
 msgid "Justin Haygood"
