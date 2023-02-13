@@ -11,6 +11,18 @@
     </p>
   </description>
   <releases>
+    <release version="0.7.3" date="2023-02-12" urgency="medium">
+      <description>
+        <p>Improvements</p>
+        <ul>
+          <li>Update to elementary 7.1 runtime</li>
+        </ul>
+        <p>Temporarily Removed Features</p>
+        <ul>
+          <li>Capture QR Code from screenshot. We still support importing from Aegis and from a saved image file</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.7.2" date="2021-12-08" urgency="medium">
       <description>
         <p>Bugfixes</p>
