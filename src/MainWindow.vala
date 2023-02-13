@@ -64,9 +64,9 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
             row_spacing = 3
         };
 
-        var add_pad_screenshot_button = new Gtk.ModelButton () {
-            label = _("Add Pad From Screenshot")
-        };
+        //var add_pad_screenshot_button = new Gtk.ModelButton () {
+        //    label = _("Add Pad From Screenshot")
+        //};
         
         var add_pad_qr_file_button = new Gtk.ModelButton () {
             label = _("Add Pad From QR Code Image File")
@@ -87,9 +87,9 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
         var add_pad_popover = new Gtk.Popover (null);
         add_pad_popover.add (add_pad_grid);
         
-        add_pad_grid.attach (add_pad_screenshot_button, 0, 0);
-        add_pad_grid.attach (add_pad_qr_file_button, 0, 1);
-        add_pad_grid.attach (add_pad_from_aegis_vault, 0, 2);
+        //add_pad_grid.attach (add_pad_screenshot_button, 0, 0);
+        add_pad_grid.attach (add_pad_qr_file_button, 0, 0);
+        add_pad_grid.attach (add_pad_from_aegis_vault, 0, 1);
         add_pad_grid.show_all ();
         
         var add_pad_button = new Gtk.MenuButton () {
@@ -99,7 +99,7 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
             popover = add_pad_popover
         };
         
-        add_pad_screenshot_button.clicked.connect(acquire_from_screenshot_clicked);
+        //add_pad_screenshot_button.clicked.connect(acquire_from_screenshot_clicked);
         add_pad_from_aegis_vault.clicked.connect(acquire_from_aegis_encrypted_vault_clicked);
         add_pad_qr_file_button.clicked.connect(acquire_from_qr_code_file_clicked);
 
@@ -119,9 +119,9 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
 
         onetimepad_view = new OneTimePadView ();
         
-        onetimepad_view.add_code_from_screenshot_clicked.connect(() => {
-            add_code_from_screenshot ();
-        });
+        //onetimepad_view.add_code_from_screenshot_clicked.connect(() => {
+        //    add_code_from_screenshot ();
+        //});
         
         onetimepad_view.add_code_from_aegis_clicked.connect(() => {
             add_codes_from_aegis_encrypted_json ();
