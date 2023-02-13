@@ -252,8 +252,8 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
 
     private async string acquire_from_screenshot() {
         try {
-            var parent_window = Xdp.ParentWindow.new_gtk (this);
-            var screenshot_uri = yield portal.take_screenshot(parent_window, Xdp.ScreenshotFlags.INTERACTIVE);
+            var parent_window = Xdp.parent_new_gtk (this);
+            var screenshot_uri = yield portal.take_screenshot(parent_window, Xdp.ScreenshotFlags.INTERACTIVE, null);
             
             var file = File.new_for_uri(screenshot_uri);
             return acquire_from_file (file);

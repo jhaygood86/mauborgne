@@ -1,6 +1,6 @@
 app-id: io.github.jhaygood86.mauborgne
 runtime: io.elementary.Platform
-runtime-version: '6.1'
+runtime-version: '7.1'
 sdk: io.elementary.Sdk
 command: io.github.jhaygood86.mauborgne
 finish-args:
@@ -33,10 +33,13 @@ modules:
 
   - name: libportal
     buildsystem: meson
+    config-opts:
+      - -Dbackends=gtk3
+      - -Ddocs=false
     sources:
     - type: git
       url: https://github.com/flatpak/libportal.git
-      branch: '0.4'
+      branch: '0.6'
 
   - name: json-glib
     buildsystem: meson
@@ -52,8 +55,8 @@ modules:
     sources:
     - type: git
       url: https://github.com/FortAwesome/Font-Awesome.git
-      tag: 5.15.4
-      commit: 7d3d774145ac38663f6d1effc6def0334b68ab7e
+      tag: 6.3.0
+      commit: d02961b018153506364077343b0edcde0a39d27e
 
   - name: mauborgne
     buildsystem: meson

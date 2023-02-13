@@ -1,7 +1,7 @@
 project(
     'io.github.jhaygood86.mauborgne', 'vala', 'c',
     meson_version: '>= 0.49',
-    version: '0.7.2'
+    version: '0.7.3'
 )
 
 vapi_dir = meson.current_source_dir() / 'vapi'
@@ -39,6 +39,7 @@ mauborgne_deps = [
     dependency('libhandy-1', version: '>=0.90.0'),
     dependency('granite', version: '>=6.0.0'),
     dependency('libportal'),
+    dependency('libportal-gtk3'),
     dependency('cotp'),
     dependency('libsecret-1'),
     dependency('gee-0.8'),
