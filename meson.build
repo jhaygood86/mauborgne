@@ -71,6 +71,7 @@ executable(
     'src/Widgets/ExportWindow.vala',
     'src/Widgets/OneTimePadView.vala',
     'src/Widgets/PasswordDialog.vala',
+    'src/Widgets/SetupKeyDialog.vala',
     dependencies: mauborgne_deps,
     install: true
 )

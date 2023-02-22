@@ -22,6 +22,24 @@ public class OneTimePad : Object {
                                     "issuer", Secret.SchemaAttributeType.STRING,
                                     "account_name", Secret.SchemaAttributeType.STRING);
     }
+    
+    public OneTimePad.from_secret_key(string secret_key_issuer, string secret_key_account, string secret_key_value, string secret_key_note) {
+        algorithm = OneTimePadAlgorithm.SHA1;
+        digits = 6;
+        period = 30;
+        
+        pad_type = OneTimePadType.TOTP;
+        issuer = secret_key_issuer;
+        account_name = secret_key_account;
+        account_name_display = secret_key_account;
+        
+        secret = secret_key_value;
+        note = secret_key_note;
+        
+        print("issuer: %s\n",issuer);
+        
+        store_secret.begin(secret);
+    }
 
     public OneTimePad.from_uri(string uri) throws GLib.UriError {
     

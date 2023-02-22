@@ -76,8 +76,8 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
             label = _("Add Pad From Camera")
         };
         
-        var add_pad_token_button = new Gtk.ModelButton () {
-            label = _("Add Pad From Token")
+        var add_pad_setup_key_button = new Gtk.ModelButton () {
+            label = _("Add Pad From Setup Key")
         };
         
         var add_pad_from_aegis_vault = new Gtk.ModelButton () {
@@ -90,6 +90,7 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
         //add_pad_grid.attach (add_pad_screenshot_button, 0, 0);
         add_pad_grid.attach (add_pad_qr_file_button, 0, 0);
         add_pad_grid.attach (add_pad_from_aegis_vault, 0, 1);
+        add_pad_grid.attach (add_pad_setup_key_button, 0, 2);
         add_pad_grid.show_all ();
         
         var add_pad_button = new Gtk.MenuButton () {
@@ -102,6 +103,7 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
         //add_pad_screenshot_button.clicked.connect(acquire_from_screenshot_clicked);
         add_pad_from_aegis_vault.clicked.connect(acquire_from_aegis_encrypted_vault_clicked);
         add_pad_qr_file_button.clicked.connect(acquire_from_qr_code_file_clicked);
+        add_pad_setup_key_button.clicked.connect(acquire_from_setup_key_clicked);
 
         var actionbar = new Gtk.ActionBar ();
         actionbar.add (add_pad_button);
@@ -129,6 +131,10 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
 
         onetimepad_view.add_code_from_qr_code_image_clicked.connect(() => {
             add_code_from_qr_code_file ();
+        });
+        
+        onetimepad_view.add_code_from_setup_key_clicked.connect(() => {
+            add_code_from_setup_key ();
         });
 
         onetimepad_view.code_retrieved.connect(() => {
@@ -200,6 +206,10 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
     private void acquire_from_qr_code_file_clicked(Gtk.Button button) {
         add_code_from_qr_code_file ();
     }
+    
+    private void acquire_from_setup_key_clicked(Gtk.Button button) {
+        add_code_from_setup_key ();
+    }
 
     private void add_codes_from_aegis_encrypted_json () {
         var chooser = new Gtk.FileChooserNative ("Open Aegis Vault File", this, Gtk.FileChooserAction.OPEN, null, null);
@@ -248,6 +258,15 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
                 otp_library.add.begin(otp);
             }
         }
+    }
+    
+    private void add_code_from_setup_key () {
+        var setup_key_dialog = new SetupKeyDialog ();
+        setup_key_dialog.show_all ();
+
+        setup_key_dialog.save_requested.connect ((otp) => {
+            otp_library.add.begin(otp);
+        });
     }
 
     private async string acquire_from_screenshot() {
