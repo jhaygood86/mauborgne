@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-13 11:27-0500\n"
+"POT-Creation-Date: 2023-02-22 18:47-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,11 +21,7 @@ msgstr ""
 msgid "Mauborgne"
 msgstr ""
 
-#: src/MainWindow.vala:68 src/Widgets/OneTimePadView.vala:44
-msgid "Add Pad From Screenshot"
-msgstr ""
-
-#: src/MainWindow.vala:72 src/Widgets/OneTimePadView.vala:50
+#: src/MainWindow.vala:72 src/Widgets/OneTimePadView.vala:51
 msgid "Add Pad From QR Code Image File"
 msgstr ""
 
@@ -33,31 +29,31 @@ msgstr ""
 msgid "Add Pad From Camera"
 msgstr ""
 
-#: src/MainWindow.vala:80
-msgid "Add Pad From Token"
+#: src/MainWindow.vala:80 src/Widgets/OneTimePadView.vala:54
+msgid "Add Pad From Setup Key"
 msgstr ""
 
 #: src/MainWindow.vala:84
 msgid "Add Pad(s) From Aegis Encrypted JSON"
 msgstr ""
 
-#: src/MainWindow.vala:96
+#: src/MainWindow.vala:97
 msgid "Add One Time Pad…"
 msgstr ""
 
-#: src/MainWindow.vala:282
+#: src/MainWindow.vala:301
 msgid "Time-based One Time Pads"
 msgstr ""
 
-#: src/MainWindow.vala:283
+#: src/MainWindow.vala:302
 msgid "Counter-based One Time Pads"
 msgstr ""
 
-#: src/OneTimePad.vala:175
+#: src/OneTimePad.vala:193
 msgid "Cannot determine pad type"
 msgstr ""
 
-#: src/OneTimePad.vala:344
+#: src/OneTimePad.vala:362
 msgid "Invalid Secret. Please delete and re-import"
 msgstr ""
 
@@ -65,59 +61,61 @@ msgstr ""
 msgid "Unable to lock vault. Please try a different password"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:41
+#: src/Widgets/OneTimePadView.vala:42
 msgid "Add a One Time Pad"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:42
+#: src/Widgets/OneTimePadView.vala:43
 msgid "Add a one time pad from a provider"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:45
-msgid "Add a pad using a screenshot of a QR code"
-msgstr ""
-
-#: src/Widgets/OneTimePadView.vala:47
+#. welcome_screen.append ("screenshot", _("Add Pad From Screenshot"),
+#. _("Add a pad using a screenshot of a QR code"));
+#: src/Widgets/OneTimePadView.vala:48
 msgid "Add Pad From Aegis JSON"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:48
+#: src/Widgets/OneTimePadView.vala:49
 msgid "Add a pad using an export of an Aegis encrypted JSON vault file"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:51
+#: src/Widgets/OneTimePadView.vala:52
 msgid "Add a pad using an image file that contains a QR Code"
 msgstr ""
 
 #: src/Widgets/OneTimePadView.vala:55
+msgid "Add a pad using a setup key"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:59
 msgid "One Time Pad"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:95
+#: src/Widgets/OneTimePadView.vala:99
 msgid "Copy"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:104
+#: src/Widgets/OneTimePadView.vala:108
 msgid "Export as QR Code"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:108
+#: src/Widgets/OneTimePadView.vala:112
 msgid "Export this pad as Aegis Vault JSON"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:112
+#: src/Widgets/OneTimePadView.vala:116
 msgid "Export all pads as Aegis Vault JSON"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:122
+#: src/Widgets/OneTimePadView.vala:126
 msgid "Export"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:143
+#: src/Widgets/OneTimePadView.vala:147
 msgid "Delete"
 msgstr ""
 
-#: src/Widgets/OneTimePadView.vala:155
+#: src/Widgets/OneTimePadView.vala:159
 msgid "Edit"
 msgstr ""
 
@@ -159,88 +157,118 @@ msgid ""
 "Import OTP pads from QR codes and generate OTP codes for secure 2FA logins"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:16
-msgid "New Features"
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:27
+msgid "Improvements"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:18
-msgid "Importing pads from image files containing QR Codes"
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:29
+msgid "Update to elementary 7.1 runtime"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:20
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:32
-msgid "New Translations"
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:31
+msgid "Temporarily Removed Features"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:22
-msgid "Portuguese (Brazil)"
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:33
+msgid ""
+"Capture QR Code from screenshot. We still support importing from Aegis and "
+"from a saved image file"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:28
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:39
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:47
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:72
 msgid "Bugfixes"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:30
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:41
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:49
+msgid "Updated icons"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:51
+msgid "New &amp; Updated Translations"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:53
+msgid "Japanese"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:54
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:66
+msgid "Portuguese (Brazil)"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:60
+msgid "New Features"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:62
+msgid "Importing pads from image files containing QR Codes"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:64
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:76
+msgid "New Translations"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:74
 msgid ""
 "Detect dark mode on GNOME versions that do not support the freedesktop color "
 "scheme setting"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:34
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:78
 msgid "Italian"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:40
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:50
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:84
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:94
 msgid "Feature Release"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:42
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:86
 msgid ""
 "Add support for copying codes, including pasting the current code on TOTP "
 "pads"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:43
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:87
 msgid "Remove access to AccountService thanks to elementary OS updates"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:44
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:88
 msgid "Add support for editing pads, issuer names, and account names"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:52
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:96
 msgid "Adds support for exporting pad(s) in Aegis encrypted JSON format"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:53
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:97
 msgid "Fix crashes when deleting a pad"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:54
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:98
 msgid "Adds missing button to import from Aegis files on welcome screen"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:55
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:99
 msgid ""
 "Clean up account names for accounts where the issuer name is repeated in the "
 "account name"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:56
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:100
 msgid "Updated icons!"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:98
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:142
 msgid "Justin Haygood"
 msgstr ""
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:5
 msgid "Generates OTP Codes for use with 2FA environments"
-msgstr ""
-
-#: data/io.github.jhaygood86.mauborgne.desktop.in:8
-msgid "io.github.jhaygood86.mauborgne"
 msgstr ""
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:11
