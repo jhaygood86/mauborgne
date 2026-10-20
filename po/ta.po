@@ -20,7 +20,7 @@ msgstr ""
 
 #: src/MainWindow.vala:11 data/io.github.jhaygood86.mauborgne.desktop.in:3
 msgid "Mauborgne"
-msgstr "ம ub போர்க்னே"
+msgstr ""
 
 #: src/MainWindow.vala:72 src/Widgets/OneTimePadView.vala:51
 msgid "Add Pad From QR Code Image File"
@@ -292,4 +292,4 @@ msgstr "2FA சூழல்களுடன் பயன்படுத்த OTP
 
 #: data/io.github.jhaygood86.mauborgne.desktop.in:11
 msgid "Mauborgne;2FA;OTP;"
-msgstr "கீழ்ப்படிதல்; 2fa; otp;"
+msgstr ""
