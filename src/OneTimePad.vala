@@ -37,8 +37,6 @@ public class OneTimePad : Object {
         note = secret_key_note;
         
         print("issuer: %s\n",issuer);
-        
-        store_secret.begin(secret);
     }
 
     public OneTimePad.from_uri(string uri) throws GLib.UriError {
@@ -126,8 +124,6 @@ public class OneTimePad : Object {
 
             account_name = get_cleaned_account_name (issuer, account_name);
             account_name_display = account_name;
-
-            store_secret.begin(secret);
         }
     }
     
@@ -233,6 +229,12 @@ public class OneTimePad : Object {
     }
     
     public async string to_uri () {
+        var secret_value = yield lookup_secret ();
+
+        return build_uri (secret_value);
+    }
+
+    internal string build_uri (string secret_value) {
         var sb = new StringBuilder ();
         sb.append("otpauth://");
 
@@ -249,8 +251,6 @@ public class OneTimePad : Object {
         sb.append(Uri.escape_string(issuer));
         sb.append(":");
         sb.append(Uri.escape_string(account_name));
-
-        var secret_value = yield lookup_secret ();
 
         sb.append("?secret=");
         sb.append(secret_value);
@@ -293,6 +293,12 @@ public class OneTimePad : Object {
     }
 
     public async AegisVaultContent.AegisVaultEntry to_aegis_vault_entry () {
+        var secret_value = yield lookup_secret ();
+
+        return build_aegis_vault_entry (secret_value);
+    }
+
+    internal AegisVaultContent.AegisVaultEntry build_aegis_vault_entry (string secret_value) {
         AegisVaultContent.AegisVaultEntry? entry = null;
         AegisVaultContent.AegisVaultEntryInfo? info = null;
 
@@ -318,8 +324,6 @@ public class OneTimePad : Object {
         entry.name = account_name;
         entry.issuer = issuer;
         entry.note = note;
-
-        var secret_value = yield lookup_secret ();
 
         info.secret = secret_value;
 
@@ -362,18 +366,35 @@ public class OneTimePad : Object {
             return _("Invalid Secret. Please delete and re-import");
         }
 
-        Cotp.Error error = Cotp.Error.VALID;
-        
+        return generate_code (secret_value) ?? "";
+    }
+
+    /**
+     * Generates the current code for the given base32 secret. TOTP codes use
+     * the current time unless unix_time is given; HOTP codes advance the counter.
+     */
+    internal string? generate_code (string secret_value, int64 unix_time = -1) {
+        Cotp.Error error = Cotp.Error.NO_ERROR;
+        string? code = null;
+
         switch(pad_type) {
             case TOTP:
-                return Cotp.get_totp(secret_value, digits, period, get_cotp_algorithm(algorithm), out error);
+                if (unix_time >= 0) {
+                    code = Cotp.get_totp_at(secret_value, (long) unix_time, digits, period, get_cotp_algorithm(algorithm), out error);
+                } else {
+                    code = Cotp.get_totp(secret_value, digits, period, get_cotp_algorithm(algorithm), out error);
+                }
+                break;
             case HOTP:
-                return Cotp.get_hotp(secret_value, ++counter, digits, get_cotp_algorithm(algorithm), out error);
+                code = Cotp.get_hotp(secret_value, (long) (++counter), digits, get_cotp_algorithm(algorithm), out error);
+                break;
         }
-        
-        print("Error Code: %d",error);
-        
-        return "";
+
+        if (code == null) {
+            print("Error Code: %d\n", error);
+        }
+
+        return code;
     }
     
     public int get_remaining_time () {

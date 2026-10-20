@@ -52,6 +52,9 @@ namespace Quirc {
 	    
         [CCode (cname = "quirc_decode")]
         public DecodeError decode (out Data data);
+
+        [CCode (cname = "quirc_flip")]
+        public void flip ();
     }
     
     [CCode (cname = "struct quirc_data", has_type_id = false, destroy_function = "")]

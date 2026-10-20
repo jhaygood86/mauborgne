@@ -10,18 +10,18 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # This job runs in a special container designed for building Flatpaks for AppCenter
+    # This job runs in a container with flatpak-builder and the GNOME runtime tooling
     container:
-      image: ghcr.io/elementary/flatpak-platform/runtime:6
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-51
       options: --privileged
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so the job can access it
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
       # Builds your flatpak manifest using the Flatpak Builder action
-    - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v3
+    - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
       with:
         # This is the name of the Bundle file we're building and can be anything you like
         bundle: mauborgne.flatpak
@@ -31,7 +31,4 @@ jobs:
         # You can automatically run any of the tests you've created as part of this workflow
         run-tests: true
 
-        # These lines specify the location of the elementary Runtime and Sdk
-        repository-name: appcenter
-        repository-url: https://flatpak.elementary.io/repo.flatpakrepo
         cache-key: "flatpak-builder-${{ github.sha }}"

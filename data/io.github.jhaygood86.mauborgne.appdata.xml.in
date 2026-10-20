@@ -3,7 +3,7 @@
   <id>io.github.jhaygood86.mauborgne</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0+</project_license>
-  <name>Maurborgne</name>
+  <name>Mauborgne</name>
   <summary>2FA OTP Code Generator</summary>
   <description>
     <p>
@@ -11,6 +11,15 @@
     </p>
   </description>
   <releases>
+    <release version="0.9.0" date="2026-10-20" urgency="medium">
+      <description>
+        <p>Improvements</p>
+        <ul>
+          <li>Ported to GTK 4 and libadwaita, and now built on the GNOME runtime</li>
+          <li>Updated libraries</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.8.0" date="2023-02-22" urgency="medium">
       <p>New Features</p>
       <ul>
@@ -139,11 +148,17 @@
     <content_attribute id="money-gambling">none</content_attribute>
   </content_rating>
   <translation type="gettext">io.github.jhaygood86.mauborgne</translation>
-  <developer_name>Justin Haygood</developer_name>
+  <developer id="io.github.jhaygood86">
+    <name>Justin Haygood</name>
+  </developer>
+  <launchable type="desktop-id">io.github.jhaygood86.mauborgne.desktop</launchable>
+  <branding>
+    <color type="primary" scheme_preference="light">#DCF0DD</color>
+  </branding>
   <url type="homepage">https://jhaygood86.github.io/mauborgne/</url>
   <url type="bugtracker">https://github.com/jhaygood86/mauborgne/issues</url>
   <custom>
-    <value key="x-appcenter-color-primary">#0e9a83</value>
+    <value key="x-appcenter-color-primary">#2B5233</value>
     <value key="x-appcenter-color-primary-text">rgb(255, 255, 255)</value>
     <value key="x-appcenter-suggested-price">10</value>
     <value key="x-appcenter-stripe">pk_live_51JQWYDHZX5xcE5RZsPJymrVxQa2FF1xD2mCl9dsb4JMhFJPJN9WKwTVuHMzOGx8y1tzjLknRIuDA7iRiIuAVQYS1003BJHg0C1</value>

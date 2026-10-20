@@ -8,11 +8,14 @@ Mauborgne 2FA OTP Generator
 You'll need the following dependencies:
 
 * gobject-2.0 >= 2.66
-* gtk+-3.0
-* libhandy-1 >=0.90.0
-* granite >= 6.0.0
-* libportal
+* gtk4
+* libadwaita-1 >= 1.5
+* libportal-gtk4
 * cotp
+* libsecret-1
+* gee-0.8
+* json-glib-1.0
+* libgcrypt
 
 Run `meson build` to configure the build environment. Change to the build directory and run `ninja` to build
 
@@ -40,9 +43,8 @@ Translations use Weblate. Contribute at https://hosted.weblate.org/projects/maur
 Mauborgne utilizes the following open source software that we would like to thank!
 
  * **[libcotp](https://github.com/paolostivanin/libcotp)** We utilize libcotp for generating the OTP tokens
- * **[quirc](https://github.com/dlbeer/quirc/)** We utilize quirc for parsing QR Codes
- * **[elementary](https://www.elementary.io)** We are built on top of the elementary OS platform
+ * **[GNOME](https://www.gnome.org)** We are built on the GNOME platform (GTK 4 and libadwaita)
  * **[flatpak](https://www.flatpak.org)** The future of app distribution. We also utilize their libportal to make taking screenshots easier
- * **[gnome](https://www.gnome.org)** GNOME provides core parts of the platform we depend on, including GLib and GTK+
+ * **[gnome](https://www.gnome.org)** GNOME provides core parts of the platform we depend on, including GLib, GTK 4 and libadwaita
 
 

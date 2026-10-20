@@ -9,6 +9,12 @@ public class AegisVault : Object {
 
         public override bool deserialize_property (string property_name, out GLib.Value value, GLib.ParamSpec pspec, Json.Node property_node) {
 
+            // plain (unencrypted) vaults have "params": null and "slots": null
+            if ((property_name == "params" || property_name == "slots") && property_node.is_null ()) {
+                value = Value (pspec.value_type);
+                return true;
+            }
+
             switch (property_name) {
                 case "params":
                     var parsed_params = Json.gobject_deserialize (typeof(AegisEncryptionParams), property_node) as AegisEncryptionParams;
@@ -43,7 +49,7 @@ public class AegisVault : Object {
                     var node_array = new Json.Array.sized (slots.size);
 
                     foreach (var slot in slots) {
-                        var slot_node = Json.gobject_serialize (slot);
+                        var slot_node = AegisRawSlot.serialize (slot);
                         node_array.add_element (slot_node);
                     }
 
@@ -94,21 +100,15 @@ public class AegisVault : Object {
         public bool repaired { get; set; }
         public int slot_type { get; set;}
 
-        public override string get_member_name (ParamSpec pspec) {
-            if (pspec.name == "key-params") {
-                return "key_params";
-            }
-
-            if (pspec.name == "slot-type") {
-                return "type";
-            }
-
-            return pspec.name;
+        public static Json.Node serialize (AegisRawSlot slot) {
+            return Mauborgne.JsonHelpers.serialize_renamed (slot, { "key-params", "key_params", "slot-type", "type" });
         }
 
         public override unowned ParamSpec? find_property (string name) {
             if (name == "type") {
                 name = "slot-type";
+            } else if (name == "key_params") {
+                name = "key-params";
             }
 
             var clazz = (ObjectClass)get_type ().class_ref ();

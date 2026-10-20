@@ -1,7 +1,202 @@
+/*
+ * Peach State Technologies brand theme, shared with the Windows and Android
+ * apps: forest green, peach and cream. The app is light only.
+ */
+
+/* libadwaita palette */
+@define-color accent_color #2B5233;
+@define-color accent_bg_color #2B5233;
+@define-color accent_fg_color #FFFFFF;
+@define-color destructive_color #B3261E;
+@define-color destructive_bg_color #B3261E;
+@define-color error_color #B3261E;
+@define-color error_bg_color #B3261E;
+@define-color window_bg_color #FBF8F3;
+@define-color window_fg_color #23241F;
+@define-color view_bg_color #FFFFFF;
+@define-color view_fg_color #23241F;
+@define-color headerbar_bg_color #FBF8F3;
+@define-color headerbar_fg_color #23241F;
+@define-color headerbar_border_color #E5E0D6;
+@define-color card_bg_color #FFFFFF;
+@define-color card_fg_color #23241F;
+@define-color dialog_bg_color #FFFFFF;
+@define-color dialog_fg_color #23241F;
+@define-color popover_bg_color #FFFFFF;
+@define-color popover_fg_color #23241F;
+
+/* Primary call to action: the peach gradient button */
+.pst-primary,
+button.suggested-action {
+    background-image: linear-gradient(135deg, #FF9C66, #B8490D);
+    background-color: #FF9C66;
+    color: #FFFFFF;
+    font-weight: 600;
+    border: none;
+    border-radius: 14px;
+    padding: 11px 20px;
+}
+
+.pst-primary:hover,
+button.suggested-action:hover {
+    background-image: linear-gradient(135deg, #FFB07E, #C85A1C);
+}
+
+.pst-secondary {
+    background-image: none;
+    background-color: #1F3A26;
+    color: #FFFFFF;
+    border: 1px solid #3E7A4C;
+    border-radius: 14px;
+    padding: 9px 16px;
+}
+
+.pst-secondary:hover {
+    background-color: #2B5233;
+    border-color: #5A9F63;
+}
+
+.pst-secondary:active {
+    background-color: #17301D;
+    border-color: #3E7A4C;
+}
+
+/* Sidebar: dark green gradient with light text */
+.pst-sidebar {
+    background-image: linear-gradient(to bottom, #17301D, #0F2013);
+    color: #DCF0DD;
+}
+
+.pst-sidebar headerbar {
+    background: transparent;
+    box-shadow: none;
+    border-bottom: none;
+    color: #FFFFFF;
+}
+
+.pst-sidebar .pst-wordmark {
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 14pt;
+}
+
+.pst-sidebar scrolledwindow,
+.pst-sidebar list {
+    background: transparent;
+    color: #DCF0DD;
+}
+
+.pst-sidebar list row {
+    color: #DCF0DD;
+    border-radius: 10px;
+    margin: 1px 8px;
+}
+
+.pst-sidebar list row:hover {
+    background-color: alpha(#FFFFFF, 0.10);
+}
+
+.pst-sidebar list row:selected {
+    background-color: alpha(#FFFFFF, 0.14);
+    color: #FFFFFF;
+}
+
+.pst-sidebar list row:selected:hover {
+    background-color: alpha(#FFFFFF, 0.18);
+}
+
+/* issuer and section header rows are not selectable, so no hover either */
+.pst-sidebar list row:not(:selected).pst-header-row:hover {
+    background: transparent;
+}
+
+.pst-sidebar .pst-category {
+    color: #5A9F63;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.pst-sidebar .pst-issuer {
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+.pst-sidebar separator {
+    background-color: alpha(#FFFFFF, 0.10);
+}
+
+.pst-sidebar button.flat {
+    color: #DCF0DD;
+}
+
+.pst-sidebar button.flat:hover {
+    background-color: alpha(#FFFFFF, 0.10);
+}
+
+/* Circular issuer avatars: initials on the brand palette */
+.pst-avatar {
+    min-width: 22px;
+    min-height: 22px;
+    border-radius: 11px;
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.pst-avatar-0 { background-color: #3E7A4C; }
+.pst-avatar-1 { background-color: #5A9F63; }
+.pst-avatar-2 { background-color: #2B5233; }
+.pst-avatar-3 { background-color: #B8490D; }
+.pst-avatar-4 { background-color: #FF9C66; }
+.pst-avatar-5 { background-color: #767A6C; }
+.pst-avatar-6 { background-color: #1F3A26; }
+.pst-avatar-7 { background-color: #17301D; }
+
+/* The one time code */
+.pst-code {
+    font-family: monospace;
+    font-size: 48pt;
+    font-weight: 600;
+    color: #2B5233;
+    letter-spacing: 2px;
+}
+
+.pst-code-expiring {
+    color: #B8490D;
+}
+
+.pst-issuer-subtitle {
+    color: #767A6C;
+    font-weight: 600;
+}
+
+/* Remaining time: green on a pale green track */
 .remaining-time {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 20px;
+}
+
+progressbar trough {
+    background-color: #DCF0DD;
+    min-height: 4px;
+    border-radius: 2px;
+}
+
+progressbar progress {
+    background-color: #5A9F63;
+    min-height: 4px;
+    border-radius: 2px;
+}
+
+/* Cards and boxed lists: white, flat, outlined */
+.boxed-list,
+.card {
+    background-color: #FFFFFF;
+    border: 1px solid #E5E0D6;
+    border-radius: 16px;
+    box-shadow: none;
 }
 
 .export-window {

@@ -1,7 +1,7 @@
 project(
     'qrcodegen', 'c',
-    meson_version: '>= 0.49',
-    version: '1.7.0'
+    meson_version: '>= 1.0',
+    version: '1.8.0'
 )
 
 inc = include_directories('.')

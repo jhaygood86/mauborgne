@@ -1,7 +1,7 @@
 project(
     'quirc', 'c',
-    meson_version: '>= 0.49',
-    version: '1.1'
+    meson_version: '>= 1.0',
+    version: '1.2'
 )
 
 add_project_arguments('-DQUIRC_MAX_REGIONS=65534', language:'c')

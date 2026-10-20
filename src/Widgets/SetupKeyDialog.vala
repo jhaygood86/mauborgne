@@ -1,86 +1,72 @@
-public class SetupKeyDialog : Hdy.Window {
+public class SetupKeyDialog : Adw.Dialog {
     public signal void save_requested (OneTimePad pad);
 
-    private Gtk.Entry issuer_name_entry;
-    private Gtk.Entry account_name_entry;
-    private Gtk.Entry setup_key_entry;
-    private Gtk.Entry note_entry;
-    
-    private Gtk.Button save_button;
+    private Adw.EntryRow issuer_name_entry;
+    private Adw.EntryRow account_name_entry;
+    private Adw.PasswordEntryRow setup_key_entry;
+    private Adw.EntryRow note_entry;
 
     construct {
-        default_width = 400;
-        
-        var grid = new Gtk.Grid () {
-            margin = 12,
-            orientation = Gtk.Orientation.VERTICAL,
-            row_spacing = 6,
-            hexpand = true
-        };
-        
-        var issuer_name_label = new Granite.HeaderLabel(_("Issuer Name"));
+        title = _("Add Pad From Setup Key");
+        content_width = 400;
 
-        issuer_name_entry = new Gtk.Entry () {
-            hexpand = true
-        };
-        
-        var account_name_label = new Granite.HeaderLabel(_("Account Name"));
-
-        account_name_entry = new Gtk.Entry () {
-            hexpand = true
-        };
-        
-        var setup_key_label = new Granite.HeaderLabel(_("Setup Key"));
-        
-        setup_key_entry = new Gtk.Entry () {
-            hexpand = true
+        issuer_name_entry = new Adw.EntryRow () {
+            title = _("Issuer Name")
         };
 
-        var note_label = new Granite.HeaderLabel(_("Note"));
-
-        note_entry = new Gtk.Entry () {
-            hexpand = true
+        account_name_entry = new Adw.EntryRow () {
+            title = _("Account Name")
         };
 
-        grid.add (issuer_name_label);
-        grid.add (issuer_name_entry);
-        grid.add (account_name_label);
-        grid.add (account_name_entry);
-        grid.add (setup_key_label);
-        grid.add (setup_key_entry);
-        grid.add (note_label);
-        grid.add (note_entry);
-        
+        setup_key_entry = new Adw.PasswordEntryRow () {
+            title = _("Setup Key")
+        };
+
+        note_entry = new Adw.EntryRow () {
+            title = _("Note")
+        };
+
+        var group = new Adw.PreferencesGroup ();
+        group.add (issuer_name_entry);
+        group.add (account_name_entry);
+        group.add (setup_key_entry);
+        group.add (note_entry);
+
         var cancel_button = new Gtk.Button.with_label (_("Cancel"));
 
-        save_button = new Gtk.Button.with_label (_("Save")) {
-            can_default = true
+        var save_button = new Gtk.Button.with_label (_("Save"));
+        save_button.add_css_class ("suggested-action");
+
+        var action_area = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
+            halign = Gtk.Align.END,
+            margin_top = 12
         };
+        action_area.append (cancel_button);
+        action_area.append (save_button);
 
-        save_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
-
-        var action_area = new Gtk.ButtonBox (Gtk.Orientation.HORIZONTAL) {
-            layout_style = Gtk.ButtonBoxStyle.END,
-            margin_top = 24,
-            spacing = 6,
-            valign = Gtk.Align.END,
-            vexpand = true
+        var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 12) {
+            margin_top = 12,
+            margin_bottom = 12,
+            margin_start = 12,
+            margin_end = 12
         };
+        box.append (group);
+        box.append (action_area);
 
-        action_area.add (cancel_button);
-        action_area.add (save_button);
+        var toolbar_view = new Adw.ToolbarView ();
+        toolbar_view.add_top_bar (new Adw.HeaderBar ());
+        toolbar_view.content = box;
 
-        grid.add (action_area);
-
-        add (grid);
+        child = toolbar_view;
+        default_widget = save_button;
 
         cancel_button.clicked.connect (() => {
-            destroy ();
+            close ();
         });
 
         save_button.clicked.connect (() => {
             string secret_key = setup_key_entry.text.replace(" ","");
-            
+
             string issuer_name = issuer_name_entry.text;
             string account_name = account_name_entry.text;
             string note = note_entry.text;
@@ -88,7 +74,7 @@ public class SetupKeyDialog : Hdy.Window {
             var pad = new OneTimePad.from_secret_key(issuer_name, account_name, secret_key, note);
             save_requested (pad);
 
-            destroy ();
+            close ();
         });
     }
 }

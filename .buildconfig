@@ -1,6 +1,6 @@
 [default]
 name=Default
-runtime=flatpak:io.elementary.Sdk/x86_64/6
+runtime=flatpak:org.gnome.Sdk/x86_64/51
 toolchain=default
 config-opts=
 run-opts=

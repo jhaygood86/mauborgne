@@ -1,7 +1,7 @@
 project(
     'io.github.jhaygood86.mauborgne', 'vala', 'c',
-    meson_version: '>= 0.49',
-    version: '0.8.0'
+    meson_version: '>= 1.0',
+    version: '0.9.0'
 )
 
 vapi_dir = meson.current_source_dir() / 'vapi'
@@ -35,16 +35,14 @@ qrcodegen_dep = qrcodegen_proj.get_variable('qrcodegen_dep')
 
 mauborgne_deps = [
     dependency('gobject-2.0'),
-    dependency('gtk+-3.0'),
-    dependency('libhandy-1', version: '>=0.90.0'),
-    dependency('granite', version: '>=6.0.0'),
+    dependency('gtk4'),
+    dependency('libadwaita-1', version: '>=1.5'),
     dependency('libportal'),
-    dependency('libportal-gtk3'),
+    dependency('libportal-gtk4'),
     dependency('cotp'),
     dependency('libsecret-1'),
     dependency('gee-0.8'),
     dependency('json-glib-1.0'),
-    meson.get_compiler('vala').find_library('json-glib-1.0', dirs: vapi_dir),
     quirc_dep,
     meson.get_compiler('vala').find_library('quirc', dirs: vapi_dir),
     qrcodegen_dep,
@@ -53,30 +51,42 @@ mauborgne_deps = [
     meson.get_compiler('vala').find_library('gcrypt', dirs: vapi_dir)
 ]
 
+# Everything except the application entry points, so the tests can build on it
+mauborgne_sources = files(
+    'src/QrHelpers.vala',
+    'src/OneTimePad.vala',
+    'src/OneTimePadLibrary.vala',
+    'src/Services/AegisManager.vala',
+    'src/Services/JsonHelpers.vala',
+    'src/Services/Models/AegisVault.vala',
+    'src/Services/Models/AegisVaultContent.vala',
+    'src/Widgets/CreatePasswordDialog.vala',
+    'src/Widgets/EditDialog.vala',
+    'src/Widgets/IssuerAvatar.vala',
+    'src/Widgets/ExportWindow.vala',
+    'src/Widgets/OneTimePadView.vala',
+    'src/Widgets/PasswordDialog.vala',
+    'src/Widgets/PasswordPromptDialog.vala',
+    'src/Widgets/SetupKeyDialog.vala',
+)
+
 executable(
     meson.project_name(),
     icon_res,
     config_file,
     'src/Application.vala',
     'src/MainWindow.vala',
-    'src/QrHelpers.vala',
-    'src/OneTimePad.vala',
-    'src/OneTimePadLibrary.vala',
-    'src/Services/AegisManager.vala',
-    'src/Services/Portal.vala',
-    'src/Services/Models/AegisVault.vala',
-    'src/Services/Models/AegisVaultContent.vala',
-    'src/Widgets/CreatePasswordDialog.vala',
-    'src/Widgets/EditDialog.vala',
-    'src/Widgets/ExportWindow.vala',
-    'src/Widgets/OneTimePadView.vala',
-    'src/Widgets/PasswordDialog.vala',
-    'src/Widgets/SetupKeyDialog.vala',
+    mauborgne_sources,
     dependencies: mauborgne_deps,
     install: true
 )
 
-meson.add_install_script('build-aux/post_install.py')
+gnome.post_install(
+    glib_compile_schemas: true,
+    gtk_update_icon_cache: true,
+    update_desktop_database: true
+)
 
 subdir('data')
 subdir('po')
+subdir('tests')

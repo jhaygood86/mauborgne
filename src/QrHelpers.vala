@@ -29,7 +29,21 @@ namespace QrHelpers {
             qr_recognizer.extract(0, out code);
             err = code.decode(out data);
 
-            string payload = (string)data.payload;
+            if (err != Quirc.DecodeError.SUCCESS) {
+                // earlier versions exported mirrored codes, which readers may support as an optional feature
+                code.flip();
+                err = code.decode(out data);
+            }
+
+            if (err != Quirc.DecodeError.SUCCESS) {
+                print("qr code could not be decoded\n");
+                return "";
+            }
+
+            // the payload is a fixed size buffer, so only take what was actually decoded
+            var payload_builder = new StringBuilder.sized (data.payload_len);
+            payload_builder.append_len ((string)data.payload, data.payload_len);
+            string payload = payload_builder.str;
 
             print("qr code payload: %s\n",payload);
 
@@ -58,7 +72,7 @@ namespace QrHelpers {
         for(var i = 0; i < side_length; i ++){
             for(var r = 0; r < QR_PIXEL_SIZE; r++){
                 for(var j = 0; j < side_length; j++){
-                    var is_pixel_dark = QrCodegen.is_pixel_dark(qr_code,i,j);
+                    var is_pixel_dark = QrCodegen.is_pixel_dark(qr_code,j,i);
 
                     var pixel_value = is_pixel_dark ? 0 : 255;
 

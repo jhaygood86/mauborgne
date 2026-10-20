@@ -3,21 +3,17 @@
  * SPDX-FileCopyrightText: 2021 Justin Haygood <jhaygood86@gmail.com>
  */
 
-public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
+public class Mauborgne.MainWindow : Adw.ApplicationWindow {
     public MainWindow (Gtk.Application application) {
             Object (
                 application: application,
-                icon_name: "com.github.jhaygood86.mauborgne",
+                icon_name: "io.github.jhaygood86.mauborgne",
                 title: _("Mauborgne")
             );
     }
-    
-    static construct {
-        Hdy.init ();
-    }
-    
+
     Xdp.Portal portal;
-    Granite.Widgets.SourceList source_list;
+    Gtk.ListBox pad_list;
     OneTimePadLibrary otp_library;
     OneTimePadView onetimepad_view;
     KeyFile brand_mapping_file;
@@ -31,100 +27,59 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
         default_height = settings.get_int ("window-height");
 
         portal = new Xdp.Portal();
-        
+
         otp_library = OneTimePadLibrary.get_default ();
         otp_library.changed.connect (bind_pads_to_source_list);
-    
-        var sidebar_header = new Hdy.HeaderBar () {
-            decoration_layout = "close:",
-            has_subtitle = false,
-            show_close_button = true
-        };
-        
-        unowned Gtk.StyleContext sidebar_header_context = sidebar_header.get_style_context ();
-        sidebar_header_context.add_class ("default-decoration");
-        sidebar_header_context.add_class (Gtk.STYLE_CLASS_FLAT);
-        
-        var scrolledwindow = new Gtk.ScrolledWindow (null, null) {
-            expand = true,
-            hscrollbar_policy = Gtk.PolicyType.NEVER
-        };
-        
-        source_list = new Granite.Widgets.SourceList();
 
-        source_list.hadjustment.value = settings.get_int ("pad-list-width");
+        var brand = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 8);
+        brand.append (new Gtk.Image.from_icon_name ("io.github.jhaygood86.mauborgne") {
+            pixel_size = 24
+        });
 
-        source_list.item_selected.connect(pad_item_selected);
-    
-        scrolledwindow.add(source_list);
-        
-        var add_pad_grid = new Gtk.Grid () {
-            margin_top = 3,
-            margin_bottom = 3,
-            row_spacing = 3
+        var wordmark = new Gtk.Label (_("Mauborgne"));
+        wordmark.add_css_class ("pst-wordmark");
+        brand.append (wordmark);
+
+        var sidebar_header = new Adw.HeaderBar () {
+            show_end_title_buttons = false,
+            title_widget = brand
         };
 
-        //var add_pad_screenshot_button = new Gtk.ModelButton () {
-        //    label = _("Add Pad From Screenshot")
-        //};
-        
-        var add_pad_qr_file_button = new Gtk.ModelButton () {
-            label = _("Add Pad From QR Code Image File")
+        pad_list = new Gtk.ListBox () {
+            selection_mode = Gtk.SelectionMode.SINGLE
+        };
+        pad_list.add_css_class ("navigation-sidebar");
+        pad_list.row_selected.connect (pad_row_selected);
+
+        var scrolledwindow = new Gtk.ScrolledWindow () {
+            vexpand = true,
+            hscrollbar_policy = Gtk.PolicyType.NEVER,
+            child = pad_list
         };
 
-        var add_pad_camera_button = new Gtk.ModelButton () {
-            label = _("Add Pad From Camera")
+        // A dialog rather than a popover menu: popovers stayed visible on screen after closing under WSLg
+        var add_pad_button = new Gtk.Button () {
+            child = new Adw.ButtonContent () {
+                label = _("Add One Time Pad…"),
+                icon_name = "list-add-symbolic"
+            },
+            margin_top = 6,
+            margin_bottom = 6,
+            margin_start = 6,
+            margin_end = 6
         };
-        
-        var add_pad_setup_key_button = new Gtk.ModelButton () {
-            label = _("Add Pad From Setup Key")
-        };
-        
-        var add_pad_from_aegis_vault = new Gtk.ModelButton () {
-            label = _("Add Pad(s) From Aegis Encrypted JSON")
-        };
+        add_pad_button.add_css_class ("pst-primary");
+        add_pad_button.clicked.connect (show_add_pad_dialog);
 
-        var add_pad_popover = new Gtk.Popover (null);
-        add_pad_popover.add (add_pad_grid);
-        
-        //add_pad_grid.attach (add_pad_screenshot_button, 0, 0);
-        add_pad_grid.attach (add_pad_qr_file_button, 0, 0);
-        add_pad_grid.attach (add_pad_from_aegis_vault, 0, 1);
-        add_pad_grid.attach (add_pad_setup_key_button, 0, 2);
-        add_pad_grid.show_all ();
-        
-        var add_pad_button = new Gtk.MenuButton () {
-            label = _("Add One Time Pad…"),
-            image = new Gtk.Image.from_icon_name ("list-add-symbolic", Gtk.IconSize.SMALL_TOOLBAR),
-            always_show_image = true,
-            popover = add_pad_popover
-        };
-        
-        //add_pad_screenshot_button.clicked.connect(acquire_from_screenshot_clicked);
-        add_pad_from_aegis_vault.clicked.connect(acquire_from_aegis_encrypted_vault_clicked);
-        add_pad_qr_file_button.clicked.connect(acquire_from_qr_code_file_clicked);
-        add_pad_setup_key_button.clicked.connect(acquire_from_setup_key_clicked);
-
-        var actionbar = new Gtk.ActionBar ();
-        actionbar.add (add_pad_button);
-        
-        unowned Gtk.StyleContext actionbar_style_context = actionbar.get_style_context ();
-        actionbar_style_context.add_class (Gtk.STYLE_CLASS_FLAT);
-        
-        var sidebar = new Gtk.Grid ();
-        sidebar.attach (sidebar_header, 0, 0);
-        sidebar.attach (scrolledwindow, 0, 1);
-        sidebar.attach (actionbar, 0, 2);
-        
-        unowned Gtk.StyleContext sidebar_style_context = sidebar.get_style_context ();
-        sidebar_style_context.add_class (Gtk.STYLE_CLASS_SIDEBAR);
+        var sidebar = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+        sidebar.append (sidebar_header);
+        sidebar.append (scrolledwindow);
+        sidebar.append (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+        sidebar.append (add_pad_button);
+        sidebar.add_css_class ("pst-sidebar");
 
         onetimepad_view = new OneTimePadView ();
-        
-        //onetimepad_view.add_code_from_screenshot_clicked.connect(() => {
-        //    add_code_from_screenshot ();
-        //});
-        
+
         onetimepad_view.add_code_from_aegis_clicked.connect(() => {
             add_codes_from_aegis_encrypted_json ();
         });
@@ -132,7 +87,7 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
         onetimepad_view.add_code_from_qr_code_image_clicked.connect(() => {
             add_code_from_qr_code_file ();
         });
-        
+
         onetimepad_view.add_code_from_setup_key_clicked.connect(() => {
             add_code_from_setup_key ();
         });
@@ -167,59 +122,84 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
             });
         });
 
-        var paned = new Gtk.Paned (Gtk.Orientation.HORIZONTAL);
-        paned.pack1 (sidebar, false, false);
-        paned.pack2 (onetimepad_view, true, false);
-        
+        var paned = new Gtk.Paned (Gtk.Orientation.HORIZONTAL) {
+            start_child = sidebar,
+            end_child = onetimepad_view,
+            resize_start_child = false,
+            shrink_start_child = false,
+            shrink_end_child = false
+        };
+
         paned.position = settings.get_int ("pad-list-width");
 
         paned.notify["position"].connect(() => {
            settings.set_int ("pad-list-width", paned.position);
         });
 
-        add (paned);
-        
+        content = paned;
+
         brand_mapping_file = new KeyFile ();
         brand_mapping_file.load_from_data_dirs("io.github.jhaygood86.mauborgne/brand_mapping.ini", null, KeyFileFlags.NONE);
 
         bind_pads_to_source_list();
 
-        this.configure_event.connect(() => {
-           var rect = Gdk.Rectangle ();
-           get_size(out rect.width, out rect.height);
-
-           settings.set_int("window-width", rect.width);
-           settings.set_int("window-height", rect.height);
+        close_request.connect(() => {
+           settings.set_int("window-width", get_width ());
+           settings.set_int("window-height", get_height ());
 
            return false;
         });
     }
-    
-    private void acquire_from_screenshot_clicked(Gtk.Button button) {
-        add_code_from_screenshot ();
-    }
-    
-    private void acquire_from_aegis_encrypted_vault_clicked(Gtk.Button button) {
-        add_codes_from_aegis_encrypted_json ();
+
+    private void show_add_pad_dialog () {
+        var dialog = new Adw.AlertDialog (_("Add One Time Pad"), null) {
+            close_response = "cancel"
+        };
+        dialog.add_response ("cancel", _("Cancel"));
+        //dialog.add_response ("screenshot", _("Add Pad From Screenshot"));
+        dialog.add_response ("qr-file", _("Add Pad From QR Code Image File"));
+        dialog.add_response ("aegis", _("Add Pad(s) From Aegis Encrypted JSON"));
+        dialog.add_response ("setup-key", _("Add Pad From Setup Key"));
+
+        dialog.response.connect ((response) => {
+            switch (response) {
+                case "qr-file":
+                    add_code_from_qr_code_file ();
+                    break;
+                case "aegis":
+                    add_codes_from_aegis_encrypted_json ();
+                    break;
+                case "setup-key":
+                    add_code_from_setup_key ();
+                    break;
+            }
+        });
+
+        dialog.present (this);
     }
 
-    private void acquire_from_qr_code_file_clicked(Gtk.Button button) {
-        add_code_from_qr_code_file ();
-    }
-    
-    private void acquire_from_setup_key_clicked(Gtk.Button button) {
-        add_code_from_setup_key ();
+    private async File? choose_file (string title) {
+        var dialog = new Gtk.FileDialog () {
+            title = title
+        };
+
+        try {
+            return yield dialog.open (this, null);
+        } catch (Error e) {
+            // dismissed by the user
+            return null;
+        }
     }
 
     private void add_codes_from_aegis_encrypted_json () {
-        var chooser = new Gtk.FileChooserNative ("Open Aegis Vault File", this, Gtk.FileChooserAction.OPEN, null, null);
+        add_codes_from_aegis_encrypted_json_async.begin ();
+    }
 
-        var response = chooser.run ();
+    private async void add_codes_from_aegis_encrypted_json_async () {
+        var file = yield choose_file (_("Open Aegis Vault File"));
 
-        if (response == Gtk.ResponseType.ACCEPT) {
-            var file = chooser.get_filename ();
-
-            var vault = AegisManager.import_from_json_file(file, this);
+        if (file != null) {
+            var vault = yield AegisManager.import_from_json_file(file.get_path (), this);
 
             if (vault != null) {
                 foreach (var entry in vault.entries) {
@@ -234,23 +214,22 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
         acquire_from_screenshot.begin((obj,res) => {
                 var qr_code_uri = acquire_from_screenshot.end(res);
                 print("screenshot uri: %s\n",qr_code_uri);
-                
+
                 if(qr_code_uri.length > 0){
                     var otp = new OneTimePad.from_uri(qr_code_uri);
                     otp_library.add.begin(otp);
                 }
         });
     }
-    
+
     private void add_code_from_qr_code_file () {
-        var chooser = new Gtk.FileChooserNative ("Open QR Code Image File", this, Gtk.FileChooserAction.OPEN, null, null);
+        add_code_from_qr_code_file_async.begin ();
+    }
 
-        var response = chooser.run ();
+    private async void add_code_from_qr_code_file_async () {
+        var file = yield choose_file (_("Open QR Code Image File"));
 
-        if (response == Gtk.ResponseType.ACCEPT) {
-            var filename = chooser.get_filename ();
-
-            var file = File.new_for_path(filename);
+        if (file != null) {
             var qr_code_uri = acquire_from_file (file);
 
             if(qr_code_uri.length > 0){
@@ -259,14 +238,15 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
             }
         }
     }
-    
+
     private void add_code_from_setup_key () {
         var setup_key_dialog = new SetupKeyDialog ();
-        setup_key_dialog.show_all ();
 
         setup_key_dialog.save_requested.connect ((otp) => {
             otp_library.add.begin(otp);
         });
+
+        setup_key_dialog.present (this);
     }
 
     private async string acquire_from_screenshot() {
@@ -297,77 +277,146 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
     }
 
     private void bind_pads_to_source_list() {
-  
-        var totp_item = new Granite.Widgets.SourceList.ExpandableItem(_("Time-based One Time Pads"));
-        var hotp_item = new Granite.Widgets.SourceList.ExpandableItem(_("Counter-based One Time Pads"));
+        pad_list.remove_all ();
 
-        var issuers = new Gee.HashMap<string, Granite.Widgets.SourceList.ExpandableItem>();
-        
-        foreach(var pad in otp_library.get_set()) {
-            
-            if(!issuers.keys.contains(pad.issuer)) {
-                var issuer_display_name = otp_library.get_issuer_display_name (pad.issuer);
+        add_section (_("Time-based One Time Pads"), OneTimePadType.TOTP);
+        add_section (_("Counter-based One Time Pads"), OneTimePadType.HOTP);
+    }
 
-                var item = new Granite.Widgets.SourceList.ExpandableItem(issuer_display_name) {
-                    editable = true
+    private void add_section (string title, OneTimePadType pad_type) {
+        var issuers = new Gee.ArrayList<string> ();
+        var pads_by_issuer = new Gee.HashMap<string, Gee.List<OneTimePad>> ();
+
+        foreach (var pad in otp_library.get_set ()) {
+            if (pad.pad_type != pad_type) {
+                continue;
+            }
+
+            if (!pads_by_issuer.has_key (pad.issuer)) {
+                issuers.add (pad.issuer);
+                pads_by_issuer[pad.issuer] = new Gee.ArrayList<OneTimePad> ();
+            }
+
+            pads_by_issuer[pad.issuer].add (pad);
+        }
+
+        var section_label = new Gtk.Label (title.up ()) {
+            xalign = 0,
+            margin_top = 12,
+            margin_bottom = 6,
+            margin_start = 10
+        };
+        section_label.add_css_class ("pst-category");
+        pad_list.append (create_header_row (section_label));
+
+        foreach (var issuer in issuers) {
+            pad_list.append (create_issuer_row (issuer));
+
+            foreach (var pad in pads_by_issuer[issuer]) {
+                var account_label = new Gtk.Label (pad.account_name_display) {
+                    xalign = 0,
+                    ellipsize = Pango.EllipsizeMode.END,
+                    margin_top = 4,
+                    margin_bottom = 4,
+                    margin_start = 38
                 };
 
-                item.edited.connect((new_name) => {
-                    otp_library.set_issuer_display_name(pad.issuer, new_name);
-                });
+                var row = new Gtk.ListBoxRow () {
+                    child = account_label
+                };
+                row.set_data<OneTimePad> ("pad", pad);
 
-                item.set_data("issuer", pad.issuer);
-
-                issuers[pad.issuer] = item;
-
-                if (brand_mapping_file.has_key("Brand Icons", pad.issuer)) {
-                    var brand_icon_name = brand_mapping_file.get_string ("Brand Icons", pad.issuer) + "-symbolic";
-
-                    if (has_brand_icon(brand_icon_name)) {
-                        item.icon = new ThemedIcon(brand_icon_name);
-                    }
-                }
-
-                if (pad.pad_type == OneTimePadType.TOTP) {
-                    totp_item.add (item);
-                }
-
-                if (pad.pad_type == OneTimePadType.HOTP) {
-                    hotp_item.add (item);
-                }
+                pad_list.append (row);
             }
-            
-            var issuer_item = issuers[pad.issuer];
-            
-            var account_item = new Granite.Widgets.SourceList.Item(pad.account_name_display) {
-                editable = true
-            };
-
-            account_item.edited.connect((new_name) => {
-                pad.account_name_display = new_name;
-                otp_library.save.begin(pad);
-            });
-
-            account_item.set_data("account-name", pad.account_name);
-
-            issuer_item.add(account_item);
         }
-        
-        source_list.root.clear();
-        
-        source_list.root.add(totp_item);
-        source_list.root.add(hotp_item);
-        
-        source_list.root.expand_all();
     }
-    
-    private void pad_item_selected(Granite.Widgets.SourceList source_list, Granite.Widgets.SourceList.Item? item){
-        if(item is Granite.Widgets.SourceList.Item && !(item is Granite.Widgets.SourceList.ExpandableItem)){
-            var account_name = item.get_data<string>("account-name");
-            var issuer_name = item.parent.get_data<string>("issuer");
-            
-            var pad = otp_library.get_pad(issuer_name,account_name);
-            
+
+    private Gtk.ListBoxRow create_header_row (Gtk.Widget child) {
+        var row = new Gtk.ListBoxRow () {
+            child = child,
+            selectable = false,
+            activatable = false
+        };
+        row.add_css_class ("pst-header-row");
+
+        return row;
+    }
+
+    private Gtk.ListBoxRow create_issuer_row (string issuer) {
+        var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 8) {
+            margin_start = 10,
+            margin_top = 4,
+            margin_bottom = 4
+        };
+
+        // a known brand gets its logo, everything else a coloured initials avatar
+        var has_icon = false;
+
+        if (brand_mapping_file.has_key("Brand Icons", issuer)) {
+            var brand_icon_name = brand_mapping_file.get_string ("Brand Icons", issuer) + "-symbolic";
+
+            if (has_brand_icon(brand_icon_name)) {
+                box.append (new Gtk.Image.from_icon_name (brand_icon_name));
+                has_icon = true;
+            }
+        }
+
+        if (!has_icon) {
+            box.append (Mauborgne.IssuerAvatar.create (issuer));
+        }
+
+        var issuer_label = new Gtk.Label (otp_library.get_issuer_display_name (issuer)) {
+            xalign = 0,
+            hexpand = true,
+            ellipsize = Pango.EllipsizeMode.END
+        };
+        issuer_label.add_css_class ("pst-issuer");
+        box.append (issuer_label);
+
+        var rename_button = new Gtk.Button.from_icon_name ("document-edit-symbolic") {
+            tooltip_text = _("Rename")
+        };
+        rename_button.add_css_class ("flat");
+        rename_button.clicked.connect (() => {
+            rename_issuer (issuer);
+        });
+        box.append (rename_button);
+
+        return create_header_row (box);
+    }
+
+    private void rename_issuer (string issuer) {
+        var entry = new Gtk.Entry () {
+            text = otp_library.get_issuer_display_name (issuer),
+            activates_default = true
+        };
+
+        var dialog = new Adw.AlertDialog (_("Rename Issuer"), null) {
+            extra_child = entry,
+            default_response = "rename",
+            close_response = "cancel"
+        };
+        dialog.add_response ("cancel", _("Cancel"));
+        dialog.add_response ("rename", _("Rename"));
+        dialog.set_response_appearance ("rename", Adw.ResponseAppearance.SUGGESTED);
+
+        dialog.response.connect ((response) => {
+            if (response == "rename") {
+                otp_library.set_issuer_display_name (issuer, entry.text);
+            }
+        });
+
+        dialog.present (this);
+    }
+
+    private void pad_row_selected (Gtk.ListBoxRow? row) {
+        if (row == null) {
+            return;
+        }
+
+        var pad = row.get_data<OneTimePad> ("pad");
+
+        if (pad != null) {
             onetimepad_view.pad = pad;
         }
     }
@@ -375,8 +424,7 @@ public class Mauborgne.MainWindow : Hdy.ApplicationWindow {
     private bool has_brand_icon (string brand_icon_name) {
         print ("has brand icon: %s\n", brand_icon_name);
 
-        var icon_theme = Gtk.IconTheme.get_default ();
+        var icon_theme = Gtk.IconTheme.get_for_display (get_display ());
         return icon_theme.has_icon (brand_icon_name);
     }
 }
-

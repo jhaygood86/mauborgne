@@ -139,7 +139,7 @@ public class OneTimePadLibrary : Object {
             vault_content.entries.add (vault_entry);
         }
 
-        var vault_json = AegisManager.export_to_json_string(parent_window, vault_content);
+        var vault_json = yield AegisManager.export_to_json_string(parent_window, vault_content);
 
         print("json to save: %s\n", vault_json);
 
@@ -147,16 +147,18 @@ public class OneTimePadLibrary : Object {
             return;
         }
 
-        var save_dialog = new Gtk.FileChooserNative (_("Save Aegis Vault JSON"), parent_window, Gtk.FileChooserAction.SAVE, null, null);
-        save_dialog.set_current_name("aegis-vault.json");
+        var save_dialog = new Gtk.FileDialog () {
+            title = _("Save Aegis Vault JSON"),
+            initial_name = "aegis-vault.json"
+        };
 
-        var response = save_dialog.run ();
-
-        if (response == Gtk.ResponseType.ACCEPT) {
-            var uri = save_dialog.get_uri();
-            var file = File.new_for_uri(uri);
+        try {
+            var file = yield save_dialog.save (parent_window, null);
 
             yield file.replace_contents_async(vault_json.data, null, false, FileCreateFlags.NONE, null, null);
+        } catch (Error e) {
+            // dismissed by the user, or the file could not be written
+            warning ("Could not save Aegis vault: %s", e.message);
         }
     }
 

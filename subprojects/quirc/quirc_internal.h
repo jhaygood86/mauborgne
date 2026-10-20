@@ -17,7 +17,12 @@
 #ifndef QUIRC_INTERNAL_H_
 #define QUIRC_INTERNAL_H_
 
+#include <assert.h>
+#include <stdlib.h>
+
 #include "quirc.h"
+
+#define QUIRC_ASSERT(a)	assert(a)
 
 #define QUIRC_PIXEL_WHITE	0
 #define QUIRC_PIXEL_BLACK	1
@@ -27,7 +32,7 @@
 #define QUIRC_MAX_REGIONS	254
 #endif
 #define QUIRC_MAX_CAPSTONES	32
-#define QUIRC_MAX_GRIDS		8
+#define QUIRC_MAX_GRIDS		(QUIRC_MAX_CAPSTONES * 2)
 
 #define QUIRC_PERSPECTIVE_PARAMS	8
 
@@ -39,6 +44,20 @@ typedef uint8_t quirc_pixel_t;
 typedef uint16_t quirc_pixel_t;
 #else
 #error "QUIRC_MAX_REGIONS > 65534 is not supported"
+#endif
+
+#ifdef QUIRC_FLOAT_TYPE
+/* Quirc uses double precision floating point internally by default.
+ * On platforms with a single precision FPU but no double precision FPU,
+ * this can be changed to float by defining QUIRC_FLOAT_TYPE.
+ *
+ * When setting QUIRC_FLOAT_TYPE to 'float', consider also defining QUIRC_USE_TGMATH.
+ * This will use the type-generic math functions (tgmath.h, C99 or later) instead of the normal ones,
+ * which will allow the compiler to use the correct overloaded functions for the type.
+ */
+typedef QUIRC_FLOAT_TYPE quirc_float_t;
+#else
+typedef double quirc_float_t;
 #endif
 
 struct quirc_region {
@@ -53,7 +72,7 @@ struct quirc_capstone {
 
 	struct quirc_point	corners[4];
 	struct quirc_point	center;
-	double			c[QUIRC_PERSPECTIVE_PARAMS];
+	quirc_float_t		c[QUIRC_PERSPECTIVE_PARAMS];
 
 	int			qr_grid;
 };
@@ -68,12 +87,17 @@ struct quirc_grid {
 
 	/* Timing pattern endpoints */
 	struct quirc_point	tpep[3];
-	int			hscan;
-	int			vscan;
 
 	/* Grid size and perspective transform */
 	int			grid_size;
-	double			c[QUIRC_PERSPECTIVE_PARAMS];
+	quirc_float_t		c[QUIRC_PERSPECTIVE_PARAMS];
+};
+
+struct quirc_flood_fill_vars {
+	int y;
+	int right;
+	int left_up;
+	int left_down;
 };
 
 struct quirc {
@@ -90,6 +114,9 @@ struct quirc {
 
 	int			num_grids;
 	struct quirc_grid	grids[QUIRC_MAX_GRIDS];
+
+	size_t      		num_flood_fill_vars;
+	struct quirc_flood_fill_vars *flood_fill_vars;
 };
 
 /************************************************************************

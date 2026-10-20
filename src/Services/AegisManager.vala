@@ -4,51 +4,34 @@ public errordomain AegisExportError {
 
 public class AegisManager {
 
-    public static AegisVaultContent? import_from_json_file (string filename, Gtk.Window parent_window) {
+    public static async AegisVaultContent? import_from_json_file (string filename, Gtk.Window parent_window) {
         Json.Parser parser = new Json.Parser ();
         parser.load_from_file(filename);
 
-        var node = parser.get_root ();
-
-        AegisVault encrypted_vault = Json.gobject_deserialize (typeof(AegisVault), node) as AegisVault;
+        AegisVault encrypted_vault = parse_vault (parser.get_root ());
 
         // check if encrypted
-        if (encrypted_vault.header.params.nonce == null && encrypted_vault.header.params.tag == null) {
-            var data = Base64.decode(encrypted_vault.db);
-
-            parser.load_from_data((string)data);
-            node = parser.get_root ();
-
-            return Json.gobject_deserialize(typeof(AegisVaultContent), node) as AegisVaultContent?;
+        if (!is_vault_encrypted (encrypted_vault)) {
+            return read_plain_vault (encrypted_vault);
         } else {
-            var password_dialog = new PasswordDialog (parent_window);
+            var password_dialog = new PasswordDialog ();
 
             while (true) {
-                var response = password_dialog.run ();
+                var accepted = yield password_dialog.wait_for_response (parent_window);
 
-                if (response == Gtk.ResponseType.ACCEPT) {
-                    var master_key = decrypt_master_key (encrypted_vault, password_dialog.password);
+                if (accepted) {
+                    var content = unlock_vault (encrypted_vault, password_dialog.password);
 
-                    if (master_key == null) {
+                    if (content == null) {
                         password_dialog.show_error(_("Unable to lock vault. Please try a different password"));
                     } else {
-                        password_dialog.destroy ();
-
-                        var data = (string)decrypt_data (encrypted_vault, master_key);
-
-                        print("json %s\n", data);
-
-                        parser.load_from_data(data);
-                        node = parser.get_root ();
-
-                        var content = Json.gobject_deserialize(typeof(AegisVaultContent), node) as AegisVaultContent?;
+                        password_dialog.force_close ();
 
                         return content;
                     }
 
 
                 } else {
-                    password_dialog.destroy ();
                     return null;
                 }
             }
@@ -58,51 +41,106 @@ public class AegisManager {
         return null;
     }
 
-    public static string? export_to_json_string(Gtk.Window parent_window, AegisVaultContent content) throws AegisExportError {
-        var password_dialog = new CreatePasswordDialog (parent_window);
+    public static async string? export_to_json_string(Gtk.Window parent_window, AegisVaultContent content) throws AegisExportError {
+        var password_dialog = new CreatePasswordDialog ();
 
-        var response = password_dialog.run ();
+        var accepted = yield password_dialog.wait_for_response (parent_window);
 
-        if (response == Gtk.ResponseType.ACCEPT) {
-            var vault = new AegisVault ();
-            vault.version = 1;
-
-            var key = new uchar[32];
-            GCrypt.Random.nonce(key);
-
+        if (accepted) {
             var passphrase = password_dialog.password;
 
-            var password_slot = create_password_slot ();
-            var derived_key = derive_key(password_slot, passphrase);
+            password_dialog.force_close ();
 
-            password_dialog.destroy ();
-
-            print("creating json vault db contents\n");
-            var content_json = get_json_string (content);
-            print("%s\n",content_json);
-
-            print ("encryypting master key using passphrase...\n");
-
-            encrypt_master_key(password_slot, key, derived_key);
-
-            vault.header = new AegisVault.AegisHeader ();
-            vault.header.slots = new Gee.ArrayList<AegisVault.AegisRawSlot> ();
-
-            vault.header.slots.add (password_slot);
-
-            print ("encrypting data using master key...\n");
-
-            encrypt_data (vault, key, content_json.data);
-
-            return get_json_string (vault);
-        } else {
-            password_dialog.destroy ();
+            return create_encrypted_vault_json (content, passphrase);
         }
 
         return null;
     }
 
-    private static string get_json_string (Object object) {
+    internal static AegisVault? parse_vault (Json.Node node) {
+        return Json.gobject_deserialize (typeof(AegisVault), node) as AegisVault;
+    }
+
+    internal static bool is_vault_encrypted (AegisVault vault) {
+        var params = vault.header.params;
+
+        // plain vaults carry no encryption parameters at all
+        return params != null && !(params.nonce == null && params.tag == null);
+    }
+
+    /** Reads a vault that is not encrypted (the db is only base64 encoded). */
+    internal static AegisVaultContent? read_plain_vault (AegisVault vault) {
+        return parse_vault_content (buffer_to_string (Base64.decode(vault.db)));
+    }
+
+    /** Decrypts an encrypted vault; returns null if the passphrase is wrong. */
+    internal static AegisVaultContent? unlock_vault (AegisVault vault, string passphrase) {
+        var master_key = decrypt_master_key (vault, passphrase);
+
+        if (master_key == null) {
+            return null;
+        }
+
+        var decrypted = decrypt_data (vault, master_key);
+
+        if (decrypted == null) {
+            return null;
+        }
+
+        var data = buffer_to_string (decrypted);
+
+        print("json %s\n", data);
+
+        return parse_vault_content (data);
+    }
+
+    /** The decrypted buffers are not NUL terminated, so copy them into a proper string. */
+    private static string buffer_to_string (uint8[] buffer) {
+        var builder = new StringBuilder.sized (buffer.length);
+        builder.append_len ((string)buffer, buffer.length);
+
+        return builder.str;
+    }
+
+    private static AegisVaultContent? parse_vault_content (string data) {
+        var parser = new Json.Parser ();
+        parser.load_from_data(data);
+
+        return Json.gobject_deserialize(typeof(AegisVaultContent), parser.get_root ()) as AegisVaultContent?;
+    }
+
+    /** Encrypts the content with a password slot and returns the vault JSON. */
+    internal static string create_encrypted_vault_json (AegisVaultContent content, string passphrase) throws AegisExportError {
+        var vault = new AegisVault ();
+        vault.version = 1;
+
+        var key = new uchar[32];
+        GCrypt.Random.nonce(key);
+
+        var password_slot = create_password_slot ();
+        var derived_key = derive_key(password_slot, passphrase);
+
+        print("creating json vault db contents\n");
+        var content_json = get_json_string (content);
+        print("%s\n",content_json);
+
+        print ("encryypting master key using passphrase...\n");
+
+        encrypt_master_key(password_slot, key, derived_key);
+
+        vault.header = new AegisVault.AegisHeader ();
+        vault.header.slots = new Gee.ArrayList<AegisVault.AegisRawSlot> ();
+
+        vault.header.slots.add (password_slot);
+
+        print ("encrypting data using master key...\n");
+
+        encrypt_data (vault, key, content_json.data);
+
+        return get_json_string (vault);
+    }
+
+    internal static string get_json_string (Object object) {
         var encoded_content = Json.gobject_serialize(object);
 
         Json.Generator generator = new Json.Generator ();
@@ -111,7 +149,7 @@ public class AegisManager {
         return generator.to_data (null);
     }
 
-    private static AegisVault.AegisPasswordSlot create_password_slot () {
+    internal static AegisVault.AegisPasswordSlot create_password_slot () {
         var salt = new uchar[32];
         GCrypt.Random.nonce(salt);
 
@@ -134,7 +172,7 @@ public class AegisManager {
         return password_slot;
     }
 
-    private static uint8[]? derive_key (AegisVault.AegisPasswordSlot password_slot, string passphrase_value) {
+    internal static uint8[]? derive_key (AegisVault.AegisPasswordSlot password_slot, string passphrase_value) {
 
         var buffer = new uint8[32];
 
@@ -153,7 +191,7 @@ public class AegisManager {
         return buffer;
     }
 
-    private static uchar[]? decrypt_data (AegisVault vault, uchar[] master_key) {
+    internal static uchar[]? decrypt_data (AegisVault vault, uchar[] master_key) {
         GCrypt.Cipher.Cipher aes;
         GCrypt.Cipher.Cipher.open(out aes, GCrypt.Cipher.Algorithm.AES256, GCrypt.Cipher.Mode.GCM, 0);
 
@@ -195,7 +233,7 @@ public class AegisManager {
         return buffer;
     }
 
-    private static void encrypt_data (AegisVault vault, uchar[] master_key, uchar[] data) throws AegisExportError {
+    internal static void encrypt_data (AegisVault vault, uchar[] master_key, uchar[] data) throws AegisExportError {
         GCrypt.Cipher.Cipher aes;
         GCrypt.Cipher.Cipher.open(out aes, GCrypt.Cipher.Algorithm.AES256, GCrypt.Cipher.Mode.GCM, 0);
 
@@ -237,7 +275,7 @@ public class AegisManager {
         vault.db = encoded_db_contents;
     }
 
-    private static uchar[]? decrypt_master_key (AegisVault vault, string passphrase) {
+    internal static uchar[]? decrypt_master_key (AegisVault vault, string passphrase) {
         var password_slot = get_password_slot (vault);
         var derived_key = derive_key (password_slot, passphrase);
 
@@ -270,7 +308,7 @@ public class AegisManager {
         return buffer;
     }
 
-    private static void encrypt_master_key(AegisVault.AegisPasswordSlot password_slot, uchar[] master_key, uint8[] derived_key) throws AegisExportError {
+    internal static void encrypt_master_key(AegisVault.AegisPasswordSlot password_slot, uchar[] master_key, uint8[] derived_key) throws AegisExportError {
         var nonce = hex_to_bytes (password_slot.key_params.nonce);
 
         GCrypt.Cipher.Cipher aes;
@@ -304,7 +342,7 @@ public class AegisManager {
     }
 
 
-    private static AegisVault.AegisPasswordSlot? get_password_slot (AegisVault vault) {
+    internal static AegisVault.AegisPasswordSlot? get_password_slot (AegisVault vault) {
 
         var slots = vault.header.slots;
 
@@ -320,7 +358,7 @@ public class AegisManager {
         return null;
     }
 
-    private static uint8[]? hex_to_bytes(string hexstring) {
+    internal static uint8[]? hex_to_bytes(string? hexstring) {
 
         if(hexstring == null)
            return null;
@@ -357,7 +395,7 @@ public class AegisManager {
         return data;
     }
 
-    private static string bytes_to_hex (uint8[] buffer) {
+    internal static string bytes_to_hex (uint8[] buffer) {
         var sb = new StringBuilder ();
 
         for (var i = 0;  i < buffer.length; i++) {

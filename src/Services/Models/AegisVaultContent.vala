@@ -40,7 +40,7 @@ public class AegisVaultContent : Object, Json.Serializable  {
                 var node_array = new Json.Array.sized (entries.size);
 
                 foreach (var entry in entries) {
-                    var entry_node = Json.gobject_serialize (entry);
+                    var entry_node = AegisVaultEntry.serialize (entry);
                     node_array.add_element (entry_node);
                 }
 
@@ -97,12 +97,13 @@ public class AegisVaultContent : Object, Json.Serializable  {
         public string entry_type { get; set; }
         public string? icon { get; set; default = null; }
 
-        public override string get_member_name (ParamSpec pspec) {
-            if (pspec.name == "entry-type") {
-                return "type";
-            }
+        public static Json.Node serialize (AegisVaultEntry entry) {
+            return Mauborgne.JsonHelpers.serialize_renamed (entry, { "entry-type", "type" });
+        }
 
-            return pspec.name;
+        public override unowned ParamSpec? find_property (string name) {
+            var clazz = (ObjectClass)get_type ().class_ref ();
+            return clazz.find_property (name == "type" ? "entry-type" : name);
         }
 
         public override Json.Node serialize_property (string property_name, Value value, ParamSpec pspec) {

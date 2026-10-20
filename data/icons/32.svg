@@ -1,47 +1,11 @@
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M24 16H29C30.1046 16 31 16.8954 31 18V23C31 24.1046 30.1046 25 29 25H24V16Z" fill="#535353" fill-opacity="0.8"/>
-<path d="M24 17H29C29.5523 17 30 17.4477 30 18V23C30 23.5523 29.5523 24 29 24H24V17Z" fill="url(#paint0_linear_1_31)"/>
-<rect x="0.5" y="5.5" width="23" height="24" rx="1.5" stroke="#535353" stroke-opacity="0.8"/>
-<rect x="1" y="6" width="22" height="23" rx="1" fill="url(#paint1_linear_1_31)"/>
-<rect x="2" y="8" width="20" height="14" rx="1" fill="url(#paint2_linear_1_31)"/>
-<rect x="2.5" y="8.5" width="19" height="13" rx="0.5" stroke="url(#paint3_linear_1_31)" stroke-opacity="0.9"/>
-<path d="M25 11H29V19C29 20.1046 28.1046 21 27 21V21C25.8954 21 25 20.1046 25 19V11Z" fill="url(#paint4_linear_1_31)"/>
-<circle cx="4" cy="25" r="1" fill="#424242"/>
-<path d="M7.37575 11.4545H6.07497L4.45459 12.4805V13.7077L5.95352 12.7681H5.99188V18H7.37575V11.4545ZM8.93142 18H13.5976V16.8686H10.849V16.8239L11.8046 15.8874C13.1502 14.6602 13.5113 14.0465 13.5113 13.3018C13.5113 12.1673 12.5845 11.3651 11.1814 11.3651C9.80713 11.3651 8.8643 12.1864 8.8675 13.4712H10.1811C10.1779 12.8448 10.5742 12.4613 11.1718 12.4613C11.7471 12.4613 12.1754 12.8192 12.1754 13.3945C12.1754 13.9155 11.8558 14.2734 11.2613 14.8455L8.93142 17.0028V18ZM17.0198 18.0895C18.4899 18.0895 19.5414 17.2809 19.5382 16.1623C19.5414 15.3473 19.0237 14.7656 18.0617 14.6442V14.593C18.7935 14.462 19.2985 13.9442 19.2953 13.2092C19.2985 12.1768 18.394 11.3651 17.0389 11.3651C15.6966 11.3651 14.6867 12.1513 14.6675 13.2827H15.9938C16.0098 12.7841 16.4668 12.4613 17.0325 12.4613C17.5918 12.4613 17.9658 12.8001 17.9626 13.2923C17.9658 13.8068 17.5279 14.1552 16.8983 14.1552H16.2879V15.1715H16.8983C17.6398 15.1715 18.1032 15.5423 18.1 16.0696C18.1032 16.5906 17.6558 16.9485 17.0229 16.9485C16.4125 16.9485 15.9555 16.6289 15.9299 16.1495H14.5364C14.5588 17.2937 15.5815 18.0895 17.0198 18.0895Z" fill="white"/>
-<rect x="6" y="25" width="15" height="1" rx="0.5" fill="#555761"/>
-<path d="M26 11H28V19C28 19.5523 27.5523 20 27 20V20C26.4477 20 26 19.5523 26 19V11Z" fill="url(#paint5_linear_1_31)"/>
-<circle cx="27" cy="9" r="5" fill="#007367" fill-opacity="0.8"/>
-<circle cx="27" cy="9" r="4" fill="url(#paint6_radial_1_31)"/>
 <defs>
-<linearGradient id="paint0_linear_1_31" x1="27" y1="17" x2="27" y2="24" gradientUnits="userSpaceOnUse">
-<stop stop-color="#FAFAFA"/>
-<stop offset="0.3125" stop-color="#C5C5C6"/>
-<stop offset="0.703125" stop-color="#ABACAE"/>
-<stop offset="1" stop-color="#7E8087"/>
+<linearGradient id="tile" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+<stop offset="0" stop-color="#3E7A4C"/>
+<stop offset="1" stop-color="#1F3A26"/>
 </linearGradient>
-<linearGradient id="paint1_linear_1_31" x1="12" y1="6" x2="12" y2="29" gradientUnits="userSpaceOnUse">
-<stop stop-color="#D4D4D4"/>
-<stop offset="1" stop-color="#ABACAE"/>
-</linearGradient>
-<linearGradient id="paint2_linear_1_31" x1="12" y1="8" x2="12" y2="22" gradientUnits="userSpaceOnUse">
-<stop stop-color="#333333"/>
-<stop offset="1" stop-color="#1A1A1A"/>
-</linearGradient>
-<linearGradient id="paint3_linear_1_31" x1="12" y1="8" x2="12" y2="22" gradientUnits="userSpaceOnUse">
-<stop stop-opacity="0.9"/>
-<stop offset="1" stop-color="#1A1A1A" stop-opacity="0.9"/>
-</linearGradient>
-<linearGradient id="paint4_linear_1_31" x1="27" y1="11" x2="27" y2="21" gradientUnits="userSpaceOnUse">
-<stop offset="0.40625" stop-color="#ABACAE"/>
-<stop offset="1" stop-color="#7E8087"/>
-</linearGradient>
-<linearGradient id="paint5_linear_1_31" x1="27" y1="12.2656" x2="27" y2="20" gradientUnits="userSpaceOnUse">
-<stop offset="0.348958" stop-color="#D4D4D4"/>
-<stop offset="1" stop-color="#ABACAE"/>
-</linearGradient>
-<radialGradient id="paint6_radial_1_31" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(27 6.38462) rotate(90) scale(5.53846 8.58695)">
-<stop stop-color="#43D6B5"/>
-<stop offset="1" stop-color="#0E9A83"/>
-</radialGradient>
 </defs>
+<rect width="32" height="32" rx="8" fill="url(#tile)"/>
+<path fill="#FF9C66" d="M5.6 5.6h5.6v5.6H5.6zM13.2 13.2h5.6v5.6h-5.6zM20.8 20.8h5.6v5.6h-5.6z"/>
+<path fill="#FFF6EC" d="M13.2 5.6h5.6v5.6h-5.6zM20.8 5.6h5.6v5.6h-5.6zM5.6 13.2h5.6v5.6H5.6zM20.8 13.2h5.6v5.6h-5.6zM5.6 20.8h5.6v5.6H5.6zM13.2 20.8h5.6v5.6h-5.6z"/>
 </svg>

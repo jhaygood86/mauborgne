@@ -1,85 +1,74 @@
-public class EditDialog : Hdy.Window {
+public class EditDialog : Adw.Dialog {
 
     public signal void save_requested (OneTimePad pad);
 
     public OneTimePad pad { get; construct; }
 
-    private Gtk.Entry account_name_entry;
-    private Gtk.Entry note_entry;
-    private Gtk.SpinButton counter_entry;
-
-    private Gtk.Button save_button;
+    private Adw.EntryRow account_name_entry;
+    private Adw.EntryRow note_entry;
+    private Adw.SpinRow counter_entry;
 
     public EditDialog (OneTimePad pad) {
         Object(pad: pad);
     }
 
     construct {
+        title = _("Edit");
+        content_width = 400;
 
-        default_width = 400;
-
-        var grid = new Gtk.Grid () {
-            margin = 12,
-            orientation = Gtk.Orientation.VERTICAL,
-            row_spacing = 6,
-            hexpand = true
+        account_name_entry = new Adw.EntryRow () {
+            title = _("Account Name"),
+            text = pad.account_name_display
         };
 
-        var account_name_label = new Granite.HeaderLabel(_("Account Name"));
-
-        account_name_entry = new Gtk.Entry () {
-            hexpand = true
+        note_entry = new Adw.EntryRow () {
+            title = _("Note"),
+            text = pad.note
         };
 
-        var note_label = new Granite.HeaderLabel(_("Note"));
-
-        note_entry = new Gtk.Entry () {
-            hexpand = true
-        };
-
-        grid.add (account_name_label);
-        grid.add (account_name_entry);
-        grid.add (note_label);
-        grid.add (note_entry);
+        var group = new Adw.PreferencesGroup ();
+        group.add (account_name_entry);
+        group.add (note_entry);
 
         if (pad.pad_type == OneTimePadType.HOTP) {
-            var counter_label = new Granite.HeaderLabel(_("Counter"));
-
-            counter_entry = new Gtk.SpinButton.with_range (0, double.MAX, 1) {
-                hexpand = true,
-                input_purpose = Gtk.InputPurpose.NUMBER
+            counter_entry = new Adw.SpinRow.with_range (0, double.MAX, 1) {
+                title = _("Counter"),
+                value = pad.counter
             };
 
-            grid.add (counter_label);
-            grid.add (counter_entry);
+            group.add (counter_entry);
         }
-
 
         var cancel_button = new Gtk.Button.with_label (_("Cancel"));
 
-        save_button = new Gtk.Button.with_label (_("Save")) {
-            can_default = true
+        var save_button = new Gtk.Button.with_label (_("Save"));
+        save_button.add_css_class ("suggested-action");
+
+        var action_area = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
+            halign = Gtk.Align.END,
+            margin_top = 12
         };
+        action_area.append (cancel_button);
+        action_area.append (save_button);
 
-        save_button.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
-
-        var action_area = new Gtk.ButtonBox (Gtk.Orientation.HORIZONTAL) {
-            layout_style = Gtk.ButtonBoxStyle.END,
-            margin_top = 24,
-            spacing = 6,
-            valign = Gtk.Align.END,
-            vexpand = true
+        var box = new Gtk.Box (Gtk.Orientation.VERTICAL, 12) {
+            margin_top = 12,
+            margin_bottom = 12,
+            margin_start = 12,
+            margin_end = 12
         };
+        box.append (group);
+        box.append (action_area);
 
-        action_area.add (cancel_button);
-        action_area.add (save_button);
+        var toolbar_view = new Adw.ToolbarView ();
+        toolbar_view.add_top_bar (new Adw.HeaderBar ());
+        toolbar_view.content = box;
 
-        grid.add (action_area);
-
-        add (grid);
+        child = toolbar_view;
+        default_widget = save_button;
 
         cancel_button.clicked.connect (() => {
-            destroy ();
+            close ();
         });
 
         save_button.clicked.connect (() => {
@@ -93,15 +82,8 @@ public class EditDialog : Hdy.Window {
 
            save_requested (pad);
 
-           destroy ();
+           close ();
         });
-
-        account_name_entry.text = pad.account_name_display;
-        note_entry.text = pad.note;
-
-        if (pad.pad_type == OneTimePadType.HOTP) {
-            counter_entry.value = pad.counter;
-        }
     }
 
 }

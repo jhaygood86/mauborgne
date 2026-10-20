@@ -1,4 +1,4 @@
-public class OneTimePadView : Gtk.Grid {
+public class OneTimePadView : Gtk.Box {
 
     public signal void add_code_from_screenshot_clicked ();
     public signal void add_code_from_aegis_clicked ();
@@ -14,88 +14,111 @@ public class OneTimePadView : Gtk.Grid {
 
     public OneTimePad? pad { get; set; }
 
-    Granite.Widgets.Welcome welcome_screen;
+    Gtk.Stack stack;
     Gtk.Label title_label;
     Gtk.Label subtitle_label;
     Gtk.Label note_label;
     Gtk.ProgressBar code_remaining_progress;
     Gtk.Button edit_button;
-    Gtk.Button export_button;
     Gtk.Button delete_button;
-    Hdy.HeaderBar codeview_header;
-
-    Gtk.Clipboard? clipboard;
+    Adw.WindowTitle header_title;
+    Adw.HeaderBar codeview_header;
 
     Gee.List<OneTimePadClipboardOwner> clipboard_owners;
+
+    // the code as generated, without the display grouping
+    string current_code = "";
 
     public bool has_pad { get; set; default = false; }
 
     construct {
+        orientation = Gtk.Orientation.VERTICAL;
+
         clipboard_owners = new Gee.ArrayList<OneTimePadClipboardOwner> ();
 
-        codeview_header = new Hdy.HeaderBar () {
-            decoration_layout = ":maximize",
-            show_close_button = true,
-            title = "Mauborgne"
+        header_title = new Adw.WindowTitle ("Mauborgne", "");
+
+        codeview_header = new Adw.HeaderBar () {
+            title_widget = header_title
         };
 
-        welcome_screen = new Granite.Widgets.Welcome (_("Add a One Time Pad"),
-            _("Add a one time pad from a provider"));
+        var welcome_list = new Gtk.ListBox () {
+            selection_mode = Gtk.SelectionMode.NONE,
+            halign = Gtk.Align.CENTER
+        };
+        welcome_list.add_css_class ("boxed-list");
 
-        //welcome_screen.append ("screenshot", _("Add Pad From Screenshot"),
+        //add_welcome_row (welcome_list, "screenshot", _("Add Pad From Screenshot"),
         //    _("Add a pad using a screenshot of a QR code"));
 
-        welcome_screen.append ("aegis", _("Add Pad From Aegis JSON"),
+        add_welcome_row (welcome_list, "aegis", _("Add Pad From Aegis JSON"),
             _("Add a pad using an export of an Aegis encrypted JSON vault file"));
 
-        welcome_screen.append ("image-x-generic", _("Add Pad From QR Code Image File"),
+        add_welcome_row (welcome_list, "image-x-generic", _("Add Pad From QR Code Image File"),
             _("Add a pad using an image file that contains a QR Code"));
-            
-        welcome_screen.append ("dialog-password", _("Add Pad From Setup Key"),
+
+        add_welcome_row (welcome_list, "dialog-password", _("Add Pad From Setup Key"),
             _("Add a pad using a setup key"));
 
-        welcome_screen.activated.connect (welcome_screen_activated);
+        welcome_list.row_activated.connect ((row) => welcome_screen_activated (row.get_index ()));
 
-        title_label = new Gtk.Label (_("One Time Pad"));
-        title_label.justify = Gtk.Justification.LEFT;
-        title_label.hexpand = true;
-        title_label.get_style_context ().add_class (Granite.STYLE_CLASS_H1_LABEL);
-        title_label.visible = true;
+        var welcome_screen = new Adw.StatusPage () {
+            title = _("Add a One Time Pad"),
+            description = _("Add a one time pad from a provider"),
+            icon_name = "io.github.jhaygood86.mauborgne",
+            child = welcome_list,
+            vexpand = true
+        };
 
-        subtitle_label = new Gtk.Label (null);
-        subtitle_label.justify = Gtk.Justification.CENTER;
-        subtitle_label.hexpand = true;
-        subtitle_label.wrap = true;
-        subtitle_label.wrap_mode = Pango.WrapMode.WORD;
-        subtitle_label.visible = true;
+        title_label = new Gtk.Label (_("One Time Pad")) {
+            justify = Gtk.Justification.LEFT,
+            hexpand = true
+        };
+        title_label.add_css_class ("title-1");
 
-        var subtitle_label_context = subtitle_label.get_style_context ();
-        subtitle_label_context.add_class (Gtk.STYLE_CLASS_DIM_LABEL);
-        subtitle_label_context.add_class (Granite.STYLE_CLASS_H2_LABEL);
+        subtitle_label = new Gtk.Label (null) {
+            justify = Gtk.Justification.CENTER,
+            hexpand = true,
+            wrap = true,
+            wrap_mode = Pango.WrapMode.WORD,
+            selectable = false
+        };
+        subtitle_label.add_css_class ("pst-code");
 
-        note_label = new Gtk.Label (null);
-        note_label.justify = Gtk.Justification.CENTER;
-        note_label.hexpand = true;
-        note_label.wrap = true;
-        note_label.wrap_mode = Pango.WrapMode.WORD;
-        note_label.visible = true;
+        note_label = new Gtk.Label (null) {
+            justify = Gtk.Justification.CENTER,
+            hexpand = true,
+            wrap = true,
+            wrap_mode = Pango.WrapMode.WORD
+        };
 
-        code_remaining_progress = new Gtk.ProgressBar ();
-        code_remaining_progress.show_text = true;
-        code_remaining_progress.visible = true;
+        code_remaining_progress = new Gtk.ProgressBar () {
+            show_text = true
+        };
+        code_remaining_progress.add_css_class ("remaining-time");
 
-        var code_remaining_progress_context = code_remaining_progress.get_style_context ();
-        code_remaining_progress_context.add_class ("remaining-time");
+        var code_view = new Gtk.Box (Gtk.Orientation.VERTICAL, 6) {
+            valign = Gtk.Align.CENTER,
+            vexpand = true
+        };
+        code_view.append (title_label);
+        code_view.append (subtitle_label);
+        code_view.append (note_label);
+        code_view.append (code_remaining_progress);
 
-        attach (codeview_header, 0, 0);
-        attach (welcome_screen, 0, 1);
+        stack = new Gtk.Stack ();
+        stack.add_named (welcome_screen, "welcome");
+        stack.add_named (code_view, "code");
+        stack.vexpand = true;
+
+        append (codeview_header);
+        append (stack);
 
         notify["pad"].connect(() => {
             on_pad_set();
         });
 
-        var copy_button = new Gtk.Button () {
-            image = new Gtk.Image.from_icon_name ("edit-copy", Gtk.IconSize.LARGE_TOOLBAR),
+        var copy_button = new Gtk.Button.from_icon_name ("edit-copy-symbolic") {
             tooltip_text = _("Copy"),
         };
 
@@ -105,45 +128,43 @@ public class OneTimePadView : Gtk.Grid {
 
         codeview_header.pack_start(copy_button);
 
-        var export_qr_code_menu_item = new Gtk.MenuItem.with_label (_("Export as QR Code")) {
-            sensitive = false
+        // A dialog rather than a popover: the popover stayed visible on screen after closing under WSLg
+        var export_button = new Gtk.Button.from_icon_name ("document-send-symbolic") {
+            tooltip_text = _("Export")
         };
 
-        var export_aegis_vault_menu_item = new Gtk.MenuItem.with_label (_("Export this pad as Aegis Vault JSON")) {
-            sensitive = false
-        };
+        export_button.clicked.connect(() => {
+            var dialog = new Adw.AlertDialog (_("Export"), null) {
+                close_response = "cancel"
+            };
+            dialog.add_response ("cancel", _("Cancel"));
+            dialog.add_response ("qr", _("Export as QR Code"));
+            dialog.add_response ("aegis", _("Export this pad as Aegis Vault JSON"));
+            dialog.add_response ("aegis-all", _("Export all pads as Aegis Vault JSON"));
 
-        var export_all_aegis_vault_menu_item = new Gtk.MenuItem.with_label (_("Export all pads as Aegis Vault JSON"));
+            dialog.set_response_enabled ("qr", has_pad);
+            dialog.set_response_enabled ("aegis", has_pad);
 
-        var export_menu = new Gtk.Menu ();
-        export_menu.add (export_qr_code_menu_item);
-        export_menu.add (export_aegis_vault_menu_item);
-        export_menu.add (export_all_aegis_vault_menu_item);
-        export_menu.show_all ();
+            dialog.response.connect ((response) => {
+                switch (response) {
+                    case "qr":
+                        new ExportWindow (pad).present (this);
+                        break;
+                    case "aegis":
+                        export_pad_as_aegis (pad);
+                        break;
+                    case "aegis-all":
+                        export_all_pads_as_aegis ();
+                        break;
+                }
+            });
 
-        export_button = new Gtk.MenuButton () {
-            image = new Gtk.Image.from_icon_name ("document-export", Gtk.IconSize.LARGE_TOOLBAR),
-            tooltip_text = _("Export"),
-            popup = export_menu
-        };
-
-        export_qr_code_menu_item.activate.connect(() => {
-           var export_window = new ExportWindow (pad);
-           export_window.show_all ();
-        });
-
-        export_aegis_vault_menu_item.activate.connect(() => {
-            export_pad_as_aegis (pad);
-        });
-
-        export_all_aegis_vault_menu_item.activate.connect(() => {
-            export_all_pads_as_aegis ();
+            dialog.present (this);
         });
 
         codeview_header.pack_end(export_button);
 
-        delete_button = new Gtk.Button () {
-            image = new Gtk.Image.from_icon_name ("edit-delete", Gtk.IconSize.LARGE_TOOLBAR),
+        delete_button = new Gtk.Button.from_icon_name ("user-trash-symbolic") {
             tooltip_text = _("Delete"),
         };
 
@@ -154,28 +175,38 @@ public class OneTimePadView : Gtk.Grid {
 
         codeview_header.pack_end(delete_button);
 
-        edit_button = new Gtk.Button () {
-            image = new Gtk.Image.from_icon_name ("document-edit", Gtk.IconSize.LARGE_TOOLBAR),
+        edit_button = new Gtk.Button.from_icon_name ("document-edit-symbolic") {
             tooltip_text = _("Edit"),
         };
 
         edit_button.clicked.connect(() => {
             var edit_dialog = new EditDialog (pad);
-            edit_dialog.show_all ();
 
             edit_dialog.save_requested.connect ((pad) => {
                 save_requested (pad);
                 on_pad_set ();
             });
+
+            edit_dialog.present (this);
         });
 
         codeview_header.pack_end(edit_button);
 
         bind_property ("has-pad", delete_button, "sensitive", BindingFlags.SYNC_CREATE);
-        bind_property ("has-pad", export_aegis_vault_menu_item, "sensitive", BindingFlags.SYNC_CREATE);
-        bind_property ("has-pad", export_qr_code_menu_item, "sensitive", BindingFlags.SYNC_CREATE);
         bind_property ("has-pad", copy_button, "sensitive", BindingFlags.SYNC_CREATE);
         bind_property ("has-pad", edit_button, "sensitive", BindingFlags.SYNC_CREATE);
+    }
+
+    private void add_welcome_row (Gtk.ListBox list, string icon_name, string title, string subtitle) {
+        var row = new Adw.ActionRow () {
+            title = title,
+            subtitle = subtitle,
+            activatable = true
+        };
+        row.add_prefix (new Gtk.Image.from_icon_name (icon_name));
+        row.add_suffix (new Gtk.Image.from_icon_name ("go-next-symbolic"));
+
+        list.append (row);
     }
 
     private void welcome_screen_activated (int index) {
@@ -190,7 +221,7 @@ public class OneTimePadView : Gtk.Grid {
         if (index == 1) {
             add_code_from_qr_code_image_clicked ();
         }
-        
+
         if (index == 2) {
             add_code_from_setup_key_clicked ();
         }
@@ -208,15 +239,14 @@ public class OneTimePadView : Gtk.Grid {
         var library = OneTimePadLibrary.get_default ();
 
         library.issuer_display_name_changed.connect(() => {
-            codeview_header.subtitle = library.get_issuer_display_name(pad.issuer);
+            header_title.subtitle = library.get_issuer_display_name(pad.issuer);
         });
-
-        switch_to_code_display ();
 
         pad.bind_property ("account-name-display", title_label, "label", BindingFlags.SYNC_CREATE);
 
-        codeview_header.subtitle = library.get_issuer_display_name(pad.issuer);
+        header_title.subtitle = library.get_issuer_display_name(pad.issuer);
         note_label.label = pad.note;
+        note_label.visible = pad.note.length > 0;
 
         switch_to_code_display();
         set_otp_code_label ();
@@ -243,10 +273,28 @@ public class OneTimePadView : Gtk.Grid {
         }
     }
 
+    // the code turns peach when it is about to change
+    private const int EXPIRING_SECONDS = 5;
+
+    /** Splits a code into readable groups: "123456" becomes "123 456". */
+    internal static string group_code (string code) {
+        var length = code.length;
+
+        if (length < 6 || length > 10) {
+            return code;
+        }
+
+        // even lengths split in half, odd lengths put the shorter group first
+        var first = length / 2;
+
+        return code.substring (0, first) + " " + code.substring (first);
+    }
+
     private void set_otp_code_label () {
         get_otp_code.begin((obj,res) => {
             var code = get_otp_code.end (res);
-            subtitle_label.label = code;
+            current_code = code ?? "";
+            subtitle_label.label = group_code (current_code);
         });
     }
 
@@ -266,71 +314,39 @@ public class OneTimePadView : Gtk.Grid {
 
         code_remaining_progress.text = "Code Changes In %d seconds".printf(remaining_time);
 
+        if (remaining_time <= EXPIRING_SECONDS) {
+            subtitle_label.add_css_class ("pst-code-expiring");
+        } else {
+            subtitle_label.remove_css_class ("pst-code-expiring");
+        }
+
         var ratio = ((double)remaining_time) / ((double)pad.period);
         code_remaining_progress.set_fraction(ratio);
     }
 
     private void copy_code_to_clipboard () {
-        if (clipboard == null) {
-            clipboard = Gtk.Clipboard.get_default (get_display());
-        }
-
         print("copying code to clipboard\n");
 
-        Gtk.TargetEntry target_entry_utf8 = {"UTF8_STRING", 0, 0};
-        Gtk.TargetEntry target_entry_text = {"TEXT", 0, 0};
-        Gtk.TargetEntry target_entry_ctext = {"COMPOUND_TEXT", 0, 0};
-        Gtk.TargetEntry target_entry_text_plain = {"text/plain", 0, 0};
-        Gtk.TargetEntry target_entry_text_plain_utf8 = {"text/plain;charset=utf-8", 0, 0};
-
-        Gtk.TargetEntry[] text_targets = {target_entry_utf8, target_entry_text, target_entry_ctext, target_entry_text_plain, target_entry_text_plain_utf8};
-
-        var owner = new OneTimePadClipboardOwner (pad, subtitle_label.label);
+        var owner = new OneTimePadClipboardOwner (pad, current_code);
         clipboard_owners.add (owner);
 
         owner.cancelled.connect(() => {
            clipboard_owners.remove (owner);
         });
 
-        clipboard.set_with_owner(text_targets, clipboard_get_code, clipboard_clear, owner);
-    }
-
-    private static void clipboard_get_code (Gtk.Clipboard clipboard, Gtk.SelectionData selection_data, uint info, void* owner) {
-        print ("clipboard get code called\n");
-
-        var clipboard_owner = owner as OneTimePadClipboardOwner;
-
-        var code = clipboard_owner.code;
-
-        selection_data.set_text (code, -1);
-    }
-
-    private static void clipboard_clear (Gtk.Clipboard clipboard, void* owner) {
-        var clipboard_owner = owner as OneTimePadClipboardOwner;
-        clipboard_owner.cancel ();
+        get_clipboard ().set_content (owner);
     }
 
     private void switch_to_code_display() {
-        remove (welcome_screen);
-        attach (title_label, 0, 1);
-        attach (subtitle_label, 0, 2);
-
-        if (pad.note.length > 0) {
-            attach (note_label, 0, 3);
-        }
-
-        attach (code_remaining_progress, 0, 4);
+        stack.visible_child_name = "code";
     }
 
     private void switch_to_welcome_screen() {
-        remove (title_label);
-        remove (subtitle_label);
-        remove (code_remaining_progress);
-        remove (note_label);
-        attach (welcome_screen, 0, 1);
+        header_title.subtitle = "";
+        stack.visible_child_name = "welcome";
     }
 
-    private class OneTimePadClipboardOwner : Object {
+    private class OneTimePadClipboardOwner : Gdk.ContentProvider {
 
         public string code { get; private set; }
 
@@ -351,6 +367,24 @@ public class OneTimePadView : Gtk.Grid {
                     return true;
                 });
             }
+        }
+
+        public override Gdk.ContentFormats ref_formats () {
+            return new Gdk.ContentFormats.for_gtype (typeof (string));
+        }
+
+        public override bool get_value (ref Value value) throws Error {
+            if (value.holds (typeof (string))) {
+                value.set_string (code);
+                return true;
+            }
+
+            return false;
+        }
+
+        // called when another clipboard owner replaces this one
+        public override void detach_clipboard (Gdk.Clipboard clipboard) {
+            cancel ();
         }
 
         private async void set_current_code() {
