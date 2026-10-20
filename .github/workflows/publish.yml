@@ -1,0 +1,136 @@
+name: Publish
+
+# Builds the Flatpak, pushes it to GitHub Container Registry as OCI images (with AetherPak), and
+# deploys the website together with the Flatpak repository index to GitHub Pages.
+#
+#   main      -> channel "beta"
+#   v* tags   -> channel "stable"
+#
+# The website is the docs/ directory of this branch; there is no separate Pages branch. Pages must be
+# set to deploy from GitHub Actions (Settings, Pages, Source). The repository index lives on Pages, so
+# every deployment has to carry it: a push that only touches the website redeploys with the index
+# reconciled against the registry, without building the app again.
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      rebuild:
+        description: Build and publish the app again (otherwise only the site and the index are redeployed)
+        type: boolean
+        default: true
+
+# one publication at a time, and never cancel one half way
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  changes:
+    name: What changed
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      app: ${{ steps.diff.outputs.app }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - id: diff
+        env:
+          BEFORE: ${{ github.event.before }}
+          REBUILD: ${{ inputs.rebuild }}
+        run: |
+          app=true
+
+          if [ "$GITHUB_EVENT_NAME" = workflow_dispatch ]; then
+            app="$REBUILD"
+          elif [ "$GITHUB_REF_TYPE" = branch ] && git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+            # a push that only touches the website and the documentation leaves the app as it is
+            if git diff --name-only "$BEFORE" "$GITHUB_SHA" | grep -qvE '^(docs/|README\.md$)'; then
+              app=true
+            else
+              app=false
+            fi
+          fi
+
+          echo "app=$app" >> "$GITHUB_OUTPUT"
+          echo "Rebuilding the app: $app"
+
+  publish:
+    name: Build and publish the Flatpak
+    needs: changes
+    permissions:
+      contents: read
+      packages: write
+      pages: write
+      id-token: write
+    uses: aetherpak/actions/.github/workflows/publish.yml@v3
+    with:
+      manifest-path: io.github.jhaygood86.mauborgne.yml
+      remote-name: mauborgne
+      pages-url: https://jhaygood86.github.io/mauborgne
+      # The site is deployed by the job below, which adds the website to what AetherPak produces,
+      # and the website is our own page instead of the generated one.
+      deploy: false
+      landing-page: false
+      reconcile-only: ${{ needs.changes.outputs.app != 'true' }}
+      # The linter checks Flathub's rules, and this app is not published there.
+      run-linter: false
+    secrets:
+      # Optional: with this key the images are signed and installs can be verified.
+      gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+
+  site:
+    name: Deploy the website and the repository index
+    needs: publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Get the repository index and the .flatpakref files
+        uses: actions/download-artifact@v8
+        with:
+          name: aetherpak-site
+          path: _site
+
+      # Until the website is plain HTML, docs/ is a Jekyll site and still has to be built
+      - name: Build the Jekyll site
+        if: ${{ hashFiles('docs/_config.yml') != '' }}
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./docs
+          destination: ./_website
+
+      - name: Add the website
+        run: |
+          src=docs
+          if [ -d _website ]; then src=_website; fi
+
+          # the website must not shadow what Flatpak reads from the same site
+          for reserved in index refs sigs; do
+            if [ -e "$src/$reserved" ]; then
+              echo "::error::docs/ must not contain '$reserved'; that name belongs to the Flatpak repository"
+              exit 1
+            fi
+          done
+
+          rsync -a --exclude='_*' --exclude='*.md' "$src"/ _site/
+          ls -R _site | head -50
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+      - id: deploy
+        uses: actions/deploy-pages@v5

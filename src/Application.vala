@@ -36,8 +36,4 @@ public class MauborgneApp : Adw.Application {
 
         main_window.present ();
     }
-
-    public static int main (string[] args) {
-        return new MauborgneApp ().run (args);
-    }
 }

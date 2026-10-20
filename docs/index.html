@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mauborgne: one time codes, on your terms</title>
+<meta name="description" content="Mauborgne generates TOTP and HOTP codes, keeps the secrets in your system keyring, and can sync them across your devices with end to end encryption. Free and open source.">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<meta property="og:title" content="Mauborgne: one time codes, on your terms">
+<meta property="og:description" content="Two factor codes for GNOME, with optional end to end encrypted Cloud Backup.">
+<meta property="og:image" content="https://jhaygood86.github.io/mauborgne/images/screenshot.png">
+<meta property="og:url" content="https://jhaygood86.github.io/mauborgne/">
+<meta name="theme-color" content="#17301D">
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="#"><svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="ga" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3E7A4C"/><stop offset="1" stop-color="#1F3A26"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#ga)"/><path fill="#FF9C66" d="M5.6 5.6h5.6v5.6H5.6zM13.2 13.2h5.6v5.6h-5.6zM20.8 20.8h5.6v5.6h-5.6z"/><path fill="#FFF6EC" d="M13.2 5.6h5.6v5.6h-5.6zM20.8 5.6h5.6v5.6h-5.6zM5.6 13.2h5.6v5.6H5.6zM20.8 13.2h5.6v5.6h-5.6zM5.6 20.8h5.6v5.6H5.6zM13.2 20.8h5.6v5.6h-5.6z"/></svg><span>Mauborgne</span></a>
+  <div class="links"><a href="#features">Features</a><a href="#cloud">Cloud Backup</a><a href="#get">Get it</a><a href="#open">Open source</a><a class="btn primary" href="#get">Get Mauborgne</a></div>
+</div></nav>
+
+<header class="hero"><div class="wrap grid">
+  <div>
+    <div class="eyebrow">Two factor codes for GNOME</div>
+    <h1>Your one time codes, <em>on your terms.</em></h1>
+    <p class="lead">Mauborgne generates TOTP and HOTP codes, keeps the secrets in your system keyring, and can sync them across your devices with end to end encryption.</p>
+    <div class="actions"><a class="btn primary" href="#get">Install on Linux</a><a class="btn secondary" href="#cloud">Try Cloud Backup</a></div>
+    <p class="meta">Free and open source. Cloud Backup and sync is an optional $10 a year.</p>
+  </div>
+  <div class="shot">
+    <div class="window"><img alt="Mauborgne showing a one time code" src="images/screenshot.png"></div>
+    <div class="code-chip"><i></i>Code copied <b>396 712</b></div>
+  </div>
+</div></header>
+
+<section id="features"><div class="wrap">
+  <div class="eyebrow" style="color:var(--g600)">Features</div>
+  <h2>Everything a code generator should be, nothing it shouldn't.</h2>
+  <p class="sub">A quiet, native app that does one job and keeps your secrets where they belong.</p>
+  <div class="cards">
+    <div class="card"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>TOTP and HOTP</h3><p>Time and counter based codes with SHA-1, SHA-256 and SHA-512, a live countdown, and one click to copy.</p></div>
+    <div class="card"><div class="ico"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></div><h3>Secrets in your keyring</h3><p>Pad secrets live in libsecret and the Flatpak secrets portal, never in plain files on disk.</p></div>
+    <div class="card"><div class="ico"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><path d="M14 14h2v2h-2zM18 18h2v2h-2zM14 18h2"/></svg></div><h3>Add from a QR code</h3><p>Pick an image of the QR code, type a setup key, or import an Aegis vault. Nothing leaves your machine.</p></div>
+    <div class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 8l5-5 5 5M5 15v4a2 2 0 002 2h10a2 2 0 002-2v-4"/></svg></div><h3>Export anywhere</h3><p>Turn a pad into a QR code for another app, or export one or all pads as an encrypted Aegis vault.</p></div>
+    <div class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Sandboxed</h3><p>Runs as a Flatpak with only the access it needs, so a compromised page or app can't read your codes.</p></div>
+    <div class="card"><div class="ico"><svg viewBox="0 0 24 24"><path d="M7 18a4 4 0 01-.5-7.97A6 6 0 0118 9.5 4.5 4.5 0 0117.5 18z"/></svg></div><h3>Cloud Backup</h3><p>Optional encrypted backup and sync with the Mauborgne apps for Windows and Android, $10 a year.</p></div>
+  </div>
+</div></section>
+
+<section id="cloud" class="cloud"><div class="wrap">
+  <div class="eyebrow">Cloud Backup</div>
+  <h2>Sync everywhere. Readable nowhere but your devices.</h2>
+  <p class="sub">Your pads are encrypted on this device before they are uploaded. The cloud password never leaves it, so even we can't read your backup.</p>
+  <div class="flow">
+    <div class="step"><h3>Encrypted on your device</h3><p>Pads are sealed in an Aegis format vault with a random key, which is itself wrapped with a key only your password can produce.</p></div>
+    <div class="step"><h3>Stored, never read</h3><p>The server holds ciphertext and an OPAQUE password record. It can't decrypt a backup, and can't alter one unnoticed.</p></div>
+    <div class="step"><h3>Synced across devices</h3><p>Edits merge automatically between Linux, Windows and Android, including deletions and counter positions.</p></div>
+  </div>
+  <div class="devices"><span class="pill">Linux</span><span class="pill">Windows</span><span class="pill">Android</span></div>
+  <div class="price"><b>$10</b><span>per year</span></div>
+  <div class="foot"><a class="btn primary" href="https://customer.peachstatetechnologies.com/Signup/CiNvjP-rrA36PRLwEgIhp5LnMARROZGc0cYBVWlLB3g" rel="noopener">Sign up for Cloud Backup</a><span>Mauborgne itself is free. Cloud Backup and sync is the only paid part, and it is optional. Sign in or sign up from inside the app.</span></div>
+</div></section>
+
+<section id="get"><div class="wrap">
+  <div class="eyebrow" style="color:var(--g600)">Get Mauborgne</div>
+  <h2>Pick your platform.</h2>
+  <p class="sub">Mauborgne is free and open source. The Linux app installs from this site's own Flatpak repository. The Windows and Android apps are part of the same family.</p>
+  <div class="get">
+    <div class="card linux">
+      <div class="left"><div class="tag">Linux</div><h3>Flatpak</h3><p>Add Mauborgne's own Flatpak repository, hosted right here, then install. Updates arrive with the rest of your apps.</p><p class="note">Channels: <b>stable</b> follows releases, <b>beta</b> follows development. Signed images, verified from Flatpak 1.17 (key F6B4 229E 4C6C 38FE). The GNOME runtime is installed from Flathub.</p><details class="older"><summary>Flatpak older than 1.17?</summary><pre class="cmd">flatpak remote-add --if-not-exists --user --no-gpg-verify \
+  mauborgne oci+https://jhaygood86.github.io/mauborgne</pre><p class="note">Older versions cannot verify the signatures, so add the remote without verification, then install as shown.</p></details><div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn primary" href="refs/io.github.jhaygood86.mauborgne-stable.flatpakref">Stable .flatpakref</a><a class="btn ghost" href="refs/io.github.jhaygood86.mauborgne-beta.flatpakref">Beta .flatpakref</a></div></div>
+      <pre class="cmd">flatpak remote-add --user \
+  --signature-lookaside=https://jhaygood86.github.io/mauborgne/sigs \
+  mauborgne https://jhaygood86.github.io/mauborgne/mauborgne.flatpakrepo
+flatpak install --user mauborgne \
+  io.github.jhaygood86.mauborgne</pre>
+    </div>
+    <div class="card"><div class="tag">Windows</div><h3>Mauborgne for Windows</h3><p>The same codes and the same Cloud Backup, built for Windows with Windows Hello support.</p><p class="note">Download links are coming soon.</p></div>
+    <div class="card"><div class="tag">Android</div><h3>Mauborgne for Android</h3><p>Scan a QR code with the camera and unlock with your fingerprint.</p><p class="note">Download links are coming soon.</p></div>
+  </div>
+</div></section>
+
+<section id="open" class="oss"><div class="wrap grid">
+  <div>
+    <div class="eyebrow" style="color:var(--g600)">Open source</div>
+    <h2>Read the code. Trust the codes.</h2>
+    <p class="sub" style="margin-bottom:0">The Linux app is licensed GPL 3 or later and developed in the open. The OPAQUE client that powers Cloud Backup is dual licensed, GPL 3 or commercial.</p>
+  </div>
+  <ul>
+    <li><b>Source:</b> <a href="https://github.com/jhaygood86/mauborgne">github.com/jhaygood86/mauborgne</a></li>
+    <li><b>Translations:</b> <a href="https://hosted.weblate.org/projects/maurbogne/">Help translate on Weblate</a></li>
+    <li><b>Issues:</b> <a href="https://github.com/jhaygood86/mauborgne/issues">Report a problem or request a feature</a></li>
+  </ul>
+</div></section>
+
+<footer><div class="wrap">
+  <a class="brand" href="#" style="font-size:18px"><svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="gb" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3E7A4C"/><stop offset="1" stop-color="#1F3A26"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#gb)"/><path fill="#FF9C66" d="M5.6 5.6h5.6v5.6H5.6zM13.2 13.2h5.6v5.6h-5.6zM20.8 20.8h5.6v5.6h-5.6z"/><path fill="#FFF6EC" d="M13.2 5.6h5.6v5.6h-5.6zM20.8 5.6h5.6v5.6h-5.6zM5.6 13.2h5.6v5.6H5.6zM20.8 13.2h5.6v5.6h-5.6zM5.6 20.8h5.6v5.6H5.6zM13.2 20.8h5.6v5.6h-5.6z"/></svg><span>Mauborgne</span></a>
+  <span>&copy; 2026 Justin Haygood. Free software under the GPL.</span>
+  <div class="links"><a href="https://github.com/jhaygood86/mauborgne">GitHub</a><a href="#get">Install</a><a href="https://github.com/jhaygood86/mauborgne/issues">Support</a><a class="footer-pst" href="https://peachstatetechnologies.com/" rel="noopener"><img src="images/peach.svg" width="16" height="16" alt=""> Support by Peach State Technologies</a></div>
+</div></footer>
+</body>
+</html>

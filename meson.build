@@ -88,6 +88,11 @@ mauborgne_deps = opaque_deps + [
 ]
 
 # Everything except the application entry points, so the tests can build on it
+mauborgne_app_sources = files(
+    'src/Application.vala',
+    'src/MainWindow.vala',
+)
+
 mauborgne_sources = files(
     'src/QrHelpers.vala',
     'src/OneTimePad.vala',
@@ -127,6 +132,7 @@ executable(
     config_file,
     'src/Application.vala',
     'src/MainWindow.vala',
+    'src/Main.vala',
     mauborgne_sources,
     dependencies: mauborgne_deps,
     install: true
@@ -141,3 +147,7 @@ gnome.post_install(
 subdir('data')
 subdir('po')
 subdir('tests')
+
+if get_option('screenshot_tool')
+    subdir('tools')
+endif

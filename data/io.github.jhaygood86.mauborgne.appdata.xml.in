@@ -9,6 +9,9 @@
     <p>
       Import OTP pads from QR codes and generate OTP codes for secure 2FA logins
     </p>
+    <p>
+      Mauborgne is free. An optional subscription of $10 per year adds Cloud Backup and sync across your devices.
+    </p>
   </description>
   <releases>
     <release version="0.9.0" date="2026-10-20" urgency="medium">
@@ -18,20 +21,22 @@
           <li>Ported to GTK 4 and libadwaita, and now built on the GNOME runtime</li>
           <li>Updated libraries</li>
           <li>New look, matching the Mauborgne apps for Windows and Android</li>
-          <li>Cloud Backup: encrypted backup and automatic sync across your devices (subscription)</li>
+          <li>Cloud Backup: encrypted backup and automatic sync across your devices (optional, $10 per year)</li>
         </ul>
       </description>
     </release>
     <release version="0.8.0" date="2023-02-22" urgency="medium">
-      <p>New Features</p>
-      <ul>
-        <li>Ability to add a TOTP code using a secret key</li>
-      </ul>
-      <p>New &amp; Updated Translations</p>
-      <ul>
-        <li>Portuguese</li>
-        <li>Russian</li>
-      </ul>
+      <description>
+        <p>New Features</p>
+        <ul>
+          <li>Ability to add a TOTP code using a secret key</li>
+        </ul>
+        <p>New &amp; Updated Translations</p>
+        <ul>
+          <li>Portuguese</li>
+          <li>Russian</li>
+        </ul>
+      </description>
     </release>
     <release version="0.7.3" date="2023-02-12" urgency="medium">
       <description>
@@ -162,7 +167,5 @@
   <custom>
     <value key="x-appcenter-color-primary">#2B5233</value>
     <value key="x-appcenter-color-primary-text">rgb(255, 255, 255)</value>
-    <value key="x-appcenter-suggested-price">10</value>
-    <value key="x-appcenter-stripe">pk_live_51JQWYDHZX5xcE5RZsPJymrVxQa2FF1xD2mCl9dsb4JMhFJPJN9WKwTVuHMzOGx8y1tzjLknRIuDA7iRiIuAVQYS1003BJHg0C1</value>
   </custom>
 </component>

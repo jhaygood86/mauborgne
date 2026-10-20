@@ -1,0 +1,2 @@
+option('screenshot_tool', type: 'boolean', value: false,
+       description: 'Build mauborgne-screenshot, a developer tool that renders the main window to a PNG')
