@@ -73,6 +73,25 @@ namespace TestSupport {
         }
     }
 
+    /** Warnings about the session bus and input methods that headless environments always print. */
+    public bool is_missing_bus_warning (string? domain, string message) {
+        if (domain == "IBUS") {
+            return true;
+        }
+
+        return message.contains ("session bus") || message.contains ("ibus");
+    }
+
+    /** True if a session bus can be reached; WebKit needs one for its sandbox. */
+    public bool session_bus_available () {
+        try {
+            Bus.get_sync (BusType.SESSION, null);
+            return true;
+        } catch (Error e) {
+            return false;
+        }
+    }
+
     public bool display_available () {
         return Gtk.init_check ();
     }

@@ -8,6 +8,12 @@ int main (string[] args) {
 
     Test.init (ref args);
 
+    // A headless builder (xvfb, no session bus) makes GTK and IBus warn that they cannot reach D-Bus.
+    // That says nothing about the code under test, so those warnings are not failures; all others are.
+    Test.log_set_fatal_handler ((domain, level, message) => {
+        return !TestSupport.is_missing_bus_warning (domain, message);
+    });
+
     TestSupport.write_library_fixtures ();
 
     OtpTests.register ();

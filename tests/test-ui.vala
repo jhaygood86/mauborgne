@@ -503,6 +503,11 @@ namespace UiTests {
             return;
         }
 
+        if (!TestSupport.session_bus_available ()) {
+            Test.skip ("WebKit needs a session bus for its sandbox");
+            return;
+        }
+
         var redirect = "http://127.0.0.1:50000/callback";
         var parent = make_parent ();
         var dialog = new WebPageDialog ("Sign in", "about:blank", redirect);

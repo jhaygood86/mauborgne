@@ -20,7 +20,12 @@ test_exe = executable(
 foreach suite : ['otp', 'aegis', 'qr', 'library', 'cloud', 'ui']
     test(suite, test_exe,
         args: ['-p', '/' + suite],
-        env: {'MAURBORGNE_TEST': '1'},
+        # no input method daemon and no accessibility bus are needed (or present) on a headless builder
+        env: {
+            'MAURBORGNE_TEST': '1',
+            'GTK_IM_MODULE': 'gtk-im-context-simple',
+            'GTK_A11Y': 'none'
+        },
         timeout: 120
     )
 endforeach
