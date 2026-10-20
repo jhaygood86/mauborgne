@@ -98,3 +98,8 @@ footer a{color:var(--ink700);text-decoration:none;font-weight:600}
 details.older{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px 14px}
 details.older summary{cursor:pointer;font-weight:700;color:var(--g800)}
 details.older pre.cmd{margin-top:10px}
+
+.brand .name{display:flex;flex-direction:column;line-height:1.05}
+.brand small{font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--g600);margin-top:3px}
+footer .brand small{font-size:9.5px}
+pre.cmd{white-space:pre-wrap;overflow-wrap:anywhere}

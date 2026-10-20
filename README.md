@@ -3,8 +3,9 @@
 </p>
 
 <p align="center">
-  A 2FA one time pad generator for the GNOME desktop: TOTP and HOTP codes, kept in your keyring,
-  with optional encrypted Cloud Backup.
+  <b>For Linux Desktops</b><br>
+  The free and open source Linux desktop client: TOTP and HOTP codes for GNOME, kept in your keyring,
+  with optional encrypted Cloud Backup. (Mauborgne for Windows and Android are separate apps.)
 </p>
 
 <p align="center">
