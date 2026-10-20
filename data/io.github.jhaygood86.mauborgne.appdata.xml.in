@@ -162,7 +162,7 @@
   <branding>
     <color type="primary" scheme_preference="light">#DCF0DD</color>
   </branding>
-  <url type="homepage">https://jhaygood86.github.io/mauborgne/</url>
+  <url type="homepage">https://linux.mauborgne.app/</url>
   <url type="bugtracker">https://github.com/jhaygood86/mauborgne/issues</url>
   <custom>
     <value key="x-appcenter-color-primary">#2B5233</value>

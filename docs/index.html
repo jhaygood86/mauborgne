@@ -9,8 +9,8 @@
 <link rel="stylesheet" href="style.css">
 <meta property="og:title" content="Mauborgne For Linux Desktops: one time codes, on your terms">
 <meta property="og:description" content="The free and open source Linux desktop client: two factor codes for GNOME, with optional end to end encrypted Cloud Backup.">
-<meta property="og:image" content="https://jhaygood86.github.io/mauborgne/images/screenshot.png">
-<meta property="og:url" content="https://jhaygood86.github.io/mauborgne/">
+<meta property="og:image" content="https://linux.mauborgne.app/images/screenshot.png">
+<meta property="og:url" content="https://linux.mauborgne.app/">
 <meta name="theme-color" content="#17301D">
 </head>
 <body>
@@ -69,10 +69,10 @@
   <div class="get">
     <div class="card linux">
       <div class="left"><div class="tag">Linux</div><h3>Flatpak</h3><p>Add Mauborgne's own Flatpak repository, hosted right here, then install. Updates arrive with the rest of your apps.</p><p class="note">Channels: <b>stable</b> follows releases, <b>beta</b> follows development. Signed images, verified from Flatpak 1.17 (key F6B4 229E 4C6C 38FE). The GNOME runtime is installed from Flathub.</p><details class="older"><summary>Flatpak older than 1.17?</summary><pre class="cmd">flatpak remote-add --if-not-exists --user --no-gpg-verify \
-  mauborgne oci+https://jhaygood86.github.io/mauborgne</pre><p class="note">Older versions cannot verify the signatures, so add the remote without verification, then install as shown.</p></details><div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn primary" href="refs/io.github.jhaygood86.mauborgne-stable.flatpakref">Stable .flatpakref</a><a class="btn ghost" href="refs/io.github.jhaygood86.mauborgne-beta.flatpakref">Beta .flatpakref</a></div></div>
+  mauborgne oci+https://linux.mauborgne.app</pre><p class="note">Older versions cannot verify the signatures, so add the remote without verification, then install as shown.</p></details><div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn primary" href="refs/io.github.jhaygood86.mauborgne-stable.flatpakref">Stable .flatpakref</a><a class="btn ghost" href="refs/io.github.jhaygood86.mauborgne-beta.flatpakref">Beta .flatpakref</a></div></div>
       <pre class="cmd">flatpak remote-add --user \
-  --signature-lookaside=https://jhaygood86.github.io/mauborgne/sigs \
-  mauborgne https://jhaygood86.github.io/mauborgne/mauborgne.flatpakrepo
+  --signature-lookaside=https://linux.mauborgne.app/sigs \
+  mauborgne https://linux.mauborgne.app/mauborgne.flatpakrepo
 flatpak install --user mauborgne \
   io.github.jhaygood86.mauborgne</pre>
     </div>

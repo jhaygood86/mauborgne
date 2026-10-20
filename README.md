@@ -29,15 +29,15 @@ the GitHub Container Registry and a small index is served from GitHub Pages (pub
 
 ```bash
 flatpak remote-add --user \
-  --signature-lookaside=https://jhaygood86.github.io/mauborgne/sigs \
-  mauborgne https://jhaygood86.github.io/mauborgne/mauborgne.flatpakrepo
+  --signature-lookaside=https://linux.mauborgne.app/sigs \
+  mauborgne https://linux.mauborgne.app/mauborgne.flatpakrepo
 flatpak install --user mauborgne io.github.jhaygood86.mauborgne
 ```
 
 The images are signed (Flatpak 1.17 or newer verifies them). The signing key is `Mauborgne Releases <jhaygood86@gmail.com>`, fingerprint `F6B4 229E 4C6C 38FE B2D4  78E3 316E 5078 B7B3 5D08`. With an older Flatpak, add the remote without verification instead:
 
 ```bash
-flatpak remote-add --if-not-exists --user --no-gpg-verify mauborgne oci+https://jhaygood86.github.io/mauborgne
+flatpak remote-add --if-not-exists --user --no-gpg-verify mauborgne oci+https://linux.mauborgne.app
 ```
 
 `stable` follows the tagged releases and `beta` follows `main`; choose a channel with
