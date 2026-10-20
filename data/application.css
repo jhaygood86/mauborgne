@@ -134,6 +134,11 @@ button.suggested-action:hover {
     background-color: alpha(#FFFFFF, 0.10);
 }
 
+.pst-sidebar .pst-sync-status {
+    color: #5A9F63;
+    font-size: 11px;
+}
+
 /* Circular issuer avatars: initials on the brand palette */
 .pst-avatar {
     min-width: 22px;

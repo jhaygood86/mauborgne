@@ -28,6 +28,13 @@ namespace OtpTests {
         Test.add_func ("/otp/code_totp_current_time", test_totp_current_time);
         Test.add_func ("/otp/code_invalid_secret", test_invalid_secret);
         Test.add_func ("/otp/code_remaining_time", test_remaining_time);
+        Test.add_func ("/otp/sync_identity", test_identity);
+        Test.add_func ("/otp/sync_modified_persists", test_modified_persists);
+        Test.add_func ("/otp/sync_touch", test_touch);
+        Test.add_func ("/otp/sync_copy_and_clone", test_copy_and_clone);
+        Test.add_func ("/otp/sync_hotp_code_counts_as_change", test_hotp_touches);
+        Test.add_func ("/otp/sync_totp_code_is_not_a_change", test_totp_does_not_touch);
+        Test.add_func ("/otp/sync_aegis_entry_extensions", test_aegis_extensions);
         Test.add_func ("/otp/secret_service_code_and_export", test_secret_service_pad);
     }
 
@@ -348,6 +355,117 @@ namespace OtpTests {
         pad.period = 60;
         remaining = pad.get_remaining_time ();
         assert_true (remaining >= 1 && remaining <= 60);
+    }
+
+    private void test_identity () {
+        var pad = TestSupport.make_pad (OneTimePadType.TOTP, "Acme", "bob");
+
+        assert_cmpstr (pad.identity, CompareOperator.EQ, "Acme:bob");
+    }
+
+    private void test_modified_persists () {
+        var pad = TestSupport.make_pad (OneTimePadType.TOTP, "Acme", "bob");
+        assert_true (pad.modified_at == 0);
+
+        pad.modified_at = 1700000000123;
+
+        try {
+            var loaded = new OneTimePad.from_keyfile (pad.to_keyfile ());
+            assert_true (loaded.modified_at == 1700000000123);
+        } catch (Error e) {
+            Test.fail ();
+        }
+
+        // key files written before sync existed have no time
+        var legacy = pad.to_keyfile ();
+        legacy.remove_key ("Additional Data", "Modified");
+
+        try {
+            assert_true (new OneTimePad.from_keyfile (legacy).modified_at == 0);
+        } catch (Error e) {
+            Test.fail ();
+        }
+    }
+
+    private void test_touch () {
+        var pad = TestSupport.make_pad ();
+        var before = OneTimePad.now_ms ();
+
+        pad.touch ();
+
+        assert_true (pad.modified_at >= before);
+        assert_true (pad.modified_at <= OneTimePad.now_ms ());
+    }
+
+    private void test_copy_and_clone () {
+        var source = TestSupport.make_pad (OneTimePadType.HOTP, "Acme", "bob");
+        source.algorithm = OneTimePadAlgorithm.SHA512;
+        source.digits = 8;
+        source.counter = 5;
+        source.period = 45;
+        source.note = "note";
+        source.account_name_display = "Bob";
+        source.modified_at = 123;
+
+        var copy = new OneTimePad.clone_of (source);
+
+        assert_cmpstr (copy.identity, CompareOperator.EQ, "Acme:bob");
+        assert_true (copy.pad_type == OneTimePadType.HOTP);
+        assert_true (copy.algorithm == OneTimePadAlgorithm.SHA512);
+        assert_cmpint (copy.digits, CompareOperator.EQ, 8);
+        assert_true (copy.counter == 5);
+        assert_cmpint (copy.period, CompareOperator.EQ, 45);
+        assert_cmpstr (copy.note, CompareOperator.EQ, "note");
+        assert_cmpstr (copy.account_name_display, CompareOperator.EQ, "Bob");
+        assert_true (copy.modified_at == 123);
+
+        // detached: changing the copy leaves the source alone
+        copy.note = "changed";
+        assert_cmpstr (source.note, CompareOperator.EQ, "note");
+
+        // copy_from keeps the identity of the target
+        var target = TestSupport.make_pad (OneTimePadType.TOTP, "Other", "account");
+        target.copy_from (source);
+        assert_cmpstr (target.identity, CompareOperator.EQ, "Other:account");
+        assert_true (target.counter == 5);
+    }
+
+    private void test_hotp_touches () {
+        var pad = TestSupport.make_pad (OneTimePadType.HOTP);
+        pad.counter = 0;
+        var before = OneTimePad.now_ms ();
+
+        assert_nonnull (pad.generate_code (TestSupport.SHA1_SECRET));
+
+        // the counter moved, which sync has to carry to the other devices
+        assert_true (pad.modified_at >= before);
+    }
+
+    // a code is shown every second; that is not an edit
+    private void test_totp_does_not_touch () {
+        var pad = TestSupport.make_pad (OneTimePadType.TOTP);
+
+        assert_nonnull (pad.generate_code (TestSupport.SHA1_SECRET));
+        assert_true (pad.modified_at == 0);
+    }
+
+    private void test_aegis_extensions () {
+        var pad = TestSupport.make_pad (OneTimePadType.TOTP, "Acme", "bob");
+        pad.modified_at = 1700000000123;
+        pad.account_name_display = "Bobby";
+
+        var entry = pad.build_aegis_vault_entry ("JBSWY3DPEHPK3PXP");
+        assert_true (entry.modified == 1700000000123);
+        assert_cmpstr (entry.display_name, CompareOperator.EQ, "Bobby");
+
+        try {
+            var back = new OneTimePad.from_aegis_vault_entry (entry);
+            assert_true (back.modified_at == 1700000000123);
+            assert_cmpstr (back.account_name_display, CompareOperator.EQ, "Bobby");
+            assert_cmpint (back.period, CompareOperator.EQ, 30);
+        } catch (Error e) {
+            Test.fail ();
+        }
     }
 
     /** Needs MAURBORGNE_TEST_SECRET_SERVICE=1 and an unlocked keyring. */

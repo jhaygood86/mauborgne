@@ -2,10 +2,13 @@ app-id: io.github.jhaygood86.mauborgne
 runtime: org.gnome.Platform
 runtime-version: '51'
 sdk: org.gnome.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
 command: io.github.jhaygood86.mauborgne
 finish-args:
   - '--device=dri'
   - '--share=ipc'
+  - '--share=network'
   - '--socket=fallback-x11'
   - '--socket=wayland'
   - '--talk-name=org.freedesktop.secrets'
@@ -46,6 +49,12 @@ modules:
 
   - name: mauborgne
     buildsystem: meson
+    build-options:
+      # the OPAQUE client (subprojects/opaque-bridge) is Rust; cargo-sources.json vendors its crates
+      append-path: /usr/lib/sdk/rust-stable/bin
+      env:
+        CARGO_HOME: /run/build/mauborgne/cargo
     sources:
     - type: dir
       path: .
+    - subprojects/opaque-bridge/cargo-sources.json

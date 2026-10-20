@@ -1,0 +1,34 @@
+[package]
+name = "opaque-bridge"
+version = "0.1.0"
+edition = "2024"
+description = "OPAQUE (RFC 9807) bridge for Mauborgne Cloud Backup: server as WASM, client as native C ABI"
+publish = false
+license = "GPL-3.0-or-later OR LicenseRef-Mauborgne-Commercial"
+repository = "https://github.com/jhaygood86/mauborgne"
+
+[lib]
+crate-type = ["cdylib", "staticlib", "rlib"]
+
+[features]
+default = ["client", "server"]
+# Native client (C ABI for P/Invoke). Build with --no-default-features --features client.
+client = []
+# Cloudflare Worker server (wasm-bindgen). Build with --no-default-features --features server.
+server = []
+
+[dependencies]
+opaque-ke = { version = "4.0.1", features = ["argon2"] }
+sha2 = "0.10"
+rand = { version = "0.8", features = ["getrandom"] }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2"
+getrandom = { version = "0.2", features = ["js"] }
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

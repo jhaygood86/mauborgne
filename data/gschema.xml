@@ -16,5 +16,25 @@
       <summary>Window Height</summary>
       <description>Stores the height of the width</description>
     </key>
+    <key name="cloud-last-backup-id" type="s">
+      <default>""</default>
+      <summary>Last cloud backup id</summary>
+      <description>The newest Cloud Backup this device has seen, used to notice a replayed older backup</description>
+    </key>
+    <key name="cloud-last-backup-updated-at" type="x">
+      <default>0</default>
+      <summary>Last cloud backup time</summary>
+      <description>When the newest Cloud Backup this device has seen was made (Unix seconds)</description>
+    </key>
+    <key name="cloud-sync-enabled" type="b">
+      <default>false</default>
+      <summary>Automatic cloud sync</summary>
+      <description>Keep the pads on this device in step with the Cloud Backup</description>
+    </key>
+    <key name="cloud-sync-dirty" type="b">
+      <default>false</default>
+      <summary>Unsynced changes</summary>
+      <description>Local changes have been made that the Cloud Backup has not seen</description>
+    </key>
   </schema>
 </schemalist>

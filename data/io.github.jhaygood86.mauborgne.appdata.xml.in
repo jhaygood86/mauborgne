@@ -17,6 +17,8 @@
         <ul>
           <li>Ported to GTK 4 and libadwaita, and now built on the GNOME runtime</li>
           <li>Updated libraries</li>
+          <li>New look, matching the Mauborgne apps for Windows and Android</li>
+          <li>Cloud Backup: encrypted backup and automatic sync across your devices (subscription)</li>
         </ul>
       </description>
     </release>

@@ -16,6 +16,7 @@ public class Mauborgne.MainWindow : Adw.ApplicationWindow {
     Gtk.ListBox pad_list;
     OneTimePadLibrary otp_library;
     OneTimePadView onetimepad_view;
+    CloudBackupFlow cloud_flow;
     KeyFile brand_mapping_file;
     Settings settings;
 
@@ -71,11 +72,38 @@ public class Mauborgne.MainWindow : Adw.ApplicationWindow {
         add_pad_button.add_css_class ("pst-primary");
         add_pad_button.clicked.connect (show_add_pad_dialog);
 
+        cloud_flow = new CloudBackupFlow (this, otp_library, settings);
+
+        var cloud_button = new Gtk.Button () {
+            child = new Adw.ButtonContent () {
+                label = _("Cloud Backup…"),
+                icon_name = "weather-overcast-symbolic"
+            },
+            margin_start = 6,
+            margin_end = 6,
+            margin_bottom = 6
+        };
+        cloud_button.add_css_class ("pst-secondary");
+        cloud_button.clicked.connect (() => cloud_flow.show.begin ());
+
+        var sync_label = new Gtk.Label (cloud_flow.sync.status.state == SyncState.OFF ? "" : cloud_flow.sync.status.text) {
+            xalign = 0,
+            margin_start = 12,
+            margin_bottom = 6,
+            ellipsize = Pango.EllipsizeMode.END
+        };
+        sync_label.add_css_class ("pst-sync-status");
+        cloud_flow.sync.status_changed.connect ((status) => {
+            sync_label.label = status.state == SyncState.OFF ? "" : status.text;
+        });
+
         var sidebar = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
         sidebar.append (sidebar_header);
         sidebar.append (scrolledwindow);
         sidebar.append (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
         sidebar.append (add_pad_button);
+        sidebar.append (cloud_button);
+        sidebar.append (sync_label);
         sidebar.add_css_class ("pst-sidebar");
 
         onetimepad_view = new OneTimePadView ();
@@ -142,6 +170,12 @@ public class Mauborgne.MainWindow : Adw.ApplicationWindow {
         brand_mapping_file.load_from_data_dirs("io.github.jhaygood86.mauborgne/brand_mapping.ini", null, KeyFileFlags.NONE);
 
         bind_pads_to_source_list();
+
+        // sync once the window is up, without making it wait for the network
+        Idle.add (() => {
+            cloud_flow.sync.start ();
+            return Source.REMOVE;
+        });
 
         close_request.connect(() => {
            settings.set_int("window-width", get_width ());

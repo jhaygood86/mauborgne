@@ -100,7 +100,7 @@ namespace AegisTests {
     }
 
     private string content_to_json (AegisVaultContent content) {
-        return AegisManager.get_json_string (content);
+        return content.to_json ();
     }
 
     private void test_hex_roundtrip () {

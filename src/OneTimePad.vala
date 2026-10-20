@@ -16,6 +16,19 @@ public class OneTimePad : Object {
     public int64 counter { get; set; }
     public int period { get; set; }
     public string note { get; set; }
+
+    /**
+     * When this pad's data last changed (Unix milliseconds, UTC); 0 for pads from
+     * before cloud sync existed. Cloud sync keeps the newer side of each pad.
+     */
+    public int64 modified_at { get; set; }
+
+    /** The key that identifies this pad across devices: "{issuer}:{account}". */
+    public string identity {
+        owned get {
+            return issuer + ":" + account_name;
+        }
+    }
     
     static construct {
         schema = new Secret.Schema ("io.github.jhaygood86.mauborgne", Secret.SchemaFlags.NONE,
@@ -161,6 +174,10 @@ public class OneTimePad : Object {
             } else {
                 account_name_display = account_name;
             }
+
+            if (file.has_key ("Additional Data", "Modified")) {
+                modified_at = file.get_int64 ("Additional Data", "Modified");
+            }
         } else {
             note = "";
             account_name_display = account_name;
@@ -170,6 +187,9 @@ public class OneTimePad : Object {
     public OneTimePad.from_aegis_vault_entry (AegisVaultContent.AegisVaultEntry entry) throws OneTimePadError {
 
         AegisVaultContent.AegisVaultEntryInfo? info = null;
+
+        // counter-based entries have no period; keep the usual default like a pad from a URI
+        period = 30;
 
         if (entry is AegisVaultContent.AegisTotpVaultEntry) {
             AegisVaultContent.AegisTotpVaultEntry totp_entry = (AegisVaultContent.AegisTotpVaultEntry)entry;
@@ -210,6 +230,41 @@ public class OneTimePad : Object {
 
         account_name = get_cleaned_account_name (issuer, account_name);
         account_name_display = account_name;
+
+        // sync extensions, only present in backups made by Mauborgne
+        if (entry.display_name != null && entry.display_name != "") {
+            account_name_display = entry.display_name;
+        }
+
+        modified_at = entry.modified;
+    }
+
+    /** A detached copy with the same identity and data (the secret is not copied). */
+    public OneTimePad.clone_of (OneTimePad other) {
+        issuer = other.issuer;
+        account_name = other.account_name;
+        copy_from (other);
+    }
+
+    public static int64 now_ms () {
+        return GLib.get_real_time () / 1000;
+    }
+
+    /** Records that the pad's data changed just now. Each call moves the time forward, even within a millisecond. */
+    public void touch () {
+        modified_at = int64.max (now_ms (), modified_at + 1);
+    }
+
+    /** Copies everything except the identity (issuer and account name) from another pad. */
+    public void copy_from (OneTimePad other) {
+        pad_type = other.pad_type;
+        account_name_display = other.account_name_display;
+        algorithm = other.algorithm;
+        digits = other.digits;
+        counter = other.counter;
+        period = other.period;
+        note = other.note;
+        modified_at = other.modified_at;
     }
 
     public KeyFile to_keyfile() {
@@ -224,6 +279,7 @@ public class OneTimePad : Object {
         
         file.set_string ("Additional Data", "Note", note);
         file.set_string ("Additional Data", "Account Display Name", account_name_display);
+        file.set_int64 ("Additional Data", "Modified", modified_at);
 
         return file;
     }
@@ -324,6 +380,8 @@ public class OneTimePad : Object {
         entry.name = account_name;
         entry.issuer = issuer;
         entry.note = note;
+        entry.modified = modified_at;
+        entry.display_name = account_name_display;
 
         info.secret = secret_value;
 
@@ -387,6 +445,7 @@ public class OneTimePad : Object {
                 break;
             case HOTP:
                 code = Cotp.get_hotp(secret_value, (long) (++counter), digits, get_cotp_algorithm(algorithm), out error);
+                touch ();
                 break;
         }
 
@@ -453,7 +512,7 @@ public class OneTimePad : Object {
         yield Secret.password_storev(schema, attributes, Secret.COLLECTION_DEFAULT, secret_label, secret_value, null);
     }
 
-    private async string lookup_secret () {
+    internal async string lookup_secret () {
         var attributes = get_secret_attributes ();
 
         var secret_value = yield Secret.password_lookupv(schema, attributes, null);

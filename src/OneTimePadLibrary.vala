@@ -4,13 +4,29 @@ public class OneTimePadLibrary : Object {
     
     public signal void changed ();
     public signal void issuer_display_name_changed ();
+
+    /**
+     * The synced content changed: a pad was added, edited or deleted. Not emitted for
+     * the periodic saves that only refresh a pad's file, nor for changes made by cloud sync itself.
+     */
+    public signal void content_changed ();
+
+    /** Pads deleted on this or another device: "{issuer}:{account}" to deletion time (Unix ms). */
+    public Gee.Map<string, int64?> deleted { get; private set; }
+
+    // the modification time of each pad when it was last written, to tell real edits from refreshes
+    private Gee.Map<OneTimePad, int64?> saved_modified;
+
+    public static int64 TOMBSTONE_LIFETIME_MS = 90 * 24 * 60 * 60 * 1000L;
     
     private static OneTimePadLibrary? _instance;
 
     private OneTimePadLibrary() {
         pads_set = new Gee.HashSet<OneTimePad>();
         issuer_display_name_map = new Gee.HashMap<string,string> ();
-        
+        deleted = new Gee.HashMap<string, int64?> ();
+        saved_modified = new Gee.HashMap<OneTimePad, int64?> ();
+
         load_existing_files();
     }
     
@@ -23,19 +39,43 @@ public class OneTimePadLibrary : Object {
     }
 
     public async void add(OneTimePad otp) {
+        yield add_pad (otp, true);
+        changed ();
+        content_changed ();
+    }
 
+    /** Adds a pad; a user adding it (not sync) counts as a modification and cancels an earlier deletion. */
+    private async void add_pad (OneTimePad otp, bool by_user) {
         var existing_pad = get_pad (otp.issuer, otp.account_name);
 
         if (existing_pad != null) {
-            yield remove (existing_pad);
+            yield remove_pad (existing_pad);
+        }
+
+        if (by_user) {
+            if (otp.modified_at == 0) {
+                otp.touch ();
+            }
+
+            deleted.unset (otp.identity);
+            save_deleted ();
         }
 
         pads_set.add (otp);
-        yield save (otp);
-        changed ();
+        yield save_pad (otp);
     }
 
     public async void save(OneTimePad pad) {
+        var was_modified = saved_modified.has_key (pad) && saved_modified[pad] != pad.modified_at;
+
+        yield save_pad (pad);
+
+        if (was_modified) {
+            content_changed ();
+        }
+    }
+
+    private async void save_pad (OneTimePad pad) {
         if(pads_set.contains(pad)){
 
             yield pad.save_secret();
@@ -55,11 +95,23 @@ public class OneTimePadLibrary : Object {
             var dst_file_name = Path.build_filename(Environment.get_user_data_dir(), file_name);
 
             file.save_to_file(dst_file_name);
+
+            saved_modified[pad] = pad.modified_at;
         }
     }
 
+    /** Deletes a pad on this device's initiative, leaving a tombstone so other devices delete it too. */
     public async void remove(OneTimePad pad) {
+        deleted[pad.identity] = OneTimePad.now_ms ();
+        save_deleted ();
+
+        yield remove_pad (pad);
+        content_changed ();
+    }
+
+    private async void remove_pad(OneTimePad pad) {
         pads_set.remove(pad);
+        saved_modified.unset (pad);
 
         var file_name = pad.get_file_name ();
 
@@ -113,6 +165,100 @@ public class OneTimePadLibrary : Object {
         issuer_display_name_changed ();
     }
 
+    /**
+     * Copies the pads (with their secrets from the keyring) and the tombstones for cloud sync.
+     * The pads are detached copies, so editing a pad while a sync runs does not change them.
+     */
+    public async SyncSnapshot create_sync_snapshot () {
+        prune_deleted ();
+
+        var snapshot = new SyncSnapshot ();
+        var sorted = new Gee.ArrayList<OneTimePad> ();
+        sorted.add_all (pads_set);
+
+        // a stable order, so the same pads never look like a change
+        sorted.sort ((a, b) => strcmp (a.identity, b.identity));
+
+        foreach (var pad in sorted) {
+            var secret = pad.secret ?? yield pad.lookup_secret ();
+
+            if (secret != null && secret != "") {
+                snapshot.pads.add (new SyncPad (new OneTimePad.clone_of (pad), secret));
+            }
+        }
+
+        foreach (var entry in deleted.entries) {
+            snapshot.deleted[entry.key] = entry.value;
+        }
+
+        return snapshot;
+    }
+
+    /**
+     * Applies the result of a cloud sync: adds, updates and removes pads, and takes over the tombstones.
+     * `local` is the snapshot the merge started from; a pad the user edited since then is left alone,
+     * and the next sync deals with it.
+     */
+    public async void apply_sync (SyncSnapshot merged, SyncSnapshot local) {
+        var merged_keys = new Gee.HashSet<string> ();
+
+        foreach (var sync_pad in merged.pads) {
+            merged_keys.add (sync_pad.pad.identity);
+        }
+
+        var local_by_key = new Gee.HashMap<string, SyncPad> ();
+
+        foreach (var sync_pad in local.pads) {
+            local_by_key[sync_pad.pad.identity] = sync_pad;
+        }
+
+        // pads the merge dropped, whether deleted elsewhere or never synced
+        foreach (var sync_pad in local.pads) {
+            var existing = get_pad (sync_pad.pad.issuer, sync_pad.pad.account_name);
+
+            if (existing != null && !merged_keys.contains (sync_pad.pad.identity) && existing.modified_at == sync_pad.pad.modified_at) {
+                yield remove_pad (existing);
+            }
+        }
+
+        foreach (var incoming in merged.pads) {
+            var existing = get_pad (incoming.pad.issuer, incoming.pad.account_name);
+
+            if (existing == null) {
+                var added = new OneTimePad.clone_of (incoming.pad);
+                added.secret = incoming.secret;
+                pads_set.add (added);
+                yield save_pad (added);
+                continue;
+            }
+
+            var before = local_by_key.has_key (incoming.pad.identity) ? local_by_key[incoming.pad.identity] : null;
+
+            if (before != null && existing.modified_at != before.pad.modified_at) {
+                continue;
+            }
+
+            if (before == null || !before.same_as (incoming)) {
+                existing.copy_from (incoming.pad);
+
+                if (before == null || before.secret != incoming.secret) {
+                    existing.secret = incoming.secret;
+                }
+
+                yield save_pad (existing);
+            }
+        }
+
+        deleted = new Gee.HashMap<string, int64?> ();
+
+        foreach (var entry in merged.deleted.entries) {
+            deleted[entry.key] = entry.value;
+        }
+
+        save_deleted ();
+        changed ();
+    }
+
     public Gee.Set<OneTimePad> get_set(){
         return pads_set;
     }
@@ -162,6 +308,44 @@ public class OneTimePadLibrary : Object {
         }
     }
 
+    private string deleted_file_name () {
+        return Path.build_filename (Environment.get_user_data_dir (), "deleted.txt");
+    }
+
+    /** Keys are escaped because key file keys cannot hold every character an issuer can. */
+    private void save_deleted () {
+        var file = new KeyFile ();
+
+        foreach (var entry in deleted.entries) {
+            file.set_int64 ("Deleted", Uri.escape_string (entry.key, null, true), entry.value);
+        }
+
+        try {
+            file.save_to_file (deleted_file_name ());
+        } catch (Error e) {
+            warning ("Could not save the deleted pads: %s", e.message);
+        }
+    }
+
+    /** Forgets deletions older than the tombstone lifetime. */
+    public void prune_deleted (int64 now = OneTimePad.now_ms ()) {
+        var expired = new Gee.ArrayList<string> ();
+
+        foreach (var entry in deleted.entries) {
+            if (entry.value < now - TOMBSTONE_LIFETIME_MS) {
+                expired.add (entry.key);
+            }
+        }
+
+        foreach (var key in expired) {
+            deleted.unset (key);
+        }
+
+        if (expired.size > 0) {
+            save_deleted ();
+        }
+    }
+
     private void load_existing_files () {
         var file = File.new_for_path (Environment.get_user_data_dir());
         load_existing_files_for_file(file);
@@ -185,7 +369,13 @@ public class OneTimePadLibrary : Object {
 		        var key_file = new KeyFile ();
 		        key_file.load_from_file(src_file_name, KeyFileFlags.NONE);
 		        
-		        if (key_file.has_group("Issuer Names")) {
+		        if (key_file.has_group("Deleted")) {
+
+		            foreach (var key in key_file.get_keys ("Deleted")) {
+		                deleted[Uri.unescape_string (key) ?? key] = key_file.get_int64 ("Deleted", key);
+		            }
+
+		        } else if (key_file.has_group("Issuer Names")) {
 
 		            var issuers = key_file.get_keys ("Issuer Names");
 
@@ -199,6 +389,7 @@ public class OneTimePadLibrary : Object {
 		            print("otp issuer: %s\n",otp.issuer);
 
                     pads_set.add(otp);
+                    saved_modified[otp] = otp.modified_at;
                     changed ();
 		        }
 		        

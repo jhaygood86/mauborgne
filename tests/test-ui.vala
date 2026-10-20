@@ -30,6 +30,7 @@ namespace UiTests {
     }
 
     private bool ready = false;
+    private Adw.Application? application = null;
 
     private bool init () {
         if (!ready) {
@@ -38,6 +39,17 @@ namespace UiTests {
             }
 
             Adw.init ();
+
+            // WebKit names its sandboxed processes after the default application, which has to be
+            // the Flatpak's own id or the portal refuses them. The real app is that application.
+            application = new Adw.Application ("io.github.jhaygood86.mauborgne", ApplicationFlags.NON_UNIQUE);
+
+            try {
+                application.register (null);
+            } catch (Error e) {
+                warning ("Could not register the test application: %s", e.message);
+            }
+
             ready = true;
         }
 
@@ -63,6 +75,15 @@ namespace UiTests {
         Test.add_func ("/ui/setup_key_dialog_construct", test_setup_key_dialog);
         Test.add_func ("/ui/pad_view_welcome_actions", test_pad_view_welcome);
         Test.add_func ("/ui/pad_view_code_grouping", test_code_grouping);
+        Test.add_func ("/ui/cloud_password_enter", test_cloud_password_enter);
+        Test.add_func ("/ui/cloud_password_create", test_cloud_password_create);
+        Test.add_func ("/ui/cloud_password_change", test_cloud_password_change);
+        Test.add_func ("/ui/cloud_menu_choices", test_cloud_menu_choices);
+        Test.add_func ("/ui/cloud_menu_closed_without_choice", test_cloud_menu_closed);
+        Test.add_func ("/ui/cloud_menu_unregistered", test_cloud_menu_unregistered);
+        Test.add_func ("/ui/cloud_busy_dialog", test_busy_dialog);
+        Test.add_func ("/ui/cloud_authorization_callback", test_parse_callback);
+        Test.add_func ("/ui/cloud_web_view_catches_redirect", test_web_view_redirect);
         Test.add_func ("/ui/issuer_avatar_initials", test_avatar_initials);
         Test.add_func ("/ui/issuer_avatar_colors", test_avatar_colors);
         Test.add_func ("/ui/issuer_avatar_widget", test_avatar_widget);
@@ -246,6 +267,268 @@ namespace UiTests {
         var dialog = new SetupKeyDialog ();
 
         assert_nonnull (dialog.child);
+    }
+
+    private class TestCloudPasswordDialog : CloudPasswordDialog {
+        public TestCloudPasswordDialog (CloudPasswordMode mode) {
+            base (mode, "Heading", "Action");
+        }
+
+        public void fill (string first, string second = "", string third = "") {
+            password_entry.text = first;
+
+            if (mode == CloudPasswordMode.CREATE) {
+                confirm_password_entry.text = second;
+            } else if (mode == CloudPasswordMode.CHANGE) {
+                new_password_entry.text = second;
+                confirm_password_entry.text = third;
+            }
+        }
+
+        public string? check () {
+            return validate ();
+        }
+    }
+
+    private void test_cloud_password_enter () {
+        if (!require_display ()) {
+            return;
+        }
+
+        var dialog = new TestCloudPasswordDialog (CloudPasswordMode.ENTER);
+
+        dialog.fill ("");
+        assert_nonnull (dialog.check ());
+
+        // an existing password is not held to the length rule for new ones
+        dialog.fill ("short");
+        assert_null (dialog.check ());
+        assert_cmpstr (dialog.password, CompareOperator.EQ, "short");
+    }
+
+    private void test_cloud_password_create () {
+        if (!require_display ()) {
+            return;
+        }
+
+        var dialog = new TestCloudPasswordDialog (CloudPasswordMode.CREATE);
+
+        dialog.fill ("short", "short");
+        assert_nonnull (dialog.check ());
+        assert_true (dialog.check ().contains ("12"));
+
+        dialog.fill ("a long enough password", "another long password");
+        assert_nonnull (dialog.check ());
+
+        dialog.fill ("a long enough password", "a long enough password");
+        assert_null (dialog.check ());
+        assert_cmpstr (dialog.new_password, CompareOperator.EQ, "a long enough password");
+    }
+
+    private void test_cloud_password_change () {
+        if (!require_display ()) {
+            return;
+        }
+
+        var dialog = new TestCloudPasswordDialog (CloudPasswordMode.CHANGE);
+
+        // the current password is required
+        dialog.fill ("", "a long enough password", "a long enough password");
+        assert_nonnull (dialog.check ());
+
+        // the new one must follow the policy and be confirmed
+        dialog.fill ("current", "short", "short");
+        assert_nonnull (dialog.check ());
+        dialog.fill ("current", "a long enough password", "something else entirely");
+        assert_nonnull (dialog.check ());
+
+        dialog.fill ("current", "a long enough password", "a long enough password");
+        assert_null (dialog.check ());
+        assert_cmpstr (dialog.password, CompareOperator.EQ, "current");
+        assert_cmpstr (dialog.new_password, CompareOperator.EQ, "a long enough password");
+    }
+
+    private void collect_action_rows (Gtk.Widget widget, Gee.List<Adw.ActionRow> rows) {
+        if (widget is Adw.ActionRow) {
+            rows.add ((Adw.ActionRow) widget);
+        }
+
+        for (var child = widget.get_first_child (); child != null; child = child.get_next_sibling ()) {
+            collect_action_rows (child, rows);
+        }
+    }
+
+    private CloudBackupStatus status_of (bool registered, bool exists) {
+        return new CloudBackupStatus (registered, exists, exists ? 1700000000 : 0, "cred", exists ? "backup-id" : null);
+    }
+
+    private CloudBackupChoice pick_row (CloudBackupMenuDialog dialog, string title) {
+        var parent = make_parent ();
+        var waiter = new TestSupport.Waiter ();
+        var picked = CloudBackupChoice.NONE;
+
+        dialog.pick.begin (parent, (obj, res) => {
+            picked = dialog.pick.end (res);
+            waiter.done ();
+        });
+
+        Idle.add (() => {
+            var rows = new Gee.ArrayList<Adw.ActionRow> ();
+            collect_action_rows (dialog, rows);
+
+            foreach (var row in rows) {
+                if (row.title == title) {
+                    row.activated ();
+                    break;
+                }
+            }
+
+            return false;
+        });
+
+        waiter.wait ();
+        parent.destroy ();
+
+        return picked;
+    }
+
+    private void test_cloud_menu_choices () {
+        if (!require_display ()) {
+            return;
+        }
+
+        var sync_off = new SyncStatus (SyncState.OFF, 0, "Sync is off");
+        var sync_on = new SyncStatus (SyncState.SYNCED, 1700000000, "Synced just now");
+
+        assert_true (pick_row (new CloudBackupMenuDialog (status_of (true, true), sync_off, false), "Back Up Now") == CloudBackupChoice.BACK_UP);
+        assert_true (pick_row (new CloudBackupMenuDialog (status_of (true, true), sync_off, false), "Restore From Backup…") == CloudBackupChoice.RESTORE);
+        assert_true (pick_row (new CloudBackupMenuDialog (status_of (true, true), sync_off, false), "Turn On Automatic Sync…") == CloudBackupChoice.TURN_SYNC_ON);
+        assert_true (pick_row (new CloudBackupMenuDialog (status_of (true, true), sync_off, false), "Change Cloud Password…") == CloudBackupChoice.CHANGE_PASSWORD);
+        assert_true (pick_row (new CloudBackupMenuDialog (status_of (true, true), sync_off, false), "Delete Cloud Backup…") == CloudBackupChoice.DELETE);
+        assert_true (pick_row (new CloudBackupMenuDialog (status_of (true, true), sync_on, true), "Sync Now") == CloudBackupChoice.SYNC_NOW);
+        assert_true (pick_row (new CloudBackupMenuDialog (status_of (true, true), sync_on, true), "Turn Off Automatic Sync") == CloudBackupChoice.TURN_SYNC_OFF);
+    }
+
+    private void test_cloud_menu_closed () {
+        if (!require_display ()) {
+            return;
+        }
+
+        var dialog = new CloudBackupMenuDialog (status_of (true, true), new SyncStatus (SyncState.OFF, 0, ""), false);
+        var parent = make_parent ();
+        var waiter = new TestSupport.Waiter ();
+        var picked = CloudBackupChoice.BACK_UP;
+
+        dialog.pick.begin (parent, (obj, res) => {
+            picked = dialog.pick.end (res);
+            waiter.done ();
+        });
+
+        Idle.add (() => {
+            dialog.close ();
+            return false;
+        });
+
+        waiter.wait ();
+        parent.destroy ();
+
+        assert_true (picked == CloudBackupChoice.NONE);
+    }
+
+    // before anything is set up there is nothing to restore, change or delete
+    private void test_cloud_menu_unregistered () {
+        if (!require_display ()) {
+            return;
+        }
+
+        var dialog = new CloudBackupMenuDialog (status_of (false, false), new SyncStatus (SyncState.OFF, 0, ""), false);
+        var parent = make_parent ();
+        dialog.present (parent);
+
+        var rows = new Gee.ArrayList<Adw.ActionRow> ();
+        collect_action_rows (dialog, rows);
+
+        var titles = new Gee.HashSet<string> ();
+
+        foreach (var row in rows) {
+            titles.add (row.title);
+        }
+
+        assert_true (titles.contains ("Back Up Now"));
+        assert_false (titles.contains ("Restore From Backup…"));
+        assert_false (titles.contains ("Change Cloud Password…"));
+        assert_false (titles.contains ("Delete Cloud Backup…"));
+        assert_false (titles.contains ("Turn On Automatic Sync…"));
+
+        dialog.force_close ();
+        parent.destroy ();
+    }
+
+    private void test_busy_dialog () {
+        if (!require_display ()) {
+            return;
+        }
+
+        var parent = make_parent ();
+        var busy = new Mauborgne.CloudUi.BusyDialog ("Title", "Working…");
+
+        busy.show_over (parent);
+        // it cannot be dismissed until the work is done
+        assert_false (busy.can_close);
+
+        busy.done ();
+        parent.destroy ();
+    }
+
+    // pure function: runs without a display
+    private void test_parse_callback () {
+        var ok = WebViewAuthorizationBrowser.parse_callback ("http://127.0.0.1:50000/callback?code=abc%20def&state=xyz");
+        assert_cmpstr (ok.code, CompareOperator.EQ, "abc def");
+        assert_cmpstr (ok.state, CompareOperator.EQ, "xyz");
+        assert_null (ok.error);
+
+        var denied = WebViewAuthorizationBrowser.parse_callback ("http://127.0.0.1:50000/callback?error=access_denied&state=xyz");
+        assert_null (denied.code);
+        assert_cmpstr (denied.error, CompareOperator.EQ, "access_denied");
+        assert_cmpstr (denied.state, CompareOperator.EQ, "xyz");
+
+        var bare = WebViewAuthorizationBrowser.parse_callback ("http://127.0.0.1:50000/callback");
+        assert_null (bare.code);
+        assert_null (bare.error);
+    }
+
+    // the embedded browser stops the navigation to the redirect address and reports it
+    private void test_web_view_redirect () {
+        if (!require_display ()) {
+            return;
+        }
+
+        var redirect = "http://127.0.0.1:50000/callback";
+        var parent = make_parent ();
+        var dialog = new WebPageDialog ("Sign in", "about:blank", redirect);
+        var waiter = new TestSupport.Waiter ();
+        string? seen = null;
+
+        dialog.redirected.connect ((uri) => {
+            seen = uri;
+            waiter.done ();
+        });
+
+        dialog.present (parent);
+
+        // a page navigating to the redirect address, as the Portal does after sign-in
+        Timeout.add (500, () => {
+            dialog.run_script_for_test ("window.location = '%s?code=abc&state=xyz';".printf (redirect));
+            return false;
+        });
+
+        waiter.wait ();
+
+        assert_nonnull (seen);
+        assert_true (seen.has_prefix (redirect + "?code=abc"));
+
+        dialog.force_close ();
+        parent.destroy ();
     }
 
     // pure functions: these run without a display

@@ -88,7 +88,11 @@ namespace TestSupport {
         var issuers = new KeyFile ();
         issuers.set_string ("Issuer Names", FIXTURE_ISSUER, "Fixture Display");
 
+        var deleted = new KeyFile ();
+        deleted.set_int64 ("Deleted", Uri.escape_string ("Fixture Gone:old@example.com", null, true), 1799999999000);
+
         try {
+            deleted.save_to_file (Path.build_filename (data_dir, "deleted.txt"));
             pad.to_keyfile ().save_to_file (Path.build_filename (data_dir, pad.get_file_name ()));
             issuers.save_to_file (Path.build_filename (data_dir, "issuers.txt"));
         } catch (Error e) {

@@ -14,6 +14,9 @@ int main (string[] args) {
     AegisTests.register ();
     QrTests.register ();
     LibraryTests.register ();
+    CloudTests.register ();
+    CloudServiceTests.register ();
+    OpaqueTests.register ();
     UiTests.register ();
 
     return Test.run ();

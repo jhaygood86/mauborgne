@@ -121,7 +121,7 @@ public class AegisManager {
         var derived_key = derive_key(password_slot, passphrase);
 
         print("creating json vault db contents\n");
-        var content_json = get_json_string (content);
+        var content_json = content.to_json ();
         print("%s\n",content_json);
 
         print ("encryypting master key using passphrase...\n");

@@ -582,6 +582,8 @@ namespace GCrypt {
 			public Error encrypt (uchar[] out_buffer, uchar[] in_buffer);
 			public Error decrypt (uchar[] out_buffer, uchar[] in_buffer);
 		    public Error checktag (uchar[] tag_data);
+		    [CCode (cname = "gcry_cipher_authenticate")]
+		    public Error authenticate (uchar[] abuf);
 		    public Error gettag(uchar[] tag_data);
 
 			[CCode (cname = "gcry_cipher_setkey")]

@@ -47,4 +47,9 @@ Mauborgne utilizes the following open source software that we would like to than
  * **[flatpak](https://www.flatpak.org)** The future of app distribution. We also utilize their libportal to make taking screenshots easier
  * **[gnome](https://www.gnome.org)** GNOME provides core parts of the platform we depend on, including GLib, GTK 4 and libadwaita
 
+## License
 
+Mauborgne is licensed under the GNU General Public License, version 3 or later (see `LICENSE`).
+
+The one exception is `subprojects/opaque-bridge`, the OPAQUE client used by Cloud Backup, which is dual licensed
+under `GPL-3.0-or-later` or a commercial license (see `subprojects/opaque-bridge/LICENSE.md`).
