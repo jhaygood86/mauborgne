@@ -72,6 +72,8 @@ jobs:
     with:
       manifest-path: io.github.jhaygood86.mauborgne.yml
       remote-name: mauborgne
+      # AetherPak would publish a push to main as "stable"; releases are the tags
+      branch: ${{ github.ref_type == 'tag' && 'stable' || 'beta' }}
       pages-url: https://jhaygood86.github.io/mauborgne
       # The site is deployed by the job below, which adds the website to what AetherPak produces,
       # and the website is our own page instead of the generated one.
