@@ -312,7 +312,7 @@ public class OneTimePadView : Gtk.Box {
     private void set_remaining_time() {
         var remaining_time = pad.get_remaining_time();
 
-        code_remaining_progress.text = "Code Changes In %d seconds".printf(remaining_time);
+        code_remaining_progress.text = ngettext ("Code changes in %d second", "Code changes in %d seconds", remaining_time).printf (remaining_time);
 
         if (remaining_time <= EXPIRING_SECONDS) {
             subtitle_label.add_css_class ("pst-code-expiring");

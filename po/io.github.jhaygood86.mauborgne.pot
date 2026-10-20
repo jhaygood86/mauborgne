@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: io.github.jhaygood86.mauborgne\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-22 18:47-0500\n"
+"Report-Msgid-Bugs-To: jhaygood86@gmail.com\n"
+"POT-Creation-Date: 2026-10-20 15:30-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,139 +16,16 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: src/MainWindow.vala:11 data/io.github.jhaygood86.mauborgne.desktop.in:3
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:6
+#: data/io.github.jhaygood86.mauborgne.desktop.in:2 src/MainWindow.vala:11
+#: src/MainWindow.vala:40
 msgid "Mauborgne"
 msgstr ""
 
-#: src/MainWindow.vala:72 src/Widgets/OneTimePadView.vala:51
-msgid "Add Pad From QR Code Image File"
-msgstr ""
-
-#: src/MainWindow.vala:76
-msgid "Add Pad From Camera"
-msgstr ""
-
-#: src/MainWindow.vala:80 src/Widgets/OneTimePadView.vala:54
-msgid "Add Pad From Setup Key"
-msgstr ""
-
-#: src/MainWindow.vala:84
-msgid "Add Pad(s) From Aegis Encrypted JSON"
-msgstr ""
-
-#: src/MainWindow.vala:97
-msgid "Add One Time Pad…"
-msgstr ""
-
-#: src/MainWindow.vala:301
-msgid "Time-based One Time Pads"
-msgstr ""
-
-#: src/MainWindow.vala:302
-msgid "Counter-based One Time Pads"
-msgstr ""
-
-#: src/OneTimePad.vala:193
-msgid "Cannot determine pad type"
-msgstr ""
-
-#: src/OneTimePad.vala:362
-msgid "Invalid Secret. Please delete and re-import"
-msgstr ""
-
-#: src/Services/AegisManager.vala:33
-msgid "Unable to lock vault. Please try a different password"
-msgstr ""
-
-#: src/Widgets/OneTimePadView.vala:42
-msgid "Add a One Time Pad"
-msgstr ""
-
-#: src/Widgets/OneTimePadView.vala:43
-msgid "Add a one time pad from a provider"
-msgstr ""
-
-#. welcome_screen.append ("screenshot", _("Add Pad From Screenshot"),
-#. _("Add a pad using a screenshot of a QR code"));
-#: src/Widgets/OneTimePadView.vala:48
-msgid "Add Pad From Aegis JSON"
-msgstr ""
-
-#: src/Widgets/OneTimePadView.vala:49
-msgid "Add a pad using an export of an Aegis encrypted JSON vault file"
-msgstr ""
-
-#: src/Widgets/OneTimePadView.vala:52
-msgid "Add a pad using an image file that contains a QR Code"
-msgstr ""
-
-#: src/Widgets/OneTimePadView.vala:55
-msgid "Add a pad using a setup key"
-msgstr ""
-
-#: src/Widgets/OneTimePadView.vala:59
-msgid "One Time Pad"
-msgstr ""
-
-#: src/Widgets/OneTimePadView.vala:99
-msgid "Copy"
-msgstr ""
-
-#: src/Widgets/OneTimePadView.vala:108
-msgid "Export as QR Code"
-msgstr ""
-
-#: src/Widgets/OneTimePadView.vala:112
-msgid "Export this pad as Aegis Vault JSON"
-msgstr ""
-
-#: src/Widgets/OneTimePadView.vala:116
-msgid "Export all pads as Aegis Vault JSON"
-msgstr ""
-
-#: src/Widgets/OneTimePadView.vala:126
-msgid "Export"
-msgstr ""
-
-#: src/Widgets/OneTimePadView.vala:147
-msgid "Delete"
-msgstr ""
-
-#: src/Widgets/OneTimePadView.vala:159
-msgid "Edit"
-msgstr ""
-
-#: src/Widgets/PasswordDialog.vala:9 src/Widgets/PasswordDialog.vala:15
-msgid "Aegis Vault Unlock Password"
-msgstr ""
-
-#: src/Widgets/PasswordDialog.vala:17
-msgid "Password Required"
-msgstr ""
-
-#: src/Widgets/PasswordDialog.vala:18
-msgid "Need the password to access the Aegis Vault file"
-msgstr ""
-
-#: src/Widgets/PasswordDialog.vala:24
-msgid "Password"
-msgstr ""
-
-#: src/Widgets/PasswordDialog.vala:51
-msgid "Cancel"
-msgstr ""
-
-#: src/Widgets/PasswordDialog.vala:53
-msgid "Unlock"
-msgstr ""
-
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:6
-msgid "Maurborgne"
-msgstr ""
-
 #: data/io.github.jhaygood86.mauborgne.appdata.xml.in:7
-#: data/io.github.jhaygood86.mauborgne.desktop.in:4
+#: data/io.github.jhaygood86.mauborgne.desktop.in:3
 msgid "2FA OTP Code Generator"
 msgstr ""
 
@@ -157,120 +34,783 @@ msgid ""
 "Import OTP pads from QR codes and generate OTP codes for secure 2FA logins"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:27
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:12
+msgid ""
+"Mauborgne is free. An optional subscription of $10 per year adds Cloud "
+"Backup and sync across your devices."
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:19
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:43
 msgid "Improvements"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:29
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:21
+msgid "Ported to GTK 4 and libadwaita, and now built on the GNOME runtime"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:22
+msgid "Updated libraries"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:23
+msgid "New look, matching the Mauborgne apps for Windows and Android"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:24
+msgid ""
+"Cloud Backup: encrypted backup and automatic sync across your devices "
+"(optional, $10 per year)"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:30
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:76
+msgid "New Features"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:32
+msgid "Ability to add a TOTP code using a secret key"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:34
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:67
+msgid "New & Updated Translations"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:36
+msgid "Portuguese"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:37
+msgid "Russian"
+msgstr ""
+
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:45
 msgid "Update to elementary 7.1 runtime"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:31
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:47
 msgid "Temporarily Removed Features"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:33
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:49
 msgid ""
 "Capture QR Code from screenshot. We still support importing from Aegis and "
 "from a saved image file"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:39
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:47
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:72
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:55
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:63
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:88
 msgid "Bugfixes"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:41
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:49
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:57
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:65
 msgid "Updated icons"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:51
-msgid "New &amp; Updated Translations"
-msgstr ""
-
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:53
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:69
 msgid "Japanese"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:54
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:66
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:70
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:82
 msgid "Portuguese (Brazil)"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:60
-msgid "New Features"
-msgstr ""
-
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:62
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:78
 msgid "Importing pads from image files containing QR Codes"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:64
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:76
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:80
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:92
 msgid "New Translations"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:74
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:90
 msgid ""
 "Detect dark mode on GNOME versions that do not support the freedesktop color "
 "scheme setting"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:78
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:94
 msgid "Italian"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:84
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:94
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:100
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:110
 msgid "Feature Release"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:86
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:102
 msgid ""
 "Add support for copying codes, including pasting the current code on TOTP "
 "pads"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:87
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:103
 msgid "Remove access to AccountService thanks to elementary OS updates"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:88
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:104
 msgid "Add support for editing pads, issuer names, and account names"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:96
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:112
 msgid "Adds support for exporting pad(s) in Aegis encrypted JSON format"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:97
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:113
 msgid "Fix crashes when deleting a pad"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:98
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:114
 msgid "Adds missing button to import from Aegis files on welcome screen"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:99
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:115
 msgid ""
 "Clean up account names for accounts where the issuer name is repeated in the "
 "account name"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:100
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:116
 msgid "Updated icons!"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:142
+#: data/io.github.jhaygood86.mauborgne.appdata.xml.in:159
 msgid "Justin Haygood"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.desktop.in:5
+#: data/io.github.jhaygood86.mauborgne.desktop.in:4
 msgid "Generates OTP Codes for use with 2FA environments"
 msgstr ""
 
-#: data/io.github.jhaygood86.mauborgne.desktop.in:11
+#: data/io.github.jhaygood86.mauborgne.desktop.in:10
 msgid "Mauborgne;2FA;OTP;"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:39
+msgid "Contacting Cloud Backup…"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:92
+msgid "Back Up"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:92
+msgid "Create Cloud Password"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:101
+msgid "Add a one time pad first."
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:101
+msgid "Nothing to back up"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:106
+msgid "Encrypting and uploading…"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:123
+msgid "Backed up"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:124
+#, c-format
+msgid "%d pad backed up securely."
+msgid_plural "%d pads backed up securely."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:128
+msgid "Restore"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:135
+msgid "Downloading and decrypting…"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:148
+msgid "Older backup"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:149
+msgid ""
+"This backup is older than the last one this device saw. The server may have "
+"returned an outdated copy."
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:150
+msgid "Restore Anyway"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:154
+msgid "Restoring your pads…"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:168
+msgid "Restored"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:169
+#, c-format
+msgid "%d pad restored from your backup."
+msgid_plural "%d pads restored from your backup."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:182
+msgid "Automatic sync is on: changes now flow between your devices."
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:186
+msgid "Turn On"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:186
+msgid "Turn On Sync"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:192
+#: src/CloudBackup/CloudBackupFlow.vala:202
+#: src/CloudBackup/CloudSyncService.vala:118
+msgid "Syncing…"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:197
+#: src/CloudBackup/CloudBackupFlow.vala:206
+msgid "Sync"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:210
+msgid "Change Cloud Password"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:210
+msgid "Change Password"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:220
+msgid "Changing password…"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:237
+msgid "Password changed"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:238
+msgid ""
+"Your backup is now protected by the new cloud password. Turn automatic sync "
+"back on to use it."
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:243
+msgid "Delete cloud backup?"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:244
+msgid ""
+"This permanently deletes your backup and cloud password from the server. "
+"Pads on this device are not affected."
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:245
+#: src/CloudBackup/CloudBackupFlow.vala:249 src/Widgets/OneTimePadView.vala:168
+msgid "Delete"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:249
+msgid "Delete Cloud Backup"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:255
+msgid "Deleting…"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:271
+msgid "Deleted"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:271
+msgid "Your cloud backup has been deleted."
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:278
+msgid "Sign up for Cloud Backup"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:316
+msgid "Sign-in failed"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:316
+msgid "We couldn't complete sign-in. Please try again."
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:348 src/Widgets/CloudDialogs.vala:215
+msgid "Cloud Backup"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:373
+msgid "Wrong cloud password"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:374
+msgid "That cloud password is incorrect."
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:376
+msgid "No cloud backup"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:377
+msgid "You haven't set up Cloud Backup yet. Back up first."
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:379
+msgid "No backup found"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:380
+msgid "There is no backup stored yet."
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:382
+msgid "Too many attempts"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:383
+msgid "Please wait a few minutes before trying again."
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:385
+msgid "Backup could not be verified"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:386
+msgid ""
+"The downloaded backup failed an integrity check, so it was not restored. Try "
+"again, and contact support if it persists."
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:388
+msgid "Can't reach Cloud Backup"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:389
+msgid "Check your internet connection and try again."
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:391
+msgid "Cloud Backup unavailable"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:392
+msgid "Cloud Backup isn't available in this build of the app."
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:395
+msgid "Cloud Backup error"
+msgstr ""
+
+#: src/CloudBackup/CloudBackupFlow.vala:396
+msgid "Something went wrong talking to Cloud Backup. Please try again."
+msgstr ""
+
+#: src/CloudBackup/CloudBackupTypes.vala:114
+#, c-format
+msgid "Password must be at least %d characters."
+msgstr ""
+
+#: src/CloudBackup/CloudBackupTypes.vala:117
+msgid "Passwords need to match."
+msgstr ""
+
+#: src/CloudBackup/CloudBackupTypes.vala:122 src/Widgets/CloudDialogs.vala:144
+msgid "Enter your cloud password."
+msgstr ""
+
+#: src/CloudBackup/CloudSyncService.vala:62
+#: src/CloudBackup/CloudSyncService.vala:87
+msgid "Sync is on"
+msgstr ""
+
+#: src/CloudBackup/CloudSyncService.vala:63
+#: src/CloudBackup/CloudSyncService.vala:99
+msgid "Sync is off"
+msgstr ""
+
+#: src/CloudBackup/CloudSyncService.vala:114
+msgid "Sync paused — turn it back on with your cloud password"
+msgstr ""
+
+#. Edits made while the sync ran are not in what was uploaded: stay dirty so they go next time.
+#: src/CloudBackup/CloudSyncService.vala:145
+msgid "Synced just now"
+msgstr ""
+
+#: src/CloudBackup/CloudSyncService.vala:209
+msgid "Cloud password changed — turn sync back on"
+msgstr ""
+
+#: src/CloudBackup/CloudSyncService.vala:211
+msgid "Sync paused — sign in to Cloud Backup"
+msgstr ""
+
+#: src/CloudBackup/CloudSyncService.vala:213
+msgid "Sync paused — no cloud backup yet"
+msgstr ""
+
+#: src/CloudBackup/CloudSyncService.vala:215
+msgid "Cloud sync isn't available in this build"
+msgstr ""
+
+#: src/CloudBackup/CloudSyncService.vala:217
+msgid "Can't reach Cloud Backup — will retry"
+msgstr ""
+
+#: src/CloudBackup/CloudSyncService.vala:221
+msgid "Sync failed — will retry"
+msgstr ""
+
+#: src/MainWindow.vala:64
+msgid "Add One Time Pad…"
+msgstr ""
+
+#: src/MainWindow.vala:79
+msgid "Cloud Backup…"
+msgstr ""
+
+#: src/MainWindow.vala:189
+msgid "Add One Time Pad"
+msgstr ""
+
+#: src/MainWindow.vala:192 src/MainWindow.vala:433
+#: src/Widgets/CloudDialogs.vala:18 src/Widgets/EditDialog.vala:42
+#: src/Widgets/OneTimePadView.vala:140 src/Widgets/PasswordPromptDialog.vala:58
+#: src/Widgets/SetupKeyDialog.vala:35
+msgid "Cancel"
+msgstr ""
+
+#. dialog.add_response ("screenshot", _("Add Pad From Screenshot"));
+#: src/MainWindow.vala:194 src/Widgets/OneTimePadView.vala:57
+msgid "Add Pad From QR Code Image File"
+msgstr ""
+
+#: src/MainWindow.vala:195
+msgid "Add Pad(s) From Aegis Encrypted JSON"
+msgstr ""
+
+#: src/MainWindow.vala:196 src/Widgets/OneTimePadView.vala:60
+#: src/Widgets/SetupKeyDialog.vala:10
+msgid "Add Pad From Setup Key"
+msgstr ""
+
+#: src/MainWindow.vala:233
+msgid "Open Aegis Vault File"
+msgstr ""
+
+#: src/MainWindow.vala:264
+msgid "Open QR Code Image File"
+msgstr ""
+
+#: src/MainWindow.vala:316
+msgid "Time-based One Time Pads"
+msgstr ""
+
+#: src/MainWindow.vala:317
+msgid "Counter-based One Time Pads"
+msgstr ""
+
+#: src/MainWindow.vala:411 src/MainWindow.vala:434
+msgid "Rename"
+msgstr ""
+
+#: src/MainWindow.vala:428
+msgid "Rename Issuer"
+msgstr ""
+
+#: src/OneTimePad.vala:209
+msgid "Cannot determine pad type"
+msgstr ""
+
+#: src/OneTimePad.vala:424
+msgid "Invalid Secret. Please delete and re-import"
+msgstr ""
+
+#: src/OneTimePadLibrary.vala:297
+msgid "Save Aegis Vault JSON"
+msgstr ""
+
+#: src/Services/AegisManager.vala:26
+msgid "Unable to lock vault. Please try a different password"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:8
+msgid "OK"
+msgstr ""
+
+#. The CRM accepts any loopback port, so this address needs no registration; the web view
+#. stops the navigation before anything connects.
+#: src/Widgets/CloudDialogs.vala:83 src/Widgets/WebPageDialog.vala:112
+msgid "Sign in to Cloud Backup"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:83
+msgid "Your subscription has expired"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:85
+msgid "Sign in again to keep using Cloud Backup, or renew your subscription."
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:86
+msgid ""
+"Cloud Backup is a subscription service. Sign in with your account, or sign "
+"up to get started."
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:87
+msgid "Not Now"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:88
+msgid "Renew…"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:88 src/Widgets/CloudDialogs.vala:110
+msgid "Sign Up…"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:89
+msgid "Sign In…"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:107
+msgid "No subscription found"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:108
+msgid ""
+"This account doesn't have a Cloud Backup subscription yet. You can sign up "
+"for one now."
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:109
+msgid "Close"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:141
+msgid ""
+"Choose a cloud password. If you forget it, the backup cannot be recovered."
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:143
+msgid "Enter your current cloud password, then choose a new one."
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:151
+msgid "Current password"
+msgstr ""
+
+#. in CREATE the first entry already is the new password
+#: src/Widgets/CloudDialogs.vala:156
+msgid "New password"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:157
+msgid "Confirm password"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:222
+#, c-format
+msgid "Last backup: %s"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:223
+msgid "No backup yet"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:232
+msgid "Back Up Now"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:232
+msgid "Encrypt your pads and upload them"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:235
+msgid "Add the pads from your backup to this device"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:235
+msgid "Restore From Backup…"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:239
+msgid "Sync Now"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:240
+msgid "Turn Off Automatic Sync"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:242
+msgid "Keep your devices in step"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:242
+msgid "Turn On Automatic Sync…"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:248
+msgid "Change Cloud Password…"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:249
+msgid "Delete Cloud Backup…"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:249
+msgid "Permanently deletes your backup from the server"
+msgstr ""
+
+#: src/Widgets/CloudDialogs.vala:252
+msgid "If you forget the cloud password, the backup cannot be recovered."
+msgstr ""
+
+#: src/Widgets/CreatePasswordDialog.vala:9
+msgid "Create Password"
+msgstr ""
+
+#: src/Widgets/CreatePasswordDialog.vala:10
+msgid "Need a password to secure the Aegis vault file"
+msgstr ""
+
+#: src/Widgets/CreatePasswordDialog.vala:11
+msgid "Lock"
+msgstr ""
+
+#: src/Widgets/CreatePasswordDialog.vala:18
+msgid "Confirm Password"
+msgstr ""
+
+#: src/Widgets/CreatePasswordDialog.vala:28
+#, c-format
+msgid "Password needs to be at least %d characters"
+msgstr ""
+
+#: src/Widgets/CreatePasswordDialog.vala:32
+msgid "Passwords need to match"
+msgstr ""
+
+#: src/Widgets/EditDialog.vala:16 src/Widgets/OneTimePadView.vala:179
+msgid "Edit"
+msgstr ""
+
+#: src/Widgets/EditDialog.vala:20 src/Widgets/SetupKeyDialog.vala:18
+msgid "Account Name"
+msgstr ""
+
+#: src/Widgets/EditDialog.vala:25 src/Widgets/SetupKeyDialog.vala:26
+msgid "Note"
+msgstr ""
+
+#: src/Widgets/EditDialog.vala:35
+msgid "Counter"
+msgstr ""
+
+#: src/Widgets/EditDialog.vala:44 src/Widgets/SetupKeyDialog.vala:37
+msgid "Save"
+msgstr ""
+
+#: src/Widgets/ExportWindow.vala:6
+#, c-format
+msgid "Export: %s"
+msgstr ""
+
+#. add_welcome_row (welcome_list, "screenshot", _("Add Pad From Screenshot"),
+#. _("Add a pad using a screenshot of a QR code"));
+#: src/Widgets/OneTimePadView.vala:54
+msgid "Add Pad From Aegis JSON"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:55
+msgid "Add a pad using an export of an Aegis encrypted JSON vault file"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:58
+msgid "Add a pad using an image file that contains a QR Code"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:61
+msgid "Add a pad using a setup key"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:66
+msgid "Add a One Time Pad"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:67
+msgid "Add a one time pad from a provider"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:73
+msgid "One Time Pad"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:122
+msgid "Copy"
+msgstr ""
+
+#. A dialog rather than a popover: the popover stayed visible on screen after closing under WSLg
+#: src/Widgets/OneTimePadView.vala:133 src/Widgets/OneTimePadView.vala:137
+msgid "Export"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:141
+msgid "Export as QR Code"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:142
+msgid "Export this pad as Aegis Vault JSON"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:143
+msgid "Export all pads as Aegis Vault JSON"
+msgstr ""
+
+#: src/Widgets/OneTimePadView.vala:315
+#, c-format
+msgid "Code changes in %d second"
+msgid_plural "Code changes in %d seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Widgets/PasswordDialog.vala:5
+msgid "Password Required"
+msgstr ""
+
+#: src/Widgets/PasswordDialog.vala:6
+msgid "Need the password to access the Aegis Vault file"
+msgstr ""
+
+#: src/Widgets/PasswordDialog.vala:7
+msgid "Unlock"
+msgstr ""
+
+#: src/Widgets/PasswordPromptDialog.vala:31
+msgid "Password"
+msgstr ""
+
+#: src/Widgets/SetupKeyDialog.vala:14
+msgid "Issuer Name"
+msgstr ""
+
+#: src/Widgets/SetupKeyDialog.vala:22
+msgid "Setup Key"
 msgstr ""

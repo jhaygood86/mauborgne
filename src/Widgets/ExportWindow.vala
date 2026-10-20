@@ -3,7 +3,7 @@ public class ExportWindow : Adw.Dialog {
     public OneTimePad pad { get; construct; }
 
     public ExportWindow (OneTimePad pad) {
-        title = "Export : %s".printf(pad.account_name);
+        title = _("Export: %s").printf(pad.account_name);
 
         var toolbar_view = new Adw.ToolbarView ();
         toolbar_view.add_top_bar (new Adw.HeaderBar ());
